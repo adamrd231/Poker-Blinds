@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct PokerBlindsApp: App {
+    
+    @StateObject var pokerBlinds = PokerBlinds()
+    @StateObject var options = Options()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PokerBlindsView().environmentObject(pokerBlinds).environmentObject(options)
         }
     }
 }

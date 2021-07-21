@@ -8,18 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
-		668EF5E626A347AC0040FC4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* ContentView.swift */; };
+		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
 		668EF5EB26A347AD0040FC4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */; };
+		668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5F326A348760040FC4D /* PokerBlindModel.swift */; };
+		668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5FE26A49F3A0040FC4D /* TimerView.swift */; };
+		668EF60526A4A6750040FC4D /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF60426A4A6750040FC4D /* StartButton.swift */; };
+		668EF61526A747490040FC4D /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF61426A747490040FC4D /* Options.swift */; };
+		668EF61A26A74A530040FC4D /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF61926A74A530040FC4D /* OptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
-		668EF5E526A347AC0040FC4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
 		668EF5E726A347AD0040FC4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		668EF5EC26A347AD0040FC4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		668EF5F326A348760040FC4D /* PokerBlindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindModel.swift; sourceTree = "<group>"; };
+		668EF5FE26A49F3A0040FC4D /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		668EF60426A4A6750040FC4D /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
+		668EF61426A747490040FC4D /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		668EF61926A74A530040FC4D /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +62,16 @@
 		668EF5E226A347AC0040FC4D /* PokerBlinds */ = {
 			isa = PBXGroup;
 			children = (
+				668EF60326A4A65D0040FC4D /* Buttons */,
+				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
+				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */,
-				668EF5E526A347AC0040FC4D /* ContentView.swift */,
+				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
+				668EF61426A747490040FC4D /* Options.swift */,
 				668EF5E726A347AD0040FC4D /* Assets.xcassets */,
 				668EF5EC26A347AD0040FC4D /* Info.plist */,
 				668EF5E926A347AD0040FC4D /* Preview Content */,
+				668EF61926A74A530040FC4D /* OptionsView.swift */,
 			);
 			path = PokerBlinds;
 			sourceTree = "<group>";
@@ -67,6 +82,14 @@
 				668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		668EF60326A4A65D0040FC4D /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				668EF60426A4A6750040FC4D /* StartButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +161,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				668EF5E626A347AC0040FC4D /* ContentView.swift in Sources */,
+				668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */,
 				668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */,
+				668EF60526A4A6750040FC4D /* StartButton.swift in Sources */,
+				668EF61A26A74A530040FC4D /* OptionsView.swift in Sources */,
+				668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */,
+				668EF61526A747490040FC4D /* Options.swift in Sources */,
+				668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
