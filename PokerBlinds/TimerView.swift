@@ -14,25 +14,25 @@ struct TimerView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Round \(pokerBlinds.currentLevel)")
+                Text("Level \(pokerBlinds.currentLevel)").font(.title)
                 if pokerBlinds.currentSeconds < 10 {
-                    Text("\(pokerBlinds.currentMinutes):0\(pokerBlinds.currentSeconds)")
+                    Text("\(pokerBlinds.currentMinutes):0\(pokerBlinds.currentSeconds)").font(.largeTitle).bold()
                 } else {
-                    Text("\(pokerBlinds.currentMinutes):\(pokerBlinds.currentSeconds)")
+                    Text("\(pokerBlinds.currentMinutes):\(pokerBlinds.currentSeconds)").font(.largeTitle).bold()
                 }
                 HStack {
-                    Text("\(pokerBlinds.smallBlind)")
+                    Text("\(pokerBlinds.smallBlind)").font(.title3)
                     Text("|")
-                    Text("\(pokerBlinds.bigBlind)")
+                    Text("\(pokerBlinds.bigBlind)").font(.title3)
                 }
             }.padding()
             
             VStack {
-                Text("Starting Chip Stack \(pokerBlinds.chipStack)")
-                Text("Average Chip Stack \(pokerBlinds.averageChipStack)")
+                Text("Starting Stack \(pokerBlinds.chipStack)")
+                Text("Average Stack \(pokerBlinds.averageChipStack)")
                 Text("Players: \(pokerBlinds.playerCount)")
                 
-            }.padding()
+            }
            
             
             

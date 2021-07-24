@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
+		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
+		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
 		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6659A1EE26AC91CF00BD698E /* bell2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell2.wav; sourceTree = "<group>"; };
+		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
+		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
 		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
@@ -43,6 +49,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6659A1E926AC909D00BD698E /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				6659A1EE26AC91CF00BD698E /* bell2.wav */,
+				6659A1F126AC923000BD698E /* aww.wav */,
+				6659A1F426AC929300BD698E /* cheer.wav */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		668EF5D726A347AC0040FC4D = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +78,7 @@
 		668EF5E226A347AC0040FC4D /* PokerBlinds */ = {
 			isa = PBXGroup;
 			children = (
+				6659A1E926AC909D00BD698E /* Sound */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
@@ -149,7 +166,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */,
 				668EF5EB26A347AD0040FC4D /* Preview Assets.xcassets in Resources */,
+				6659A1F226AC923000BD698E /* aww.wav in Resources */,
+				6659A1F526AC929300BD698E /* cheer.wav in Resources */,
 				668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

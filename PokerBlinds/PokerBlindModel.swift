@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 class PokerBlinds: ObservableObject, Identifiable {
+    
+    var audioPlayer: AVAudioPlayer?
     
     // MARK: Variables for running calc
     // Timer variables
@@ -33,8 +36,41 @@ class PokerBlinds: ObservableObject, Identifiable {
         
     
     func removePlayer() {
-        if playerCount >= 2 {
+        if playerCount > 1 {
+            
             playerCount -= 1
+            
+            if playerCount == 1 {
+                let path = Bundle.main.path(forResource: "cheer", ofType: "wav")!
+                let url = URL(fileURLWithPath: path)
+                do {
+                    audioPlayer = try AVAudioPlayer(contentsOf: url)
+                    audioPlayer?.play()
+                } catch {
+                    // Error Handling
+                }
+            } else {
+                let path = Bundle.main.path(forResource: "aww", ofType: "wav")!
+                let url = URL(fileURLWithPath: path)
+                do {
+                    audioPlayer = try AVAudioPlayer(contentsOf: url)
+                    audioPlayer?.play()
+                } catch {
+                    // Error Handling
+                }
+            }
+        }
+        
+    }
+    
+    func playSound() {
+        let path = Bundle.main.path(forResource: "bell2", ofType: "wav")!
+        let url = URL(fileURLWithPath: path)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            // Error Handling
         }
     }
     
@@ -73,9 +109,13 @@ class PokerBlinds: ObservableObject, Identifiable {
             currentTimer = currentTimerBackup
             currentLevel += 1
             if smallBlind >= blindLimit {
+                
+                playSound()
+                
                 return
             } else {
                 smallBlind += smallBlindBackup
+                playSound()
             }
             
             
