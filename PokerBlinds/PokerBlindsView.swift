@@ -60,68 +60,74 @@ struct PokerBlindsView: View {
     
     
     var body: some View {
-        TabView {
-        NavigationView {
+        GeometryReader { geo in
+            TabView {
+            NavigationView {
 
-            
-            TimerView().navigationBarTitle("Poker Price")
-            
-            VStack(spacing: 6) {
-                Button(action: {
-                    if pokerBlinds.timerIsRunning == false {
-                        startPokerTimer()
-                    } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == false {
-                        pausePokerTimer()
-                    } else {
-                        unPausePokerTimer()
-                    }
-                }) {
-                    startButtonText()
-                        .frame(width: 100, height: 50, alignment: .center)
-                        .background(Color(.systemGray))
-                        .foregroundColor(Color(.systemGray6))
-                        .cornerRadius(15.0)
-                }
+                VStack(alignment: .center) {
+                    TimerView()
+                    VStack(spacing: 7) {
+                        Button(action: {
+                            if pokerBlinds.timerIsRunning == false {
+                                startPokerTimer()
+                            } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == false {
+                                pausePokerTimer()
+                            } else {
+                                unPausePokerTimer()
+                            }
+                        }) {
+                            startButtonText()
+                                .frame(width: 100, height: 50, alignment: .center)
+                                .background(Color(.systemGray))
+                                .foregroundColor(Color(.systemGray6))
+                                .cornerRadius(15.0)
+                        }
+                        
+                        Button(action: {
+                            stopPokerTimer()
+                        }) {
+                            Text("Reset")
+                                .frame(width: 100, height: 50, alignment: .center)
+                                .background(Color(.systemGray))
+                                .foregroundColor(Color(.systemGray6))
+                                .cornerRadius(15.0)
+                        }
+                        
+                        Button(action: {
+                            pokerBlinds.removePlayer()
+                        }) {
+                            (pokerBlinds.timerIsRunning) ? Text("Remove Player").foregroundColor(Color(.systemGray)) : Text("Remove Player").foregroundColor(Color(.systemGray3))
+                            
+                            
+                        }.disabled(!pokerBlinds.timerIsRunning)
+                            
+                    }.padding(.top)
+                    
+                    
+                    
+                }.navigationBarTitle("Price of Poker")
                 
-                Button(action: {
-                    stopPokerTimer()
-                }) {
-                    Text("Reset")
-                        .frame(width: 100, height: 50, alignment: .center)
-                        .background(Color(.systemGray))
-                        .foregroundColor(Color(.systemGray6))
-                        .cornerRadius(15.0)
-                }
-                
-                Button(action: {
-                    pokerBlinds.removePlayer()
-                }) {
-                    (pokerBlinds.timerIsRunning) ? Text("Remove Player").foregroundColor(Color(.systemGray)) : Text("Remove Player").foregroundColor(Color(.systemGray3))
-                    
-                    
-                }.disabled(!pokerBlinds.timerIsRunning)
-                    
-            }.padding(.top)
+            }
+            .tabItem { HStack { Text("Home") }}
+            .tag(0)
             
-        }.padding()
-        .tabItem { HStack { Text("Home") }}
-        .tag(0)
-        
-        // Second Screen
-        NavigationView {
-            OptionsView().navigationBarTitle("Options")
+            // Second Screen
+            NavigationView {
+                OptionsView().navigationBarTitle("Options")
+            }
+            .tabItem { Text("Options") }
+            .tag(1)
+               
+             // Close Tab View
+            }
+            .onReceive(timer, perform: { _ in
+                    pokerBlinds.pokerTimerCountdown()
+                })
+            .onAppear(perform: {
+                pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
+                })
         }
-        .tabItem { Text("Options") }
-        .tag(1)
-           
-         // Close Tab View
-        }
-        .onReceive(timer, perform: { _ in
-                pokerBlinds.pokerTimerCountdown()
-            })
-        .onAppear(perform: {
-            pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
-            })
+
     } // Close some View
 }
 

@@ -17,6 +17,7 @@ class Options: ObservableObject, Identifiable {
     @Published var blindsArray:[Int] = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
     
     @Published var smallBlind = 100
+    @Published var raiseBlindsBy = 100
     var bigBlind:Int { get { smallBlind * 2 }}
     
     @Published var smallBlindLimit = 1000

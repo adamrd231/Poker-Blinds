@@ -24,6 +24,7 @@ struct OptionsView: View {
         pokerBlinds.playerStartingCount = options.players
         pokerBlinds.blindLimit = options.smallBlindLimit
         pokerBlinds.smallBlind = options.smallBlind
+        pokerBlinds.raiseBlindsBy = options.raiseBlindsBy
         
     }
     
@@ -61,6 +62,12 @@ struct OptionsView: View {
                 Text("Starting Blinds")
                 Text("\(options.smallBlind) / \(options.bigBlind)")
                 Stepper("", value: $options.smallBlind, in: 25...1000, step: 25)
+            }
+            
+            HStack {
+                Text("Raise blinds by:")
+                Text("\(options.raiseBlindsBy)")
+                Stepper("", value: $options.raiseBlindsBy, in: 25...5000, step: 25)
             }
             
             HStack {

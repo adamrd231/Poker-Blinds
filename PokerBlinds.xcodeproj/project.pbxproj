@@ -81,6 +81,7 @@
 				6659A1E926AC909D00BD698E /* Sound */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
+				668EF61926A74A530040FC4D /* OptionsView.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */,
 				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
@@ -88,7 +89,6 @@
 				668EF5E726A347AD0040FC4D /* Assets.xcassets */,
 				668EF5EC26A347AD0040FC4D /* Info.plist */,
 				668EF5E926A347AD0040FC4D /* Preview Content */,
-				668EF61926A74A530040FC4D /* OptionsView.swift */,
 			);
 			path = PokerBlinds;
 			sourceTree = "<group>";
