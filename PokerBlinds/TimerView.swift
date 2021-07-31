@@ -16,9 +16,6 @@ struct TimerView: View {
         VStack(alignment: .center) {
 
             ZStack {
-                
-                
-                
                 VStack {
                     Text("Level \(pokerBlinds.currentLevel)").font(.largeTitle)
                     if pokerBlinds.currentSeconds < 10 {
@@ -40,13 +37,14 @@ struct TimerView: View {
                 
                 Circle()
                     .trim(from: 0, to: 1)
-                    .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 30, lineCap: .round))
-                    .frame(width: 300, height: 300)
+                    .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .frame(width: 275, height: 275)
                 Circle()
                     .trim(from: 0, to: CGFloat(pokerBlinds.currentTimer) / CGFloat(pokerBlinds.currentTimerBackup))
-                    .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 30, lineCap: .round))
-                    .frame(width: 300, height: 300)
-            }
+                    .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .frame(width: 275, height: 275)
+                    .rotationEffect(.init(degrees: 270))
+            }.padding(.bottom)
             
             
             VStack {
@@ -54,10 +52,9 @@ struct TimerView: View {
                 Text("Average Stack \(pokerBlinds.averageChipStack)")
                 Text("Players: \(pokerBlinds.playerCount)")
                 
-            }.padding()
+            }.frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 100, alignment: .center)
             .background(Color(.systemGray6))
             .foregroundColor(.primary)
-            .cornerRadius(25.0)
         }
     }
 }

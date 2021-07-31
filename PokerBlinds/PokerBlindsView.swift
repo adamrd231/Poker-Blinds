@@ -103,9 +103,9 @@ struct PokerBlindsView: View {
                             
                     }.padding(.top)
                     
+                    Banner()
                     
-                    
-                }.navigationBarTitle("Price of Poker")
+                }
                 
             }
             .tabItem { HStack { Text("Home") }}

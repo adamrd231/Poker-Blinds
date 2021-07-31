@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0BCF4EB3FF238C97CCB13F /* Pods_PokerBlinds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */; };
 		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
 		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
 		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
+		6659A20026B25C8A00BD698E /* BannerAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6659A1FF26B25C8A00BD698E /* BannerAdMob.swift */; };
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
 		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
@@ -25,6 +27,7 @@
 		6659A1EE26AC91CF00BD698E /* bell2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell2.wav; sourceTree = "<group>"; };
 		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
 		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
+		6659A1FF26B25C8A00BD698E /* BannerAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdMob.swift; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
 		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
@@ -36,6 +39,9 @@
 		668EF60426A4A6750040FC4D /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		668EF61426A747490040FC4D /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		668EF61926A74A530040FC4D /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerBlinds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.release.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.release.xcconfig"; sourceTree = "<group>"; };
+		E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.debug.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +49,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D0BCF4EB3FF238C97CCB13F /* Pods_PokerBlinds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23E22468814046121343F60D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6659A1E926AC909D00BD698E /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -59,11 +74,21 @@
 			path = Sound;
 			sourceTree = "<group>";
 		};
+		6659A1FE26B25C7400BD698E /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				6659A1FF26B25C8A00BD698E /* BannerAdMob.swift */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
 		668EF5D726A347AC0040FC4D = {
 			isa = PBXGroup;
 			children = (
 				668EF5E226A347AC0040FC4D /* PokerBlinds */,
 				668EF5E126A347AC0040FC4D /* Products */,
+				A68120E229F8FEA117B2CB7E /* Pods */,
+				23E22468814046121343F60D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +103,7 @@
 		668EF5E226A347AC0040FC4D /* PokerBlinds */ = {
 			isa = PBXGroup;
 			children = (
+				6659A1FE26B25C7400BD698E /* AdMob */,
 				6659A1E926AC909D00BD698E /* Sound */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
@@ -109,6 +135,15 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		A68120E229F8FEA117B2CB7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */,
+				7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -116,9 +151,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 668EF5EF26A347AD0040FC4D /* Build configuration list for PBXNativeTarget "PokerBlinds" */;
 			buildPhases = (
+				61E6CE9B2A278F603952A46E /* [CP] Check Pods Manifest.lock */,
 				668EF5DC26A347AC0040FC4D /* Sources */,
 				668EF5DD26A347AC0040FC4D /* Frameworks */,
 				668EF5DE26A347AC0040FC4D /* Resources */,
+				069B94DABABEBFF03BE6C897 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -176,6 +213,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		069B94DABABEBFF03BE6C897 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61E6CE9B2A278F603952A46E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PokerBlinds-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		668EF5DC26A347AC0040FC4D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -186,6 +265,7 @@
 				668EF60526A4A6750040FC4D /* StartButton.swift in Sources */,
 				668EF61A26A74A530040FC4D /* OptionsView.swift in Sources */,
 				668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */,
+				6659A20026B25C8A00BD698E /* BannerAdMob.swift in Sources */,
 				668EF61526A747490040FC4D /* Options.swift in Sources */,
 				668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */,
 			);
@@ -312,6 +392,7 @@
 		};
 		668EF5F026A347AD0040FC4D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -334,6 +415,7 @@
 		};
 		668EF5F126A347AD0040FC4D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
