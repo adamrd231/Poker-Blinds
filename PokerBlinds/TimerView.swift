@@ -37,11 +37,11 @@ struct TimerView: View {
                 
                 Circle()
                     .trim(from: 0, to: 1)
-                    .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 3, lineCap: .round))
                     .frame(width: 275, height: 275)
                 Circle()
                     .trim(from: 0, to: CGFloat(pokerBlinds.currentTimer) / CGFloat(pokerBlinds.currentTimerBackup))
-                    .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 7, lineCap: .round))
+                    .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 3, lineCap: .round))
                     .frame(width: 275, height: 275)
                     .rotationEffect(.init(degrees: 270))
             }.padding(.bottom)

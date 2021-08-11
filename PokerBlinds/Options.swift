@@ -9,7 +9,7 @@ import SwiftUI
 
 class Options: ObservableObject, Identifiable {
     @Published var chipStack = 9000
-    @Published var currentTimer = 120
+    @Published var currentTimer = 300
     var currentSeconds: Int { get { currentTimer % 60 }}
     var currentMinutes: Int { get { currentTimer / 60 }}
     @Published var players = 9

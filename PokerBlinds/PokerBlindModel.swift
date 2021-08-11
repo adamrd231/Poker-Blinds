@@ -15,7 +15,7 @@ class PokerBlinds: ObservableObject, Identifiable {
     
     // MARK: Variables for running calc
     // Timer variables
-    @Published var currentTimer = 120
+    @Published var currentTimer = 300
     
     
     var currentSeconds: Int { get { currentTimer % 60 }}
@@ -53,6 +53,7 @@ class PokerBlinds: ObservableObject, Identifiable {
                 } catch {
                     // Error Handling
                 }
+                
             } else {
                 let path = Bundle.main.path(forResource: "aww", ofType: "wav")!
                 let url = URL(fileURLWithPath: path)
@@ -81,9 +82,9 @@ class PokerBlinds: ObservableObject, Identifiable {
     // MARK: Backup Values for resetting the timer
     @Published var currentTimerBackup = 1
     var currentLevelBackup = 1
-    var chipStackBackup = 1
+    var chipStackBackup = 9000
     var smallBlindBackup = 100
-    var playerCountBackup = 1
+    var playerCountBackup = 9
     
     func backUpTimerValues() {
         currentTimerBackup = currentTimer
@@ -110,8 +111,6 @@ class PokerBlinds: ObservableObject, Identifiable {
     func pokerTimerCountdown() {
         if currentTimer > 0 {
             currentTimer -= 1
-            
-            print("Current Timer: \(currentTimer) backup: \(currentTimerBackup) Divided: \(CGFloat(currentTimer) / CGFloat(currentTimerBackup))")
         } else {
             currentTimer = currentTimerBackup
             currentLevel += 1

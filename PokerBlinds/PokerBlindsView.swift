@@ -7,11 +7,17 @@
 
 import SwiftUI
 import AVFoundation
+import GoogleMobileAds
+import AppTrackingTransparency
 
 struct PokerBlindsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var pokerBlinds: PokerBlinds
     @EnvironmentObject var options: Options
+    
+    // Google Admob variables
+    @State var interstitial: GADInterstitialAd?
+    @State var playedInterstitial = true
     
     // Timer object
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
@@ -58,6 +64,32 @@ struct PokerBlindsView: View {
     }
     
     
+    func requestIDFA() {
+      ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+        // Tracking authorization completed. Start loading ads here.
+
+            if playedInterstitial == false {
+                let request = GADRequest()
+                    GADInterstitialAd.load(withAdUnitID:"ca-app-pub-4186253562269967/2135766372",
+                            request: request, completionHandler: { [self] ad, error in
+                                // Check if there is an error
+                                if let error = error {
+                                    return
+                                }
+                                // If no errors, create an ad and serve it
+                                interstitial = ad
+                                let root = UIApplication.shared.windows.first?.rootViewController
+                                    self.interstitial!.present(fromRootViewController: root!)
+                                    // Let user use the app until the next time ad free
+                                    playedInterstitial = true
+                                }
+                            )
+                                } else {
+                                    return
+                                }
+
+      })
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -108,15 +140,25 @@ struct PokerBlindsView: View {
                 }
                 
             }
-            .tabItem { HStack { Text("Home") }}
+            .tabItem { HStack {
+                Image(systemName: "house")
+                Text("Home")
+                
+            }}
             .tag(0)
             
             // Second Screen
-            NavigationView {
-                OptionsView().navigationBarTitle("Options")
-            }
-            .tabItem { Text("Options") }
-            .tag(1)
+                if !pokerBlinds.timerIsRunning {
+                    NavigationView {
+                        OptionsView().navigationBarTitle("Options")
+                    }
+                    .tabItem { HStack {
+                        Image(systemName: "option")
+                        Text("Options")
+                    } }
+                }
+           
+            
                
              // Close Tab View
             }
@@ -125,6 +167,7 @@ struct PokerBlindsView: View {
                 })
             .onAppear(perform: {
                 pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
+                requestIDFA()
                 })
         }
 
