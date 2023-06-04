@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "1300"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "51B1DA61DC19E1172C3160690A60C27A"
-               BuildableName = "Pods_PokerBlinds.framework"
+               BuildableName = "libPods-PokerBlinds.a"
                BlueprintName = "Pods-PokerBlinds"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

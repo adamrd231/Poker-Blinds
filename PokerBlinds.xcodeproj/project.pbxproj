@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0BCF4EB3FF238C97CCB13F /* Pods_PokerBlinds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */; };
+		031ACDBCA6C341C3891FB5C7 /* libPods-PokerBlinds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */; };
 		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
 		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
 		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
@@ -50,8 +50,8 @@
 		66E43F7426C48B8C00AE012E /* PokerBlinds.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PokerBlinds.entitlements; sourceTree = "<group>"; };
 		66E43F7726C48BAD00AE012E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		66E43FC926C6ACB900AE012E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokerBlinds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.release.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.release.xcconfig"; sourceTree = "<group>"; };
+		8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokerBlinds.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.debug.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,8 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D0BCF4EB3FF238C97CCB13F /* Pods_PokerBlinds.framework in Frameworks */,
 				66E43F7826C48BAD00AE012E /* StoreKit.framework in Frameworks */,
+				031ACDBCA6C341C3891FB5C7 /* libPods-PokerBlinds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				66E43F7726C48BAD00AE012E /* StoreKit.framework */,
-				6AFC518EADF1AAA04266BDDE /* Pods_PokerBlinds.framework */,
+				8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,7 +173,6 @@
 				668EF5DC26A347AC0040FC4D /* Sources */,
 				668EF5DD26A347AC0040FC4D /* Frameworks */,
 				668EF5DE26A347AC0040FC4D /* Resources */,
-				069B94DABABEBFF03BE6C897 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -233,23 +232,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		069B94DABABEBFF03BE6C897 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		61E6CE9B2A278F603952A46E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
