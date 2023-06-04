@@ -16,8 +16,7 @@ class PokerBlinds: ObservableObject, Identifiable {
     // MARK: Variables for running calc
     // Timer variables
     @Published var currentTimer = 300
-    
-    
+
     var currentSeconds: Int { get { currentTimer % 60 }}
     var currentMinutes: Int { get { currentTimer / 60 }}
     @Published var timerIsRunning = false
@@ -26,7 +25,7 @@ class PokerBlinds: ObservableObject, Identifiable {
     
     @Published var newChipCount = "9000"
     
-
+    @Published var keepScreenOpen = true
     
     // Chip Stack Count
     @Published var chipStack = 9000
@@ -37,7 +36,11 @@ class PokerBlinds: ObservableObject, Identifiable {
     var averageChipStack:Int { get {(chipStack * playerStartingCount) / playerCount}}
     var bigBlind: Int { get { smallBlind * 2 }}
     var blindLimit = 1000
-    
+    @Published var firstTime = UserDefaults.standard.bool(forKey: "firstTime") ?? false {
+    didSet {
+        UserDefaults.standard.setValue(self.firstTime, forKey: "firstTime")
+    }
+}
     
     func removePlayer() {
         if playerCount > 1 {

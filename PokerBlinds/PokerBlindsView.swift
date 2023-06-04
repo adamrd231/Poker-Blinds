@@ -7,17 +7,18 @@
 
 import SwiftUI
 import AVFoundation
-import GoogleMobileAds
+//import GoogleMobileAds
 import AppTrackingTransparency
 
 struct PokerBlindsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var pokerBlinds: PokerBlinds
     @EnvironmentObject var options: Options
+    @StateObject var storeManager: StoreManager
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
-    @State var playedInterstitial = true
+    @State var playedInterstitial = false
     
     // Timer object
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
@@ -68,9 +69,9 @@ struct PokerBlindsView: View {
       ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
         // Tracking authorization completed. Start loading ads here.
 
-            if playedInterstitial == false {
+        if playedInterstitial == false && storeManager.purchasedRemoveAds == false {
                 let request = GADRequest()
-                    GADInterstitialAd.load(withAdUnitID:"ca-app-pub-4186253562269967/2135766372",
+                    GADInterstitialAd.load(withAdUnitID:"ca-app-pub-4186253562269967/8239676117",
                             request: request, completionHandler: { [self] ad, error in
                                 // Check if there is an error
                                 if let error = error {
@@ -92,6 +93,7 @@ struct PokerBlindsView: View {
     }
     
     var body: some View {
+        
         GeometryReader { geo in
             TabView {
             NavigationView {
@@ -134,12 +136,25 @@ struct PokerBlindsView: View {
                         }.disabled(!pokerBlinds.timerIsRunning)
                             
                     }.padding(.top)
+                    if storeManager.purchasedRemoveAds == true {
+                        Spacer()
+                    } else {
+                        Banner()
+                    }
                     
-                    Banner()
                     
                 }
                 
-            }
+            }.onAppear(perform: {
+                pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
+                requestIDFA()
+                if pokerBlinds.keepScreenOpen == true {
+                    UIApplication.shared.isIdleTimerDisabled = true
+                } else {
+                    UIApplication.shared.isIdleTimerDisabled = false
+                }
+                
+                })
             .tabItem { HStack {
                 Image(systemName: "house")
                 Text("Home")
@@ -157,6 +172,15 @@ struct PokerBlindsView: View {
                         Text("Options")
                     } }
                 }
+                
+                NavigationView {
+                    RemoveAdvertising(storeManager: storeManager)
+                }.tabItem {
+                    HStack {
+                        Image(systemName: "pip.remove")
+                        Text("No Ads")
+                    }
+                }
            
             
                
@@ -165,10 +189,7 @@ struct PokerBlindsView: View {
             .onReceive(timer, perform: { _ in
                     pokerBlinds.pokerTimerCountdown()
                 })
-            .onAppear(perform: {
-                pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
-                requestIDFA()
-                })
+            
         }
 
     } // Close some View
@@ -176,6 +197,6 @@ struct PokerBlindsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PokerBlindsView().environmentObject(PokerBlinds()).environmentObject(Options())
+        PokerBlindsView(storeManager: StoreManager()).environmentObject(PokerBlinds()).environmentObject(Options())
     }
 }

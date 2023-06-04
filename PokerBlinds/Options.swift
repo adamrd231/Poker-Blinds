@@ -22,4 +22,6 @@ class Options: ObservableObject, Identifiable {
     
     @Published var smallBlindLimit = 1000
     var bigBlindLimit:Int { get { smallBlindLimit * 2 }}
+    
+    @Published var keepScreenOpen:Bool = true
 }

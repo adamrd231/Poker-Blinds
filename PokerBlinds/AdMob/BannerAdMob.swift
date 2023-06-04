@@ -6,7 +6,7 @@ final private class BannerVC: UIViewControllerRepresentable  {
     
     
     var testBannerAdId = "ca-app-pub-3940256099942544/2934735716"
-    var realBannerAdId = "ca-app-pub-4186253562269967/3971400494"
+    var realBannerAdId = "ca-app-pub-4186253562269967/9169135476"
 
     func makeUIViewController(context: Context) -> UIViewController {
         let view = GADBannerView(adSize: kGADAdSizeBanner)
@@ -27,9 +27,9 @@ final private class BannerVC: UIViewControllerRepresentable  {
 struct Banner:View{
     var body: some View{
         HStack(alignment: .center) {
-            Spacer()
+            
             BannerVC().frame(width: 320, height: 100, alignment: .center)
-            Spacer()
+            
         }
     }
 }

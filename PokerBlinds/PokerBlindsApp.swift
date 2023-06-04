@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
+//import GoogleMobileAds
+import StoreKit
 
 @main
 struct PokerBlindsApp: App {
     
     @StateObject var pokerBlinds = PokerBlinds()
     @StateObject var options = Options()
+    @StateObject var storeManager = StoreManager()
+    var productIds = ["removePokerAdvertising"]
+    
     
     var body: some Scene {
         WindowGroup {
-            PokerBlindsView().environmentObject(pokerBlinds).environmentObject(options)
+            PokerBlindsView(storeManager: storeManager).environmentObject(pokerBlinds).environmentObject(options)
+                .onAppear(perform: {
+                    SKPaymentQueue.default().add(storeManager)
+                    storeManager.getProducts(productIDs: productIds)
+            }) 
         }
     }
 }

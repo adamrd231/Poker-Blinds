@@ -84,6 +84,11 @@ struct OptionsView: View {
                 Stepper("Players: \(options.players)", value: $options.players, in: 1...32, step: 1)
             }
             
+            // Row ///////////////////////////
+            HStack {
+                Toggle("Keep app open while running?", isOn: $pokerBlinds.keepScreenOpen)
+            }
+            
         }.onDisappear(perform: {
             updateOptions()
         })
