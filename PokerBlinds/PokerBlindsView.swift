@@ -7,7 +7,7 @@
 
 import SwiftUI
 import AVFoundation
-//import GoogleMobileAds
+import GoogleMobileAds
 import AppTrackingTransparency
 
 struct PokerBlindsView: View {

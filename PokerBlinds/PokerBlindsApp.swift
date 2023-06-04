@@ -20,7 +20,9 @@ struct PokerBlindsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PokerBlindsView(storeManager: storeManager).environmentObject(pokerBlinds).environmentObject(options)
+            PokerBlindsView(storeManager: storeManager)
+                .environmentObject(pokerBlinds)
+                .environmentObject(options)
                 .onAppear(perform: {
                     SKPaymentQueue.default().add(storeManager)
                     storeManager.getProducts(productIDs: productIds)

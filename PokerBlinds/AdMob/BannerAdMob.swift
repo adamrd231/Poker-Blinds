@@ -2,8 +2,7 @@ import SwiftUI
 import GoogleMobileAds
 import UIKit
 
-final private class BannerVC: UIViewControllerRepresentable  {
-    
+private struct BannerVC: UIViewControllerRepresentable  {
     
     var testBannerAdId = "ca-app-pub-3940256099942544/2934735716"
     var realBannerAdId = "ca-app-pub-4186253562269967/9169135476"
