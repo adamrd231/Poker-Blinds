@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-//import GoogleMobileAds
 import StoreKit
+import AppTrackingTransparency
 
 @main
 struct PokerBlindsApp: App {
@@ -17,6 +17,11 @@ struct PokerBlindsApp: App {
     @StateObject var storeManager = StoreManager()
     var productIds = ["removePokerAdvertising"]
     
+    func requestIDFA() {
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            
+        })
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -26,6 +31,7 @@ struct PokerBlindsApp: App {
                 .onAppear(perform: {
                     SKPaymentQueue.default().add(storeManager)
                     storeManager.getProducts(productIDs: productIds)
+                    requestIDFA()
             }) 
         }
     }

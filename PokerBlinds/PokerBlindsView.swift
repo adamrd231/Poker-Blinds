@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 import GoogleMobileAds
-import AppTrackingTransparency
 
 struct PokerBlindsView: View {
     // Pokerblinds object with all usable inputs
@@ -23,21 +22,31 @@ struct PokerBlindsView: View {
     // Timer object
     @State var timer = Timer.publish(every: 1, on: .main, in: .common)
     
+    func pressedStartPauseButton() {
+        if pokerBlinds.timerIsRunning == false {
+            startPokerTimer()
+        } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == false {
+            pausePokerTimer()
+        } else {
+            unPausePokerTimer()
+        }
+    }
+    
     func startPokerTimer() {
         pokerBlinds.backUpTimerValues()
         pokerBlinds.timerIsRunning = true
         pokerBlinds.timerIsPaused = false
-
+        
         timer = Timer.publish(every: 1, on: .main, in: .common)
-        timer.connect()
+        _ = timer.connect()
     }
     
     func unPausePokerTimer() {
         pokerBlinds.timerIsRunning = true
         pokerBlinds.timerIsPaused = false
-
+        
         timer = Timer.publish(every: 1, on: .main, in: .common)
-        timer.connect()
+        _ = timer.connect()
     }
     
     func pausePokerTimer() {
@@ -64,51 +73,24 @@ struct PokerBlindsView: View {
         }
     }
     
-    
-    func requestIDFA() {
-      ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-        // Tracking authorization completed. Start loading ads here.
-
-        if playedInterstitial == false && storeManager.purchasedRemoveAds == false {
-                let request = GADRequest()
-                    GADInterstitialAd.load(withAdUnitID:"ca-app-pub-4186253562269967/8239676117",
-                            request: request, completionHandler: { [self] ad, error in
-                                // Check if there is an error
-                                if let error = error {
-                                    return
-                                }
-                                // If no errors, create an ad and serve it
-                                interstitial = ad
-                                let root = UIApplication.shared.windows.first?.rootViewController
-                                    self.interstitial!.present(fromRootViewController: root!)
-                                    // Let user use the app until the next time ad free
-                                    playedInterstitial = true
-                                }
-                            )
-                                } else {
-                                    return
-                                }
-
-      })
-    }
-    
     var body: some View {
-        
-        GeometryReader { geo in
-            TabView {
-            NavigationView {
-
-                VStack(alignment: .center) {
+        TabView {
+            HStack(alignment: .top) {
+                // MARK: Home Screen
+                VStack(alignment: .center, spacing: 25) {
+                    // Advertising
+                    if storeManager.purchasedRemoveAds != true {
+                        Banner()
+                            
+                    }
                     TimerView()
-                    VStack(spacing: 7) {
+                    // Show blind information here
+                    Blinds(smallBlind: pokerBlinds.smallBlind, bigBlind: pokerBlinds.bigBlind, raiseBlindsValue: pokerBlinds.raiseBlindsBy)
+                    
+                    HStack(spacing: 5) {
                         Button(action: {
-                            if pokerBlinds.timerIsRunning == false {
-                                startPokerTimer()
-                            } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == false {
-                                pausePokerTimer()
-                            } else {
-                                unPausePokerTimer()
-                            }
+                            // Start / Pause button
+                            pressedStartPauseButton()
                         }) {
                             startButtonText()
                                 .frame(width: 100, height: 50, alignment: .center)
@@ -126,73 +108,55 @@ struct PokerBlindsView: View {
                                 .foregroundColor(Color(.systemGray6))
                                 .cornerRadius(15.0)
                         }
-                        
-                        Button(action: {
-                            pokerBlinds.removePlayer()
-                        }) {
-                            (pokerBlinds.timerIsRunning) ? Text("Remove Player").foregroundColor(Color(.systemGray)) : Text("Remove Player").foregroundColor(Color(.systemGray3))
-                            
-                            
-                        }.disabled(!pokerBlinds.timerIsRunning)
-                            
-                    }.padding(.top)
-                    if storeManager.purchasedRemoveAds == true {
-                        Spacer()
-                    } else {
-                        Banner()
                     }
-                    
-                    
                 }
+                .fixedSize()
+                .edgesIgnoringSafeArea(.all)
+                .background(.yellow)
                 
-            }.onAppear(perform: {
+                .tabItem { HStack {
+                    Image(systemName: "house")
+                    Text("Home")
+                    
+                }}
+                .tag(0)
+            }
+            
+            .onAppear(perform: {
                 pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
-                requestIDFA()
+
                 if pokerBlinds.keepScreenOpen == true {
                     UIApplication.shared.isIdleTimerDisabled = true
                 } else {
                     UIApplication.shared.isIdleTimerDisabled = false
                 }
                 
-                })
-            .tabItem { HStack {
-                Image(systemName: "house")
-                Text("Home")
-                
-            }}
-            .tag(0)
+            })
             
-            // Second Screen
-                if !pokerBlinds.timerIsRunning {
-                    NavigationView {
-                        OptionsView().navigationBarTitle("Options")
+            
+            // MARK: Second Screen
+            if !pokerBlinds.timerIsRunning {
+                OptionsView()
+                    .tabItem {
+                        HStack {
+                            Image(systemName: "option")
+                            Text("Options")
+                        }
                     }
-                    .tabItem { HStack {
-                        Image(systemName: "option")
-                        Text("Options")
-                    } }
-                }
-                
-                NavigationView {
-                    RemoveAdvertising(storeManager: storeManager)
-                }.tabItem {
+            }
+            
+            RemoveAdvertising(storeManager: storeManager)
+                .tabItem {
                     HStack {
                         Image(systemName: "pip.remove")
                         Text("No Ads")
                     }
                 }
-           
-            
-               
-             // Close Tab View
-            }
-            .onReceive(timer, perform: { _ in
+                .onReceive(timer, perform: { _ in
                     pokerBlinds.pokerTimerCountdown()
                 })
-            
         }
-
-    } // Close some View
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

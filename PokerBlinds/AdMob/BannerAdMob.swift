@@ -27,7 +27,9 @@ struct Banner:View{
     var body: some View{
         HStack(alignment: .center) {
             
-            BannerVC().frame(width: 320, height: 100, alignment: .center)
+            BannerVC()
+                .frame(height: 150, alignment: .center)
+                .frame(maxWidth: .infinity)
             
         }
     }
