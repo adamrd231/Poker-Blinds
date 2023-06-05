@@ -14,7 +14,7 @@ struct Blinds: View {
     let raiseBlindsValue: Int
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             HStack {
                 Text("\(smallBlind - raiseBlindsValue)")
                 Text("|")
@@ -37,6 +37,7 @@ struct Blinds: View {
             }
             .font(.caption)
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

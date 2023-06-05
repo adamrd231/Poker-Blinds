@@ -40,7 +40,9 @@ struct TimerView: View {
                 .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .frame(width: 275, height: 275)
                 .rotationEffect(.init(degrees: 270))
-        }.padding(.bottom)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
     }
 }
 

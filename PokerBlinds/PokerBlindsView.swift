@@ -75,64 +75,57 @@ struct PokerBlindsView: View {
     
     var body: some View {
         TabView {
-            HStack(alignment: .top) {
-                // MARK: Home Screen
-                VStack(alignment: .center, spacing: 25) {
-                    // Advertising
-                    if storeManager.purchasedRemoveAds != true {
-                        Banner()
-                            
+            // MARK: Home Screen
+            VStack(alignment: .center) {
+                List {
+                    Section(header: Text("Timer")) {
+                        TimerView()
                     }
-                    TimerView()
-                    // Show blind information here
-                    Blinds(smallBlind: pokerBlinds.smallBlind, bigBlind: pokerBlinds.bigBlind, raiseBlindsValue: pokerBlinds.raiseBlindsBy)
                     
-                    HStack(spacing: 5) {
-                        Button(action: {
-                            // Start / Pause button
-                            pressedStartPauseButton()
-                        }) {
-                            startButtonText()
-                                .frame(width: 100, height: 50, alignment: .center)
-                                .background(Color(.systemGray))
-                                .foregroundColor(Color(.systemGray6))
-                                .cornerRadius(15.0)
-                        }
-                        
-                        Button(action: {
-                            stopPokerTimer()
-                        }) {
-                            Text("Reset")
-                                .frame(width: 100, height: 50, alignment: .center)
-                                .background(Color(.systemGray))
-                                .foregroundColor(Color(.systemGray6))
-                                .cornerRadius(15.0)
-                        }
+                    Section(header: Text("Blinds")) {
+                        // Show blind information here
+                        Blinds(smallBlind: pokerBlinds.smallBlind, bigBlind: pokerBlinds.bigBlind, raiseBlindsValue: pokerBlinds.raiseBlindsBy)
                     }
                 }
-                .fixedSize()
-                .edgesIgnoringSafeArea(.all)
-                .background(.yellow)
-                
-                .tabItem { HStack {
+                .listStyle(.plain)
+
+                HStack(spacing: 5) {
+                    Button(action: {
+                        // Start / Pause button
+                        pressedStartPauseButton()
+                    }) {
+                        startButtonText()
+                            .frame(height: 50, alignment: .center)
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemGray))
+                            .foregroundColor(Color(.systemGray6))
+                            .cornerRadius(15.0)
+                    }
+                    
+                    Button(action: {
+                        stopPokerTimer()
+                    }) {
+                        Text("Reset")
+                            .frame(height: 50, alignment: .center)
+                            .frame(maxWidth: .infinity)
+                            .background(Color(.systemGray))
+                            .foregroundColor(Color(.systemGray6))
+                            .cornerRadius(15.0)
+                    }
+                }
+                .padding()
+                    
+                if storeManager.purchasedRemoveAds != true {
+                    Banner()
+                }
+            }
+            .tabItem {
+                HStack {
                     Image(systemName: "house")
                     Text("Home")
-                    
-                }}
-                .tag(0)
-            }
-            
-            .onAppear(perform: {
-                pokerBlinds.currentTimerBackup = pokerBlinds.currentTimer
-
-                if pokerBlinds.keepScreenOpen == true {
-                    UIApplication.shared.isIdleTimerDisabled = true
-                } else {
-                    UIApplication.shared.isIdleTimerDisabled = false
-                }
                 
-            })
-            
+                }
+            }
             
             // MARK: Second Screen
             if !pokerBlinds.timerIsRunning {
