@@ -11,22 +11,19 @@ import AVFoundation
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
     
-    
     var body: some View {
         TabView {
+
             // MARK: Home Screen
             VStack(alignment: .center) {
-                List {
-                    Section(header: Text("Timer")) {
-                        TimerView(blinds: vm.blinds, timerInfo: vm.timerInfo)
-                    }
-                    
-                    Section(header: Text("Blinds")) {
-                        // Show blind information here
-                        BlindsView(blindsModel: vm.blinds)
-                    }
+                Spacer()
+                VStack {
+                    TimerView(blinds: vm.blinds, timerInfo: vm.timerInfo)
+
+                    // Show blind information here
+                    BlindsView(blindsModel: vm.blinds)
                 }
-                .listStyle(.plain)
+                Spacer()
 
                 HStack(spacing: 5) {
                     Button("Start") {

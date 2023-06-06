@@ -18,12 +18,11 @@ struct BlindsView: View {
                 Text("|")
                 Text("\((blindsModel.smallBlind - blindsModel.amountToRaiseBlinds) * 2)")
             }
-            .font(.caption)
             
             HStack {
-                Text("\(blindsModel.smallBlind)")
-                Text("|").font(.title3)
-                Text("\(blindsModel.bigBlind)")
+                LargeText(text: "\(blindsModel.smallBlind)", huge: false)
+                LargeText(text: "|", huge: false)
+                LargeText(text: "\(blindsModel.bigBlind)", huge: false)
             }
             .font(.largeTitle)
             .bold()
@@ -33,7 +32,6 @@ struct BlindsView: View {
                 Text("|")
                 Text("\((blindsModel.smallBlind + blindsModel.amountToRaiseBlinds) * 2)")
             }
-            .font(.caption)
         }
         .frame(maxWidth: .infinity)
     }

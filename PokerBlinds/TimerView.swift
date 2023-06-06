@@ -15,22 +15,13 @@ struct TimerView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                Text("Level \(blinds.currentLevel)")
-                    .font(.title)
-                    .textCase(.uppercase)
-                    .foregroundColor(Color(.darkGray))
-                    .fontWeight(.heavy)
-                if timerInfo.currentSeconds < 10 {
-                    Text("\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)")
-                        .font(.system(size: 75.0))
-                        .fontWeight(.heavy)
-                        .foregroundColor(Color(.darkGray))
-                    
-                } else {
-                    Text("\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)").font(.system(size: 75.0))
-                        .fontWeight(.heavy)
-                        .foregroundColor(Color(.darkGray))
-                }
+                LargeText(text: "Level \(blinds.currentLevel)", huge: false)
+//                Text("Level \(blinds.currentLevel)")
+//                    .font(.title)
+//                    .textCase(.uppercase)
+//                    .foregroundColor(Color(.darkGray))
+//                    .fontWeight(.heavy)
+                LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", huge: true)
             }
             
             Circle()
@@ -38,7 +29,7 @@ struct TimerView: View {
                 .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 6, lineCap: .round))
                 .frame(width: 275, height: 275)
             Circle()
-//                .trim(from: 0, to: CGFloat(pokerBlinds.currentTimer) / CGFloat(pokerBlinds.currentTimerBackup))
+                .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(timerInfo.currentTime))
                 .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round))
                 .frame(width: 275, height: 275)
                 .rotationEffect(.init(degrees: 270))
