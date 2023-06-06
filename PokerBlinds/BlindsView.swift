@@ -9,31 +9,29 @@ import SwiftUI
 
 struct BlindsView: View {
     
-    let smallBlind: Int
-    let bigBlind: Int
-    let raiseBlindsValue: Int
+    let blindsModel: BlindsModel
     
     var body: some View {
         VStack(alignment: .center) {
             HStack {
-                Text("\(smallBlind - raiseBlindsValue)")
+                Text("\(blindsModel.smallBlind - blindsModel.amountToRaiseBlinds)")
                 Text("|")
-                Text("\((smallBlind - raiseBlindsValue) * 2)")
+                Text("\((blindsModel.smallBlind - blindsModel.amountToRaiseBlinds) * 2)")
             }
             .font(.caption)
             
             HStack {
-                Text("\(smallBlind)")
+                Text("\(blindsModel.smallBlind)")
                 Text("|").font(.title3)
-                Text("\(bigBlind)")
+                Text("\(blindsModel.bigBlind)")
             }
             .font(.largeTitle)
             .bold()
             
             HStack {
-                Text("\(smallBlind + raiseBlindsValue)")
+                Text("\(blindsModel.smallBlind + blindsModel.amountToRaiseBlinds)")
                 Text("|")
-                Text("\((smallBlind + raiseBlindsValue) * 2)")
+                Text("\((blindsModel.smallBlind + blindsModel.amountToRaiseBlinds) * 2)")
             }
             .font(.caption)
         }
@@ -43,6 +41,6 @@ struct BlindsView: View {
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
-        BlindsView(smallBlind: 100, bigBlind: 200, raiseBlindsValue: 100)
+        BlindsView(blindsModel: BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100))
     }
 }

@@ -22,11 +22,10 @@ struct BlindsModel {
         return smallBlind * 2
     }
     let amountToRaiseBlinds: Int
+    
 }
 
-struct PokerGameModel: Identifiable {
-    // Timer info
-    var id = UUID()
+struct TimerModel {
     var currentTime: Int
     var currentSeconds: Int {
         return currentTime % 60
@@ -35,9 +34,15 @@ struct PokerGameModel: Identifiable {
         return currentTime / 60
     }
     var isTimerRunning: TimerStates
+}
+
+struct PokerGameModel: Identifiable {
+    // Timer info
+    var id = UUID()
+   
     // Blinds info
     var blindsModel: BlindsModel
-    var keepScreenOpen: Bool
+
 }
 
 class PokerBlinds: ObservableObject, Identifiable {

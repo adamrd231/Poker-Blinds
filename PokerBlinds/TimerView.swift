@@ -9,23 +9,25 @@ import SwiftUI
 
 struct TimerView: View {
     
-    let pokerGameModel: PokerGameModel
+    let blinds: BlindsModel
+    let timerInfo: TimerModel
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                Text("Level \(pokerGameModel.blindsModel.currentLevel)")
+                Text("Level \(blinds.currentLevel)")
                     .font(.title)
                     .textCase(.uppercase)
                     .foregroundColor(Color(.darkGray))
                     .fontWeight(.heavy)
-                if pokerGameModel.currentSeconds < 10 {
-                    Text("\(pokerGameModel.currentMinutes):0\(pokerGameModel.currentSeconds)").font(.system(size: 75.0))
+                if timerInfo.currentSeconds < 10 {
+                    Text("\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)")
+                        .font(.system(size: 75.0))
                         .fontWeight(.heavy)
                         .foregroundColor(Color(.darkGray))
                     
                 } else {
-                    Text("\(pokerGameModel.currentMinutes):\(pokerGameModel.currentSeconds)").font(.system(size: 75.0))
+                    Text("\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)").font(.system(size: 75.0))
                         .fontWeight(.heavy)
                         .foregroundColor(Color(.darkGray))
                 }
@@ -48,6 +50,15 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(pokerGameModel: PokerGameModel(currentTime: 10, isTimerRunning: TimerStates.isPaused, blindsModel: BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100), keepScreenOpen: true))
+        TimerView(
+            blinds: BlindsModel(
+                currentLevel: 1,
+                smallBlind: 100,
+                amountToRaiseBlinds: 100),
+            timerInfo: TimerModel(
+                currentTime: 10,
+                isTimerRunning: TimerStates.hasNotBeenStarted
+            )
+        )
     }
 }

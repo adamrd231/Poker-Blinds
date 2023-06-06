@@ -11,13 +11,6 @@ import AVFoundation
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
     
-    func startButtonText() -> Text {
-        switch vm.pokerGame.isTimerRunning {
-            case .hasNotBeenStarted: return Text("Start")
-            case .isPaused: return Text("Re-Start")
-            case .isRunning: return Text("Pause")
-        }
-    }
     
     var body: some View {
         TabView {
@@ -25,39 +18,29 @@ struct PokerBlindsView: View {
             VStack(alignment: .center) {
                 List {
                     Section(header: Text("Timer")) {
-                        TimerView(pokerGameModel: vm.pokerGame)
+                        TimerView(blinds: vm.blinds, timerInfo: vm.timerInfo)
                     }
                     
                     Section(header: Text("Blinds")) {
                         // Show blind information here
-                        BlindsView(smallBlind: vm.pokerGame.blindsModel.smallBlind, bigBlind: vm.pokerGame.blindsModel.bigBlind, raiseBlindsValue: vm.pokerGame.blindsModel.amountToRaiseBlinds)
+                        BlindsView(blindsModel: vm.blinds)
                     }
                 }
                 .listStyle(.plain)
 
                 HStack(spacing: 5) {
-                    Button(action: {
-                        // Start timer
+                    Button("Start") {
                         vm.startTimer()
-    
-                    }) {
-                        startButtonText()
-                            .frame(height: 50, alignment: .center)
-                            .frame(maxWidth: .infinity)
-                            .background(Color(.systemGray))
-                            .foregroundColor(Color(.systemGray6))
-                            .cornerRadius(15.0)
                     }
+                    .buttonStyle(BasicButtonStyle())
+                    .disabled(vm.timerInfo.isTimerRunning == TimerStates.isRunning)
+                   
                     
                     Button(action: {
-  
+                        vm.stopTimer()
                     }) {
                         Text("Reset")
-                            .frame(height: 50, alignment: .center)
-                            .frame(maxWidth: .infinity)
-                            .background(Color(.systemGray))
-                            .foregroundColor(Color(.systemGray6))
-                            .cornerRadius(15.0)
+                            .buttonStyle(BasicButtonStyle())
                     }
                 }
                 .padding()
@@ -96,5 +79,16 @@ struct PokerBlindsView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         PokerBlindsView()
+    }
+}
+
+struct BasicButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(height: 50, alignment: .center)
+            .frame(maxWidth: .infinity)
+            .background(Color(.systemGray))
+            .foregroundColor(Color(.systemGray6))
+            .cornerRadius(15.0)
     }
 }
