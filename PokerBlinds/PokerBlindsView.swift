@@ -7,15 +7,10 @@
 
 import SwiftUI
 import AVFoundation
-import GoogleMobileAds
 
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
-
-
-
     
-
     func startButtonText() -> Text {
         switch vm.pokerGame.isTimerRunning {
             case .hasNotBeenStarted: return Text("Start")
@@ -30,7 +25,7 @@ struct PokerBlindsView: View {
             VStack(alignment: .center) {
                 List {
                     Section(header: Text("Timer")) {
-                        TimerView()
+                        TimerView(pokerGameModel: vm.pokerGame)
                     }
                     
                     Section(header: Text("Blinds")) {
@@ -42,7 +37,8 @@ struct PokerBlindsView: View {
 
                 HStack(spacing: 5) {
                     Button(action: {
-                        // Start / Pause button
+                        // Start timer
+                        vm.startTimer()
     
                     }) {
                         startButtonText()
@@ -66,7 +62,7 @@ struct PokerBlindsView: View {
                 }
                 .padding()
                     
-                if storeManager.purchasedRemoveAds != true {
+                if vm.storeManager.purchasedRemoveAds != true {
                     Banner()
                 }
             }
@@ -86,24 +82,19 @@ struct PokerBlindsView: View {
                     }
                 }
             
-            RemoveAdvertising(storeManager: storeManager)
+            RemoveAdvertising(storeManager: vm.storeManager)
                 .tabItem {
                     HStack {
                         Image(systemName: "pip.remove")
                         Text("No Ads")
                     }
                 }
-                .onReceive(timer, perform: { _ in
-    
-                })
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PokerBlindsView(storeManager: StoreManager())
-            .environmentObject(PokerBlinds())
-            .environmentObject(Options())
+        PokerBlindsView()
     }
 }
