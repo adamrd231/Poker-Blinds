@@ -9,6 +9,37 @@ import SwiftUI
 import AVFoundation
 import Foundation
 
+enum TimerStates {
+    case isRunning
+    case isPaused
+    case hasNotBeenStarted
+}
+
+struct BlindsModel {
+    var currentLevel: Int
+    let smallBlind: Int
+    var bigBlind: Int {
+        return smallBlind * 2
+    }
+    let amountToRaiseBlinds: Int
+}
+
+struct PokerGameModel: Identifiable {
+    // Timer info
+    var id = UUID()
+    var currentTime: Int
+    var currentSeconds: Int {
+        return currentTime % 60
+    }
+    var currentMinutes: Int {
+        return currentTime / 60
+    }
+    var isTimerRunning: TimerStates
+    // Blinds info
+    var blindsModel: BlindsModel
+    var keepScreenOpen: Bool
+}
+
 class PokerBlinds: ObservableObject, Identifiable {
     
     var audioPlayer: AVAudioPlayer?
@@ -82,53 +113,25 @@ class PokerBlinds: ObservableObject, Identifiable {
         }
     }
     
-    // MARK: Backup Values for resetting the timer
-    @Published var currentTimerBackup = 1
-    var currentLevelBackup = 1
-    var chipStackBackup = 9000
-    var smallBlindBackup = 100
-    var playerCountBackup = 9
-    
-    func backUpTimerValues() {
-        currentTimerBackup = currentTimer
-        currentLevelBackup = currentLevel
-        chipStackBackup = chipStack
-        smallBlindBackup = smallBlind
-        playerCountBackup = playerCount
-        
-    }
-    
-    func resetTimerValues() {
-        currentTimer = currentTimerBackup
-        currentLevel = currentLevelBackup
-        chipStack = chipStackBackup
-        smallBlind = smallBlindBackup
-        playerCount = playerCountBackup
-        
-    }
-    
-    
-
-    
     
     func pokerTimerCountdown() {
-        if currentTimer > 0 {
-            currentTimer -= 1
-        } else {
-            currentTimer = currentTimerBackup
-            currentLevel += 1
-            if smallBlind >= blindLimit {
-                
-                playSound()
-                
-                return
-            } else {
-                smallBlind += raiseBlindsBy
-                playSound()
-            }
-            
-            
-        }
+//        if currentTimer > 0 {
+//            currentTimer -= 1
+//        } else {
+//            currentTimer = currentTimerBackup
+//            currentLevel += 1
+//            if smallBlind >= blindLimit {
+//                
+//                playSound()
+//                
+//                return
+//            } else {
+//                smallBlind += raiseBlindsBy
+//                playSound()
+//            }
+//            
+//            
+//        }
     }
     
 }

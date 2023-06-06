@@ -10,66 +10,17 @@ import AVFoundation
 import GoogleMobileAds
 
 struct PokerBlindsView: View {
-    // Pokerblinds object with all usable inputs
-    @EnvironmentObject var pokerBlinds: PokerBlinds
-    @EnvironmentObject var options: Options
-    @StateObject var storeManager: StoreManager
+    @StateObject var vm = ViewModel()
+
+
+
     
-    // Google Admob variables
-    @State var interstitial: GADInterstitialAd?
-    @State var playedInterstitial = false
-    
-    // Timer object
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common)
-    
-    func pressedStartPauseButton() {
-        if pokerBlinds.timerIsRunning == false {
-            startPokerTimer()
-        } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == false {
-            pausePokerTimer()
-        } else {
-            unPausePokerTimer()
-        }
-    }
-    
-    func startPokerTimer() {
-        pokerBlinds.backUpTimerValues()
-        pokerBlinds.timerIsRunning = true
-        pokerBlinds.timerIsPaused = false
-        
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-        _ = timer.connect()
-    }
-    
-    func unPausePokerTimer() {
-        pokerBlinds.timerIsRunning = true
-        pokerBlinds.timerIsPaused = false
-        
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-        _ = timer.connect()
-    }
-    
-    func pausePokerTimer() {
-        // Stop running the timer
-        pokerBlinds.timerIsPaused = true
-        self.timer.connect().cancel()
-        
-    }
-    
-    func stopPokerTimer() {
-        pokerBlinds.resetTimerValues()
-        pokerBlinds.timerIsRunning = false
-        pokerBlinds.timerIsPaused = false
-        self.timer.connect().cancel()
-    }
-    
+
     func startButtonText() -> Text {
-        if pokerBlinds.timerIsRunning == false {
-            return Text("Start")
-        } else if pokerBlinds.timerIsRunning == true && pokerBlinds.timerIsPaused == true {
-            return Text("Re-Start")
-        } else {
-            return Text("Pause")
+        switch vm.pokerGame.isTimerRunning {
+            case .hasNotBeenStarted: return Text("Start")
+            case .isPaused: return Text("Re-Start")
+            case .isRunning: return Text("Pause")
         }
     }
     
@@ -84,7 +35,7 @@ struct PokerBlindsView: View {
                     
                     Section(header: Text("Blinds")) {
                         // Show blind information here
-                        Blinds(smallBlind: pokerBlinds.smallBlind, bigBlind: pokerBlinds.bigBlind, raiseBlindsValue: pokerBlinds.raiseBlindsBy)
+                        BlindsView(smallBlind: vm.pokerGame.blindsModel.smallBlind, bigBlind: vm.pokerGame.blindsModel.bigBlind, raiseBlindsValue: vm.pokerGame.blindsModel.amountToRaiseBlinds)
                     }
                 }
                 .listStyle(.plain)
@@ -92,7 +43,7 @@ struct PokerBlindsView: View {
                 HStack(spacing: 5) {
                     Button(action: {
                         // Start / Pause button
-                        pressedStartPauseButton()
+    
                     }) {
                         startButtonText()
                             .frame(height: 50, alignment: .center)
@@ -103,7 +54,7 @@ struct PokerBlindsView: View {
                     }
                     
                     Button(action: {
-                        stopPokerTimer()
+  
                     }) {
                         Text("Reset")
                             .frame(height: 50, alignment: .center)
@@ -123,20 +74,17 @@ struct PokerBlindsView: View {
                 HStack {
                     Image(systemName: "house")
                     Text("Home")
-                
                 }
             }
             
             // MARK: Second Screen
-            if !pokerBlinds.timerIsRunning {
-                OptionsView()
-                    .tabItem {
-                        HStack {
-                            Image(systemName: "option")
-                            Text("Options")
-                        }
+            OptionsView()
+                .tabItem {
+                    HStack {
+                        Image(systemName: "option")
+                        Text("Options")
                     }
-            }
+                }
             
             RemoveAdvertising(storeManager: storeManager)
                 .tabItem {
@@ -146,7 +94,7 @@ struct PokerBlindsView: View {
                     }
                 }
                 .onReceive(timer, perform: { _ in
-                    pokerBlinds.pokerTimerCountdown()
+    
                 })
         }
     }
@@ -154,6 +102,8 @@ struct PokerBlindsView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PokerBlindsView(storeManager: StoreManager()).environmentObject(PokerBlinds()).environmentObject(Options())
+        PokerBlindsView(storeManager: StoreManager())
+            .environmentObject(PokerBlinds())
+            .environmentObject(Options())
     }
 }

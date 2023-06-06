@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Blinds: View {
+struct BlindsView: View {
     
     let smallBlind: Int
     let bigBlind: Int
@@ -43,6 +43,6 @@ struct Blinds: View {
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
-        Blinds(smallBlind: 100, bigBlind: 200, raiseBlindsValue: 100)
+        BlindsView(smallBlind: 100, bigBlind: 200, raiseBlindsValue: 100)
     }
 }

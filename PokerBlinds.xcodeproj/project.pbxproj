@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		031ACDBCA6C341C3891FB5C7 /* libPods-PokerBlinds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */; };
-		6642EA212A2E11080011589B /* Blinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA202A2E11080011589B /* Blinds.swift */; };
+		6642EA212A2E11080011589B /* BlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA202A2E11080011589B /* BlindsView.swift */; };
+		6642EA232A2FBB270011589B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA222A2FBB270011589B /* ViewModel.swift */; };
 		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
 		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
 		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
@@ -30,7 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6642EA202A2E11080011589B /* Blinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blinds.swift; sourceTree = "<group>"; };
+		6642EA202A2E11080011589B /* BlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindsView.swift; sourceTree = "<group>"; };
+		6642EA222A2FBB270011589B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6659A1EE26AC91CF00BD698E /* bell2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell2.wav; sourceTree = "<group>"; };
 		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
 		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
@@ -135,7 +137,8 @@
 				6659A1E926AC909D00BD698E /* Sound */,
 				668EF5E926A347AD0040FC4D /* Preview Content */,
 				66E43FC926C6ACB900AE012E /* LaunchScreen.storyboard */,
-				6642EA202A2E11080011589B /* Blinds.swift */,
+				6642EA202A2E11080011589B /* BlindsView.swift */,
+				6642EA222A2FBB270011589B /* ViewModel.swift */,
 			);
 			path = PokerBlinds;
 			sourceTree = "<group>";
@@ -267,9 +270,10 @@
 				6659A20F26C4816400BD698E /* Intro.swift in Sources */,
 				668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */,
 				668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */,
-				6642EA212A2E11080011589B /* Blinds.swift in Sources */,
+				6642EA212A2E11080011589B /* BlindsView.swift in Sources */,
 				668EF60526A4A6750040FC4D /* StartButton.swift in Sources */,
 				668EF61A26A74A530040FC4D /* OptionsView.swift in Sources */,
+				6642EA232A2FBB270011589B /* ViewModel.swift in Sources */,
 				668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */,
 				6659A20026B25C8A00BD698E /* BannerAdMob.swift in Sources */,
 				6659A20C26C47FDE00BD698E /* StoreManager.swift in Sources */,

@@ -8,11 +8,19 @@
 import SwiftUI
 
 class Options: ObservableObject, Identifiable {
-    @Published var chipStack = 9000
-    @Published var currentTimer = 300
-    var currentSeconds: Int { get { currentTimer % 60 }}
-    var currentMinutes: Int { get { currentTimer / 60 }}
-    @Published var players = 9
+    
+    @Published var players: [Player] = [Player(), Player(), Player()]
+    @Published var startingChipStack:Int = 5000
+   
+    // Computed variables
+    var playerCount: Int {
+        return players.count
+    }
+    
+    var averageChipStack: Int {
+        let totalChips = startingChipStack * players.count
+        return totalChips / players.count
+    }
     // Preset Blinds to choose from
     @Published var blindsArray:[Int] = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
     
@@ -24,4 +32,15 @@ class Options: ObservableObject, Identifiable {
     var bigBlindLimit:Int { get { smallBlindLimit * 2 }}
     
     @Published var keepScreenOpen:Bool = true
+    
+}
+
+struct PokerTimer {
+    var currentTimer: Int
+    var currentSeconds: Int { get { currentTimer % 60 }}
+    var currentMinutes: Int { get { currentTimer / 60 }}
+}
+
+struct Player {
+    let startingChipStack = 9000
 }
