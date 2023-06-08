@@ -16,11 +16,6 @@ struct TimerView: View {
         ZStack {
             VStack(spacing: 0) {
                 LargeText(text: "Level \(blinds.currentLevel)", huge: false)
-//                Text("Level \(blinds.currentLevel)")
-//                    .font(.title)
-//                    .textCase(.uppercase)
-//                    .foregroundColor(Color(.darkGray))
-//                    .fontWeight(.heavy)
                 LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", huge: true)
             }
             

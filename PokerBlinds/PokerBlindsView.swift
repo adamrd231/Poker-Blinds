@@ -26,19 +26,20 @@ struct PokerBlindsView: View {
                 Spacer()
 
                 HStack(spacing: 5) {
-                    Button("Start") {
+                    Button(vm.timerInfo.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
+                        if vm.timerInfo.isTimerRunning == TimerStates.isRunning {
+                            vm.stopTimer()
+                        } else {
+                            vm.startTimer()
+                        }
+                    }
+                    .buttonStyle(BasicButtonStyle())
+                    
+                    Button("Reset") {
                         vm.startTimer()
                     }
                     .buttonStyle(BasicButtonStyle())
                     .disabled(vm.timerInfo.isTimerRunning == TimerStates.isRunning)
-                   
-                    
-                    Button(action: {
-                        vm.stopTimer()
-                    }) {
-                        Text("Reset")
-                            .buttonStyle(BasicButtonStyle())
-                    }
                 }
                 .padding()
                     

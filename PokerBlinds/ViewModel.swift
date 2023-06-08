@@ -24,22 +24,37 @@ class ViewModel: ObservableObject {
     @State var playedInterstitial = false
     
     // Timer object
-    @State var timer = Timer()
+    var timer = Timer()
     
     func pokerTimerCountdown() {
-        if timerInfo.currentTime > 0 {
+        print("timer countdown")
+        
             timerInfo.currentTime -= 1
-        }
+       
     }
     
     func startTimer() {
+        self.timerInfo.isTimerRunning = .isRunning
+        
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
-            self.pokerTimerCountdown()
-            self.timerInfo.isTimerRunning = .isRunning
+            print("starting timer")
+            if self.timerInfo.isTimerRunning == .isRunning && self.timerInfo.currentTime > 0 {
+                self.pokerTimerCountdown()
+            } else {
+                self.stopTimer()
+            }
         }
     }
     
     func stopTimer() {
+        print("Stopping timer")
+        self.timerInfo.isTimerRunning = .isPaused
+        self.timer.invalidate()
+    }
+    
+    func resetTimer() {
+        print("reset timer")
+        self.timerInfo.isTimerRunning = .hasNotBeenStarted
         self.timer.invalidate()
     }
     
