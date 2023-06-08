@@ -9,12 +9,6 @@ import SwiftUI
 import AVFoundation
 import Foundation
 
-enum TimerStates {
-    case isRunning
-    case isPaused
-    case hasNotBeenStarted
-}
-
 struct BlindsModel {
     var currentLevel: Int
     let smallBlind: Int
@@ -22,17 +16,17 @@ struct BlindsModel {
         return smallBlind * 2
     }
     let amountToRaiseBlinds: Int
-    
 }
 
 struct TimerModel {
-    var currentTime: Int
+    var currentTime: Int = 10
     var currentSeconds: Int {
         return currentTime % 60
     }
     var currentMinutes: Int {
         return currentTime / 60
     }
+    
     var isTimerRunning: TimerStates
 }
 
@@ -45,19 +39,14 @@ struct PokerGameModel: Identifiable {
 
 }
 
+
+
+
+
+// MARK: OLD STUFF TO BE DELETED EVENTUALLY
 class PokerBlinds: ObservableObject, Identifiable {
     
     var audioPlayer: AVAudioPlayer?
-    
-    // MARK: Variables for running calc
-    // Timer variables
-    @Published var currentTimer = 300
-
-    var currentSeconds: Int { get { currentTimer % 60 }}
-    var currentMinutes: Int { get { currentTimer / 60 }}
-    @Published var timerIsRunning = false
-    @Published var timerIsPaused = false
-    @Published var currentLevel = 1
     
     @Published var newChipCount = "9000"
     
@@ -80,9 +69,7 @@ class PokerBlinds: ObservableObject, Identifiable {
     
     func removePlayer() {
         if playerCount > 1 {
-            
             playerCount -= 1
-
             if playerCount == 1 {
                 let path = Bundle.main.path(forResource: "cheer", ofType: "wav")!
                 let url = URL(fileURLWithPath: path)
@@ -117,27 +104,5 @@ class PokerBlinds: ObservableObject, Identifiable {
             // Error Handling
         }
     }
-    
-    
-    func pokerTimerCountdown() {
-//        if currentTimer > 0 {
-//            currentTimer -= 1
-//        } else {
-//            currentTimer = currentTimerBackup
-//            currentLevel += 1
-//            if smallBlind >= blindLimit {
-//                
-//                playSound()
-//                
-//                return
-//            } else {
-//                smallBlind += raiseBlindsBy
-//                playSound()
-//            }
-//            
-//            
-//        }
-    }
-    
 }
 

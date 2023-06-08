@@ -23,7 +23,6 @@ struct PokerBlindsView: View {
                     BlindsView(blindsModel: vm.blinds)
                 }
                 Spacer()
-
                 HStack(spacing: 5) {
                     Button(vm.timerInfo.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
                         if vm.timerInfo.isTimerRunning == TimerStates.isRunning {

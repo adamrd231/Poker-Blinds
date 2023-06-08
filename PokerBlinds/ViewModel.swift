@@ -8,11 +8,21 @@
 import SwiftUI
 import GoogleMobileAds
 
+enum TimerStates {
+    case isRunning
+    case isPaused
+    case hasNotBeenStarted
+}
+
 class ViewModel: ObservableObject {
     
     @Published var timerInfo = TimerModel(currentTime: 10, isTimerRunning: TimerStates.hasNotBeenStarted)
     @Published var blinds = BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100)
     @Published var keepScreenOpen: Bool = false
+    
+    @Published var backupTimer: TimerModel?
+    
+    @State var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
@@ -29,9 +39,9 @@ class ViewModel: ObservableObject {
     }
     
     func startTimer() {
-        self.timerInfo.isTimerRunning = .isRunning
+        self.isTimerRunning = .isRunning
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
-            if self.timerInfo.isTimerRunning == .isRunning && self.timerInfo.currentTime > 0 {
+            if self.isTimerRunning == .isRunning && self.timerInfo.currentTime > 0 {
                 self.pokerTimerCountdown()
             } else {
                 self.pauseTimer()
@@ -40,12 +50,12 @@ class ViewModel: ObservableObject {
     }
     
     func pauseTimer() {
-        self.timerInfo.isTimerRunning = .isPaused
+        self.isTimerRunning = .isPaused
         self.timer.invalidate()
     }
     
     func resetTimer() {
-        self.timerInfo.isTimerRunning = .hasNotBeenStarted
+        self.isTimerRunning = .hasNotBeenStarted
         self.timer.invalidate()
     }
 }
