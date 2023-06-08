@@ -11,9 +11,7 @@ import GoogleMobileAds
 class ViewModel: ObservableObject {
     
     @Published var timerInfo = TimerModel(currentTime: 10, isTimerRunning: TimerStates.hasNotBeenStarted)
-    
     @Published var blinds = BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100)
-    
     @Published var keepScreenOpen: Bool = false
     
     // Store manager for in-app purchases
@@ -27,36 +25,27 @@ class ViewModel: ObservableObject {
     var timer = Timer()
     
     func pokerTimerCountdown() {
-        print("timer countdown")
-        
-            timerInfo.currentTime -= 1
-       
+        timerInfo.currentTime -= 1
     }
     
     func startTimer() {
         self.timerInfo.isTimerRunning = .isRunning
-        
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
-            print("starting timer")
             if self.timerInfo.isTimerRunning == .isRunning && self.timerInfo.currentTime > 0 {
                 self.pokerTimerCountdown()
             } else {
-                self.stopTimer()
+                self.pauseTimer()
             }
         }
     }
     
-    func stopTimer() {
-        print("Stopping timer")
+    func pauseTimer() {
         self.timerInfo.isTimerRunning = .isPaused
         self.timer.invalidate()
     }
     
     func resetTimer() {
-        print("reset timer")
         self.timerInfo.isTimerRunning = .hasNotBeenStarted
         self.timer.invalidate()
     }
-    
-
 }

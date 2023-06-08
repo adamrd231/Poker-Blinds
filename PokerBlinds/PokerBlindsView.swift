@@ -13,7 +13,6 @@ struct PokerBlindsView: View {
     
     var body: some View {
         TabView {
-
             // MARK: Home Screen
             VStack(alignment: .center) {
                 Spacer()
@@ -28,7 +27,7 @@ struct PokerBlindsView: View {
                 HStack(spacing: 5) {
                     Button(vm.timerInfo.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
                         if vm.timerInfo.isTimerRunning == TimerStates.isRunning {
-                            vm.stopTimer()
+                            vm.pauseTimer()
                         } else {
                             vm.startTimer()
                         }
