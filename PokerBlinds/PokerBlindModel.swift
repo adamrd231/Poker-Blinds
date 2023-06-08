@@ -19,6 +19,7 @@ struct BlindsModel {
 }
 
 struct TimerModel {
+    var currentLevel: Int = 1
     var currentTime: Int = 10
     var currentSeconds: Int {
         return currentTime % 60
@@ -26,8 +27,6 @@ struct TimerModel {
     var currentMinutes: Int {
         return currentTime / 60
     }
-    
-    var isTimerRunning: TimerStates
 }
 
 struct PokerGameModel: Identifiable {

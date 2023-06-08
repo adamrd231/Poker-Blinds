@@ -23,21 +23,18 @@ struct PokerBlindsView: View {
                     BlindsView(blindsModel: vm.blinds)
                 }
                 Spacer()
+                Text(vm.isTimerRunning.description)
                 HStack(spacing: 5) {
-                    Button(vm.timerInfo.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
-                        if vm.timerInfo.isTimerRunning == TimerStates.isRunning {
-                            vm.pauseTimer()
-                        } else {
-                            vm.startTimer()
-                        }
+                    Button(vm.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
+                        vm.isTimerRunning == TimerStates.isRunning ? vm.pauseTimer() : vm.startTimer()
                     }
                     .buttonStyle(BasicButtonStyle())
                     
                     Button("Reset") {
-                        vm.startTimer()
+                        vm.resetTimer()
                     }
                     .buttonStyle(BasicButtonStyle())
-                    .disabled(vm.timerInfo.isTimerRunning == TimerStates.isRunning)
+                    .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 }
                 .padding()
                     
@@ -80,11 +77,23 @@ struct ContentView_Previews: PreviewProvider {
 
 struct BasicButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .frame(height: 50, alignment: .center)
-            .frame(maxWidth: .infinity)
-            .background(Color(.systemGray))
-            .foregroundColor(Color(.systemGray6))
-            .cornerRadius(15.0)
+        MainButton(configuration: configuration)
+            
+            
+    }
+    
+    struct MainButton: View {
+        let configuration: ButtonStyle.Configuration
+        @Environment(\.isEnabled) private var isEnabled: Bool
+        var body: some View {
+            configuration.label
+                .frame(height: 50, alignment: .center)
+                .frame(maxWidth: .infinity)
+                .background(isEnabled ? Color(.blue) : Color(.blue).opacity(0.3))
+                .foregroundColor(.white)
+                .cornerRadius(20.0)
+        }
     }
 }
+
+

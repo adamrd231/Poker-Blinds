@@ -8,21 +8,27 @@
 import SwiftUI
 import GoogleMobileAds
 
-enum TimerStates {
+enum TimerStates: String {
     case isRunning
     case isPaused
     case hasNotBeenStarted
 }
 
+extension TimerStates: CustomStringConvertible {
+    var description: String {
+        return "\(rawValue)"
+    }
+}
+
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentTime: 10, isTimerRunning: TimerStates.hasNotBeenStarted)
+    @Published var timerInfo = TimerModel(currentTime: 10)
     @Published var blinds = BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100)
     @Published var keepScreenOpen: Bool = false
     
     @Published var backupTimer: TimerModel?
     
-    @State var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
+    @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
@@ -40,11 +46,19 @@ class ViewModel: ObservableObject {
     
     func startTimer() {
         self.isTimerRunning = .isRunning
+        // make a copy for backing up stuff
+        backupTimer = timerInfo
+        print("Start")
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
-            if self.isTimerRunning == .isRunning && self.timerInfo.currentTime > 0 {
+            if self.timerInfo.currentTime > 0 {
                 self.pokerTimerCountdown()
+            } else if self.timerInfo.currentTime == 0 {
+                if let backup = self.backupTimer {
+                    self.timerInfo.currentTime = backup.currentTime
+                    self.timerInfo.currentLevel += 1
+                }
             } else {
-                self.pauseTimer()
+                self.resetTimer()
             }
         }
     }
@@ -55,7 +69,15 @@ class ViewModel: ObservableObject {
     }
     
     func resetTimer() {
-        self.isTimerRunning = .hasNotBeenStarted
+        
         self.timer.invalidate()
+        self.isTimerRunning = .hasNotBeenStarted
+        // Reset to backup values
+        if let backup = self.backupTimer {
+            self.timerInfo = backup
+            self.backupTimer = nil
+        }
+        
+        // How to handle if this fails?
     }
 }

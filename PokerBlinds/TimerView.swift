@@ -15,7 +15,7 @@ struct TimerView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                LargeText(text: "Level \(blinds.currentLevel)", huge: false)
+                LargeText(text: "Level \(timerInfo.currentLevel)", huge: false)
                 LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", huge: true)
             }
             
@@ -42,8 +42,7 @@ struct TimerView_Previews: PreviewProvider {
                 smallBlind: 100,
                 amountToRaiseBlinds: 100),
             timerInfo: TimerModel(
-                currentTime: 10,
-                isTimerRunning: TimerStates.hasNotBeenStarted
+                currentTime: 10
             )
         )
     }
