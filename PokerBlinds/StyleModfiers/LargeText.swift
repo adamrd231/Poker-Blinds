@@ -13,8 +13,13 @@ struct LargeText: View {
     
     var body: some View {
         Text(text)
-            .font(.system(size: huge ? 80.0 : 40.0))
-            .fontWeight(.heavy)
+            .font(
+                .system(
+                    size: huge ? 80.0 : 40.0,
+                    weight: .heavy,
+                    design: .rounded
+                )
+            )
     }
 }
 

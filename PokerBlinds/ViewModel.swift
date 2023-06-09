@@ -56,6 +56,7 @@ class ViewModel: ObservableObject {
                 if let backup = self.backupTimer {
                     self.timerInfo.currentTime = backup.currentTime
                     self.timerInfo.currentLevel += 1
+                    self.blinds.smallBlind += self.blinds.amountToRaiseBlinds
                 }
             } else {
                 self.resetTimer()

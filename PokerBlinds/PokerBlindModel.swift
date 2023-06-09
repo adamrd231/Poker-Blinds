@@ -11,7 +11,7 @@ import Foundation
 
 struct BlindsModel {
     var currentLevel: Int
-    let smallBlind: Int
+    var smallBlind: Int
     var bigBlind: Int {
         return smallBlind * 2
     }

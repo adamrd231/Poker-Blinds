@@ -10,19 +10,24 @@ import SwiftUI
 struct OptionsView: View {
     
     // Pokerblinds object with all usable inputs
-    @EnvironmentObject var pokerBlinds: PokerBlinds
-    @EnvironmentObject var options: Options
-    
-    @State var currentDate = Date()
+    @EnvironmentObject var vm: ViewModel
     
     var body: some View {
-        Text("Hello options")
-        
+        VStack(alignment: .leading) {
+            Text("Options")
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+            HStack {
+                Text("Time in round")
+                Stepper("\(vm.timerInfo.currentTime.description) seconds", value: $vm.timerInfo.currentTime, in: 1...1000)
+            }
+        }
+        .padding()
     }
 }
 
 struct OptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        OptionsView().environmentObject(PokerBlinds()).environmentObject(Options())
+        OptionsView().environmentObject(ViewModel())
     }
 }

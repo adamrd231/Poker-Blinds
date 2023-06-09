@@ -10,12 +10,24 @@ import AVFoundation
 
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
+    @State var isShowingDoubleCheck = true
     
     var body: some View {
         TabView {
             // MARK: Home Screen
             VStack(alignment: .center) {
-                Spacer()
+                HStack {
+                    Spacer()
+                    Image(systemName: "questionmark")
+                        .font(.system(size: 25, weight: .heavy, design: .rounded))
+                        .foregroundColor(.blue)
+                }
+                .onTapGesture {
+                    isShowingDoubleCheck.toggle()
+                }
+                .padding(.horizontal)
+                
+                    
                 VStack {
                     TimerView(blinds: vm.blinds, timerInfo: vm.timerInfo)
 
@@ -23,7 +35,6 @@ struct PokerBlindsView: View {
                     BlindsView(blindsModel: vm.blinds)
                 }
                 Spacer()
-                Text(vm.isTimerRunning.description)
                 HStack(spacing: 5) {
                     Button(vm.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
                         vm.isTimerRunning == TimerStates.isRunning ? vm.pauseTimer() : vm.startTimer()
@@ -42,6 +53,11 @@ struct PokerBlindsView: View {
                     Banner()
                 }
             }
+            .sheet(isPresented: $isShowingDoubleCheck, content: {
+                DoubleCheckPopup(isShowing: $isShowingDoubleCheck)
+                    .presentationDetents([.medium])
+            })
+           
             .tabItem {
                 HStack {
                     Image(systemName: "house")
@@ -51,14 +67,17 @@ struct PokerBlindsView: View {
             
             // MARK: Second Screen
             OptionsView()
+                .environmentObject(vm)
                 .tabItem {
                     HStack {
                         Image(systemName: "option")
                         Text("Options")
                     }
                 }
+                .disabled(vm.isTimerRunning == TimerStates.isRunning)
             
             RemoveAdvertising(storeManager: vm.storeManager)
+                .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 .tabItem {
                     HStack {
                         Image(systemName: "pip.remove")

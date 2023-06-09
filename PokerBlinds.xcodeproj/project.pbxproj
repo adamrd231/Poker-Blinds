@@ -11,6 +11,7 @@
 		6642EA212A2E11080011589B /* BlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA202A2E11080011589B /* BlindsView.swift */; };
 		6642EA232A2FBB270011589B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA222A2FBB270011589B /* ViewModel.swift */; };
 		6642EA262A2FC46B0011589B /* LargeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA252A2FC46B0011589B /* LargeText.swift */; };
+		6642EA292A3368280011589B /* DoubleCheckPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA282A3368280011589B /* DoubleCheckPopup.swift */; };
 		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
 		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
 		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
@@ -35,6 +36,7 @@
 		6642EA202A2E11080011589B /* BlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindsView.swift; sourceTree = "<group>"; };
 		6642EA222A2FBB270011589B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6642EA252A2FC46B0011589B /* LargeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeText.swift; sourceTree = "<group>"; };
+		6642EA282A3368280011589B /* DoubleCheckPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckPopup.swift; sourceTree = "<group>"; };
 		6659A1EE26AC91CF00BD698E /* bell2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell2.wav; sourceTree = "<group>"; };
 		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
 		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
@@ -91,6 +93,15 @@
 			path = StyleModfiers;
 			sourceTree = "<group>";
 		};
+		6642EA272A3367F20011589B /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
+				6642EA282A3368280011589B /* DoubleCheckPopup.swift */,
+			);
+			path = HomeScreen;
+			sourceTree = "<group>";
+		};
 		6659A1E926AC909D00BD698E /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,10 +141,10 @@
 		668EF5E226A347AC0040FC4D /* PokerBlinds */ = {
 			isa = PBXGroup;
 			children = (
-				6642EA242A2FC4550011589B /* StyleModfiers */,
 				66E43F7426C48B8C00AE012E /* PokerBlinds.entitlements */,
 				668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */,
-				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
+				6642EA242A2FC4550011589B /* StyleModfiers */,
+				6642EA272A3367F20011589B /* HomeScreen */,
 				668EF61926A74A530040FC4D /* OptionsView.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
@@ -291,6 +302,7 @@
 				6642EA262A2FC46B0011589B /* LargeText.swift in Sources */,
 				668EF61526A747490040FC4D /* Options.swift in Sources */,
 				6659A21226C4850900BD698E /* RemoveAdvertising.swift in Sources */,
+				6642EA292A3368280011589B /* DoubleCheckPopup.swift in Sources */,
 				668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
