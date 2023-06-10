@@ -46,6 +46,10 @@ struct PokerGameModel: Identifiable {
 
 }
 
+func getTotalGameTime(roundTime: Int, numberOfRounds: Int) -> (min: Int, sec: Int) {
+    let totalTime = roundTime * numberOfRounds
+    return (totalTime / 60, totalTime % 60)
+}
 
 
 
