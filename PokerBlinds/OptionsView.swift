@@ -15,12 +15,67 @@ struct OptionsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Options")
-                .font(.largeTitle)
-                .fontWeight(.heavy)
+                .font(.system(size: 20, weight: .heavy, design: .rounded))
+            
+            Divider()
+                .padding(.bottom)
             HStack {
                 Text("Time in round")
-                Stepper("\(vm.timerInfo.currentTime.description) seconds", value: $vm.timerInfo.currentTime, in: 1...1000)
+                if vm.timerInfo.currentSeconds == 0 {
+                    Stepper("\(vm.timerInfo.currentMinutes.description):00", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
+                } else {
+                    Stepper("\(vm.timerInfo.currentMinutes.description):\(vm.timerInfo.currentSeconds)", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
+                }
+       
             }
+            
+            HStack {
+                Text("Starting Blinds")
+                Text(vm.blindInfo.startingSmallBlind.description)
+                Text("|")
+                Text((vm.blindInfo.startingSmallBlind * 2).description)
+                Stepper("", value: $vm.blindInfo.startingSmallBlind, in: 100...5000, step: 100)
+            }
+            
+            HStack {
+                Text("Raise blinds by")
+                Text(vm.blindInfo.amountToRaiseBlinds.description)
+      
+                Stepper("", value: $vm.blindInfo.amountToRaiseBlinds, in: 100...5000, step: 100)
+                
+            }
+            
+            HStack {
+                Text("Blind limit")
+                Text(vm.blindInfo.blindLimit.description)
+                Text("|")
+                Text((vm.blindInfo.blindLimit * 2).description)
+                Stepper("", value: $vm.blindInfo.blindLimit, in: 100...5000, step: 100)
+            }
+            Divider()
+            ForEach(Array(vm.blindsArray.enumerated()), id: \.offset) { index, level in
+                HStack {
+                    Text("Level \((index + 1).description)")
+                    Text(level.smallBlind.description)
+                    Text("|")
+                    Text(level.bigBlind.description)
+                }
+            }
+            HStack(spacing: .pi) {
+                Text((vm.timerInfo.currentMinutes * vm.blindsArray.count).description)
+                Text(":")
+                if vm.timerInfo.currentSeconds == 0 {
+                    Text("00")
+                } else {
+                    Text((vm.timerInfo.currentSeconds * vm.blindsArray.count).description)
+                }
+                Text("mins")
+               
+            }
+            .bold()
+            
+            
+            Spacer()
         }
         .padding()
     }

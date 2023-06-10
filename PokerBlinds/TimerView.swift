@@ -38,10 +38,11 @@ struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
         TimerView(
             blinds: BlindsModel(
-                currentLevel: 1,
-                smallBlind: 100,
-                amountToRaiseBlinds: 100),
+                startingSmallBlind: 100,
+                amountToRaiseBlinds: 100,
+                blindLimit: 2000),
             timerInfo: TimerModel(
+                currentLevel: 1,
                 currentTime: 10
             )
         )

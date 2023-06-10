@@ -9,29 +9,31 @@ import SwiftUI
 
 struct BlindsView: View {
     
-    let blindsModel: BlindsModel
+    let blindInfo: BlindLevel
+    let currentLevel: Int
+    let amountToRaiseBlinds: Int
     
     var body: some View {
         VStack(alignment: .center) {
-            HStack {
-                Text("\(blindsModel.smallBlind - blindsModel.amountToRaiseBlinds)")
-                Text("|")
-                Text("\((blindsModel.smallBlind - blindsModel.amountToRaiseBlinds) * 2)")
-            }
+//            HStack {
+//                Text("\(blindsModel.smallBlind - amountToRaiseBlinds)")
+//                Text("|")
+//                Text("\((blindsModel.smallBlind - amountToRaiseBlinds) * 2)")
+//            }
             
             HStack {
-                LargeText(text: "\(blindsModel.smallBlind)", huge: false)
+                LargeText(text: "\(blindInfo.smallBlind)", huge: false)
                 LargeText(text: "|", huge: false)
-                LargeText(text: "\(blindsModel.bigBlind)", huge: false)
+                LargeText(text: "\(blindInfo.bigBlind)", huge: false)
             }
             .font(.largeTitle)
             .bold()
             
-            HStack {
-                Text("\(blindsModel.smallBlind + blindsModel.amountToRaiseBlinds)")
-                Text("|")
-                Text("\((blindsModel.smallBlind + blindsModel.amountToRaiseBlinds) * 2)")
-            }
+//            HStack {
+//                Text("\(blindsModel.smallBlind + amountToRaiseBlinds)")
+//                Text("|")
+//                Text("\((blindsModel.smallBlind + amountToRaiseBlinds) * 2)")
+//            }
         }
         .frame(maxWidth: .infinity)
     }
@@ -39,6 +41,6 @@ struct BlindsView: View {
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
-        BlindsView(blindsModel: BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100))
+        BlindsView(blindInfo: BlindLevel(smallBlind: 100), currentLevel: 0, amountToRaiseBlinds: 100)
     }
 }

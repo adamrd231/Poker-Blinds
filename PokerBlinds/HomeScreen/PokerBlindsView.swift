@@ -10,7 +10,7 @@ import AVFoundation
 
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
-    @State var isShowingDoubleCheck = true
+    @State var isShowingDoubleCheck = false
     
     var body: some View {
         TabView {
@@ -29,10 +29,10 @@ struct PokerBlindsView: View {
                 
                     
                 VStack {
-                    TimerView(blinds: vm.blinds, timerInfo: vm.timerInfo)
+                    TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo)
 
                     // Show blind information here
-                    BlindsView(blindsModel: vm.blinds)
+                    BlindsView(blindInfo: BlindLevel(smallBlind: 100), currentLevel: 0, amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds)
                 }
                 Spacer()
                 HStack(spacing: 5) {

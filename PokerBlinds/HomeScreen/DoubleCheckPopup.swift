@@ -12,7 +12,6 @@ struct DoubleCheckPopup: View {
     var body: some View {
         VStack(spacing: 10) {
             icon
-            title
             text
             Divider()
             DoubleCheckThis(icon: "square", text: "Volume turned up")

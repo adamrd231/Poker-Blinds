@@ -9,18 +9,26 @@ import SwiftUI
 import AVFoundation
 import Foundation
 
-struct BlindsModel {
-    var currentLevel: Int
+struct Blinds {
+    var levels: [BlindLevel]
+}
+
+struct BlindLevel: Hashable {
     var smallBlind: Int
     var bigBlind: Int {
         return smallBlind * 2
     }
-    let amountToRaiseBlinds: Int
+}
+
+struct BlindsModel {
+    var startingSmallBlind: Int
+    var amountToRaiseBlinds: Int
+    var blindLimit: Int
 }
 
 struct TimerModel {
-    var currentLevel: Int = 1
-    var currentTime: Int = 10
+    var currentLevel: Int
+    var currentTime: Int
     var currentSeconds: Int {
         return currentTime % 60
     }

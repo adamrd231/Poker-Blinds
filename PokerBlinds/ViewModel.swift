@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleMobileAds
+import Combine
 
 enum TimerStates: String {
     case isRunning
@@ -22,8 +23,10 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentTime: 10)
-    @Published var blinds = BlindsModel(currentLevel: 1, smallBlind: 100, amountToRaiseBlinds: 100)
+    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 300)
+    @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
+    @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
+    
     @Published var keepScreenOpen: Bool = false
     
     @Published var backupTimer: TimerModel?
@@ -37,8 +40,30 @@ class ViewModel: ObservableObject {
     @State var interstitial: GADInterstitialAd?
     @State var playedInterstitial = false
     
+    private var cancellable = Set<AnyCancellable>()
+    
     // Timer object
     var timer = Timer()
+    
+    init() {
+        addSubscribers()
+    }
+    
+    func addSubscribers() {
+        $blindInfo
+            .sink { [weak self] (BlindsModel) in
+                var newBlinds:[BlindLevel] = []
+                var start = BlindsModel.startingSmallBlind
+                while start <= BlindsModel.blindLimit {
+                    newBlinds.append(BlindLevel(smallBlind: start))
+                    start += BlindsModel.amountToRaiseBlinds
+                }
+                self?.blindsArray = newBlinds
+                print("New Blinds \(self?.blindsArray)")
+
+            }
+            .store(in: &cancellable)
+    }
     
     func pokerTimerCountdown() {
         timerInfo.currentTime -= 1
@@ -52,12 +77,11 @@ class ViewModel: ObservableObject {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
                 self.pokerTimerCountdown()
+                
+            // New Level
             } else if self.timerInfo.currentTime == 0 {
-                if let backup = self.backupTimer {
-                    self.timerInfo.currentTime = backup.currentTime
-                    self.timerInfo.currentLevel += 1
-                    self.blinds.smallBlind += self.blinds.amountToRaiseBlinds
-                }
+
+            // Reset
             } else {
                 self.resetTimer()
             }
