@@ -11,6 +11,7 @@ struct TimerView: View {
     
     let blinds: BlindsModel
     let timerInfo: TimerModel
+    let backupTimer: TimerModel
     
     var body: some View {
         ZStack {
@@ -20,12 +21,12 @@ struct TimerView: View {
             }
             
             Circle()
-                .trim(from: 1, to: 0)
-                .stroke(Color.black.opacity(0.09), style: StrokeStyle(lineWidth: 6, lineCap: .round))
+
+                .stroke(Color.theme.mainButton.opacity(0.35), style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: 275, height: 275)
             Circle()
-                .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(timerInfo.currentTime))
-                .stroke(Color.black.opacity(0.3), style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
+                .stroke(Color.theme.mainButton, style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: 275, height: 275)
                 .rotationEffect(.init(degrees: 270))
         }
@@ -44,7 +45,7 @@ struct TimerView_Previews: PreviewProvider {
             timerInfo: TimerModel(
                 currentLevel: 1,
                 currentTime: 10
-            )
+            ), backupTimer: TimerModel(currentLevel: 100, currentTime: 300)
         )
     }
 }

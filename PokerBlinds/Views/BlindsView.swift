@@ -15,11 +15,11 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-//            HStack {
-//                Text("\(blindsModel.smallBlind - amountToRaiseBlinds)")
-//                Text("|")
-//                Text("\((blindsModel.smallBlind - amountToRaiseBlinds) * 2)")
-//            }
+            HStack {
+                Text("\(blindInfo.smallBlind - amountToRaiseBlinds)")
+                Text("|")
+                Text("\((blindInfo.smallBlind - amountToRaiseBlinds) * 2)")
+            }
             
             HStack {
                 LargeText(text: "\(blindInfo.smallBlind)", huge: false)
@@ -29,11 +29,11 @@ struct BlindsView: View {
             .font(.largeTitle)
             .bold()
             
-//            HStack {
-//                Text("\(blindsModel.smallBlind + amountToRaiseBlinds)")
-//                Text("|")
-//                Text("\((blindsModel.smallBlind + amountToRaiseBlinds) * 2)")
-//            }
+            HStack {
+                Text("\(blindInfo.smallBlind + amountToRaiseBlinds)")
+                Text("|")
+                Text("\((blindInfo.smallBlind + amountToRaiseBlinds) * 2)")
+            }
         }
         .frame(maxWidth: .infinity)
     }

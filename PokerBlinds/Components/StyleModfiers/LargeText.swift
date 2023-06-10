@@ -20,6 +20,7 @@ struct LargeText: View {
                     design: .rounded
                 )
             )
+            .foregroundColor(Color.theme.text)
     }
 }
 

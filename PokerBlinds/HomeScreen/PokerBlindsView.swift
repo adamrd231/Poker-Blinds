@@ -20,8 +20,10 @@ struct PokerBlindsView: View {
                     Spacer()
                     Image(systemName: "questionmark")
                         .font(.system(size: 25, weight: .heavy, design: .rounded))
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color.theme.mainButton)
+                        .padding(.trailing, 5)
                 }
+                
                 .onTapGesture {
                     isShowingDoubleCheck.toggle()
                 }
@@ -29,8 +31,12 @@ struct PokerBlindsView: View {
                 
                     
                 VStack {
-                    TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo)
-
+                    TimerView(
+                        blinds: vm.blindInfo,
+                        timerInfo: vm.timerInfo,
+                        backupTimer: vm.backupTimer ?? vm.timerInfo
+                    )
+                    
                     // Show blind information here
                     BlindsView(blindInfo: BlindLevel(smallBlind: 100), currentLevel: 0, amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds)
                 }
@@ -108,7 +114,7 @@ struct BasicButtonStyle: ButtonStyle {
             configuration.label
                 .frame(height: 50, alignment: .center)
                 .frame(maxWidth: .infinity)
-                .background(isEnabled ? Color(.blue) : Color(.blue).opacity(0.3))
+                .background(isEnabled ? Color.theme.mainButton : Color.theme.mainButton.opacity(0.3))
                 .foregroundColor(.white)
                 .cornerRadius(20.0)
         }
