@@ -23,7 +23,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 300)
+    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 10)
     
     var totalGameTime: (Int, Int) {
         getTotalGameTime(roundTime: timerInfo.currentTime, numberOfRounds: blindsArray.count)
@@ -32,6 +32,7 @@ class ViewModel: ObservableObject {
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     
     @Published var keepScreenOpen: Bool = false
+    @Published var currentLevel: Int = 1
     
     @Published var backupTimer: TimerModel?
     
@@ -71,6 +72,9 @@ class ViewModel: ObservableObject {
     
     func pokerTimerCountdown() {
         timerInfo.currentTime -= 1
+        if timerInfo.currentTime == 0 {
+            
+        }
     }
     
     func startTimer() {
@@ -84,7 +88,11 @@ class ViewModel: ObservableObject {
                 
             // New Level
             } else if self.timerInfo.currentTime == 0 {
-
+                if let backup = self.backupTimer {
+                    self.timerInfo.currentTime = backup.currentTime
+                    self.timerInfo.currentLevel += 1
+                }
+               
             // Reset
             } else {
                 self.resetTimer()
