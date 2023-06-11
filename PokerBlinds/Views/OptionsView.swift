@@ -7,83 +7,112 @@
 
 import SwiftUI
 
-struct OptionsView: View {
+struct OptionRowView: View {
     
+    let text: String
+    @Binding var firstValue: Int
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .bold()
+            Spacer()
+            Text(firstValue.description)
+            Stepper("", value: $firstValue, in: 100...5000, step: 100)
+                .fixedSize()
+            
+        }
+    }
+}
+
+struct OptionRowBlindView: View {
+    let text: String
+    @Binding var blind: Int
+    
+    var body: some View {
+        HStack {
+            Text(text)
+                .bold()
+            Spacer()
+            Text(blind.description)
+            Text("|")
+            Text((blind * 2).description)
+            Stepper("", value: $blind, in: 100...5000, step: 100)
+                .fixedSize()
+        }
+    }
+}
+
+
+struct OptionsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var vm: ViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Options")
-                .font(.system(size: 20, weight: .heavy, design: .rounded))
-            
-            Divider()
-                .padding(.bottom)
-            HStack {
-                Text("Time in round")
-                if vm.timerInfo.currentSeconds == 0 {
-                    Stepper("\(vm.timerInfo.currentMinutes.description):00", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
-                } else {
-                    Stepper("\(vm.timerInfo.currentMinutes.description):\(vm.timerInfo.currentSeconds)", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
-                }
-       
-            }
-            
-            HStack {
-                Text("Starting Blinds")
-                Text(vm.blindInfo.startingSmallBlind.description)
-                Text("|")
-                Text((vm.blindInfo.startingSmallBlind * 2).description)
-                Stepper("", value: $vm.blindInfo.startingSmallBlind, in: 100...5000, step: 100)
-            }
-            
-            HStack {
-                Text("Raise blinds by")
-                Text(vm.blindInfo.amountToRaiseBlinds.description)
-      
-                Stepper("", value: $vm.blindInfo.amountToRaiseBlinds, in: 100...5000, step: 100)
+        VStack {
+            VStack(alignment: .leading) {
+                Text("Options")
+                    .font(.title)
+                    .fontWeight(.heavy)
+                    .foregroundColor(Color.theme.mainButton)
                 
-            }
-            
-            HStack {
-                Text("Blind limit")
-                Text(vm.blindInfo.blindLimit.description)
-                Text("|")
-                Text((vm.blindInfo.blindLimit * 2).description)
-                Stepper("", value: $vm.blindInfo.blindLimit, in: 100...5000, step: 100)
-            }
-            Divider()
-            ScrollView {
-                ForEach(Array(vm.blindsArray.enumerated()), id: \.offset) { index, level in
-                    HStack(alignment: .center) {
-                        Text("Level \((index + 1).description)")
-                        Text("-")
-                        Text(level.smallBlind.description)
-                        Text("|")
-                        Text(level.bigBlind.description)
-                        Spacer()
+                Divider()
+                    .padding(.bottom)
+                
+                HStack {
+                    Text("Time in round")
+                        .bold()
+                    Spacer()
+                    HStack(spacing: .zero) {
+                        // Minutes
+                        Text(vm.timerInfo.currentMinutes.description)
+                       // Seconds
+                        Text(":")
+                        Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
                     }
-                    .background(index % 2 == 0 ? .gray.opacity(0.25) : .clear)
+                    Stepper("", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
+                        .fixedSize()
+        
+                }
+                OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
+                OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
+                
+                HStack {
+                    Text("Blind limit")
+                        .bold()
+                    Spacer()
+                    Text(vm.blindInfo.blindLimit.description)
+                    Text("|")
+                    Text((vm.blindInfo.blindLimit * 2).description)
+                    Stepper("", value: $vm.blindInfo.blindLimit, in: 100...5000, step: 100)
+                        .fixedSize()
+                }
+            }
+            .padding()
+            
+            Divider()
+            
 
-                    
+            List {
+                Section(header: Text("Blind Table")) {
+                    ForEach(Array(zip(vm.blindsArray.indices, vm.blindsArray)), id: \.0) { index, level in
+                        HStack {
+                            Text("Level \(index + 1)")
+                            Rectangle()
+                                .foregroundColor(Color.theme.mainButton.opacity(0.5))
+                                .frame(height: 1)
+                                .padding(.horizontal)
+                            
+                            Text(level.smallBlind.description)
+                            Text("|")
+                            Text(level.bigBlind.description)
+                        }
+                    }
                 }
             }
-           
-            HStack(spacing: .pi) {
-                Text("\(vm.totalGameTime.0)")
-                Text(":")
-                if vm.totalGameTime.1 == 0 {
-                    Text("00")
-                } else {
-                    Text("\(vm.totalGameTime.1)")
-                }
-            }
-            .bold()
+            .frame(width: UIScreen.main.bounds.width)
             
-            
-            Spacer()
         }
-        .padding()
     }
 }
 

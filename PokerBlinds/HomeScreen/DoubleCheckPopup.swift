@@ -19,6 +19,9 @@ struct DoubleCheckPopup: View {
             Button("Done") {
                 isShowing.toggle()
             }
+            .buttonStyle(BasicButtonStyle())
+            .padding()
+            .padding(.horizontal, 25)
         }
         .padding(.horizontal)
     }
@@ -35,6 +38,8 @@ extension DoubleCheckPopup {
         Image(systemName: "checkmark.seal")
             .symbolVariant(.fill)
             .font(.system(size: 50, weight: .bold, design: .rounded))
+            .foregroundColor(Color.theme.mainButton)
+            
     }
     
     var title: some View {
@@ -47,7 +52,7 @@ extension DoubleCheckPopup {
         Text("In order to make sure this app works correctly, make sure you have done all of these things before starting your game.")
             .multilineTextAlignment(.center)
             .font(.callout)
-            .foregroundColor(.black.opacity(0.9))
+            .foregroundColor(Color.theme.text)
     }
 }
 
@@ -56,8 +61,8 @@ struct DoubleCheckThis: View {
     let text: String
     var body: some View {
         HStack {
-            Image(systemName: icon)
             Text(text)
+                .foregroundColor(Color.theme.text)
         }
     }
 }

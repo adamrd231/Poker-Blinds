@@ -13,7 +13,6 @@ import AppTrackingTransparency
 struct PokerBlindsApp: App {
     
     @StateObject var pokerBlinds = PokerBlinds()
-    @StateObject var options = Options()
     @StateObject var storeManager = StoreManager()
     var productIds = ["removePokerAdvertising"]
     

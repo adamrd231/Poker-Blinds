@@ -13,7 +13,8 @@ struct Blinds {
     var levels: [BlindLevel]
 }
 
-struct BlindLevel: Hashable {
+struct BlindLevel: Hashable, Identifiable {
+    var id = UUID()
     var smallBlind: Int
     var bigBlind: Int {
         return smallBlind * 2
