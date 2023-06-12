@@ -13,10 +13,9 @@ struct DoubleCheckPopup: View {
         VStack(spacing: 10) {
             icon
             text
-            Divider()
-            DoubleCheckThis(icon: "square", text: "Volume turned up")
-            DoubleCheckThis(icon: "square", text: "Phone not on vibrate")
-            DoubleCheckThis(icon: "square", text: "make sure the sound is working (bluetooth connection / etc)")
+            DoubleCheckThis(icon: "square", number: 1, text: "Phone not on vibrate")
+            DoubleCheckThis(icon: "square", number: 2, text: "Volume turned up")
+            DoubleCheckThis(icon: "square", number: 3, text: "Connected to bluetooth device?")
             Button("Done") {
                 isShowing.toggle()
             }
@@ -59,12 +58,15 @@ extension DoubleCheckPopup {
 
 struct DoubleCheckThis: View {
     let icon: String
+    let number: Int
     let text: String
     var body: some View {
-        HStack {
+        HStack(spacing: 5) {
+            Text("\(number.description).")
             Text(text)
-                .foregroundColor(Color.theme.text)
+                
         }
+        .foregroundColor(Color.theme.text)
     }
 }
 

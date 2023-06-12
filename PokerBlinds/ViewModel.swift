@@ -8,6 +8,7 @@
 import SwiftUI
 import GoogleMobileAds
 import Combine
+import AVFoundation
 
 enum TimerStates: String {
     case isRunning
@@ -41,6 +42,10 @@ class ViewModel: ObservableObject {
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
     
+    @Published var currentSound: Int = 0
+    var allSounds:[FreeSounds] = [.bell2, .aww, .cheer]
+    @Published var audioPlayer: AVAudioPlayer?
+    
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
     @State var playedInterstitial = false
@@ -64,8 +69,6 @@ class ViewModel: ObservableObject {
                     start += BlindsModel.amountToRaiseBlinds
                 }
                 self?.blindsArray = newBlinds
-                print("New Blinds \(self?.blindsArray)")
-
             }
             .store(in: &cancellable)
     }
@@ -77,14 +80,15 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func startTimer() {
+    func runTimer() {
         self.isTimerRunning = .isRunning
-        // make a copy for backing up stuff
-        backupTimer = timerInfo
-        print("Start")
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
                 self.pokerTimerCountdown()
+                if self.timerInfo.currentTime == 0 {
+                    // play noise
+                    self.playSound(sound: self.allSounds[self.currentSound])
+                }
                 
             // New Level
             } else if self.timerInfo.currentTime == 0 {
@@ -98,6 +102,13 @@ class ViewModel: ObservableObject {
                 self.resetTimer()
             }
         }
+    }
+    
+    func startTimer() {
+        // make a copy for backing up stuff
+        backupTimer = timerInfo
+        runTimer()
+        
     }
     
     func pauseTimer() {
@@ -116,5 +127,23 @@ class ViewModel: ObservableObject {
         }
         
         // How to handle if this fails?
+    }
+    
+    // Play sounds!
+    func playSound(sound: FreeSounds) {
+        let path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav")!
+        let url = URL(fileURLWithPath: path)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.play()
+        } catch {
+            // Error Handling
+        }
+    }
+    
+    enum FreeSounds: String {
+        case bell2 = "bell2"
+        case aww = "aww"
+        case cheer = "cheer"
     }
 }

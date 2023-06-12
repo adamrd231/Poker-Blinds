@@ -87,6 +87,15 @@ struct OptionsView: View {
                     Stepper("", value: $vm.blindInfo.blindLimit, in: 100...5000, step: 100)
                         .fixedSize()
                 }
+                
+                HStack {
+                    Text("End of Round")
+                    Picker("", selection: $vm.currentSound) {
+                        ForEach(vm.allSounds.indices, id: \.self) { index in
+                            Text("\(vm.allSounds[index].rawValue)")
+                        }
+                    }
+                }
             }
             .padding()
             

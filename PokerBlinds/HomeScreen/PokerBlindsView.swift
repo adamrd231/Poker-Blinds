@@ -49,7 +49,11 @@ struct PokerBlindsView: View {
                 Spacer()
                 HStack(spacing: 5) {
                     Button(vm.isTimerRunning == TimerStates.isRunning ? "Pause" : "Start") {
-                        vm.isTimerRunning == TimerStates.isRunning ? vm.pauseTimer() : vm.startTimer()
+                        switch vm.isTimerRunning {
+                            case .hasNotBeenStarted: vm.startTimer()
+                            case .isPaused: vm.runTimer()
+                            case .isRunning: vm.pauseTimer()
+                        }
                     }
                     .buttonStyle(BasicButtonStyle())
                     

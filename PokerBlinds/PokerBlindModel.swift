@@ -106,15 +106,6 @@ class PokerBlinds: ObservableObject, Identifiable {
         
     }
     
-    func playSound() {
-        let path = Bundle.main.path(forResource: "bell2", ofType: "wav")!
-        let url = URL(fileURLWithPath: path)
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.play()
-        } catch {
-            // Error Handling
-        }
-    }
+    
 }
 
