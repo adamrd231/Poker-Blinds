@@ -15,11 +15,17 @@ class SoundManager {
     var audioPlayer: AVAudioPlayer?
     // Play sounds!
     
-    var allSounds:[FreeSounds] = [.bell2, .aww, .cheer]
+    var allSounds:[FreeSounds] = [.bell, .aww, .cheer, .tada]
 
     func playSound(sound: FreeSounds) {
         print("playing class")
-        guard let path = Bundle.main.path(forResource: "bell2", ofType: "wav") else { return }
+        var path = ""
+        if sound == .tada {
+            path = Bundle.main.path(forResource: sound.rawValue, ofType: "mp3") ?? ""
+        } else {
+            path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav") ?? ""
+        }
+       
         let url = URL(fileURLWithPath: path)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -30,8 +36,9 @@ class SoundManager {
     }
     
     enum FreeSounds: String {
-        case bell2 = "bell2"
+        case bell = "bell"
         case aww = "aww"
         case cheer = "cheer"
+        case tada = "tada"
     }
 }

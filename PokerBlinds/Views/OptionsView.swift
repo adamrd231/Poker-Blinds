@@ -90,18 +90,15 @@ struct OptionsView: View {
                 
                 HStack {
                     Text("End of Round")
+                    Spacer()
                     Picker("", selection: $vm.currentSound) {
-                        Text("hallo")
-//                        ForEach(vm.soundPlayer.allSounds.indices, id: \.self) { index in
-//                            Text(vm.soundPlayer.allSounds[index].rawValue)
-//                        }
+                        ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
+                            Text(SoundManager.instance.allSounds[index].rawValue)
+                        }
                     }
                 }
             }
             .padding()
-            
-            Divider()
-            
 
             List {
                 Section(header: Text("Blind Table")) {

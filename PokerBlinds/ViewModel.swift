@@ -85,7 +85,7 @@ class ViewModel: ObservableObject {
                 if self.timerInfo.currentTime == 0 {
                     // play noise
                     print("Playing sound")
-                    SoundManager.instance.playSound(sound: .bell2)
+                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.currentSound])
                 }
                 
             // New Level
