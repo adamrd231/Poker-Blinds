@@ -15,10 +15,13 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            HStack {
-                Text("\(blindInfo.smallBlind - amountToRaiseBlinds)")
-                Text("|")
-                Text("\((blindInfo.smallBlind - amountToRaiseBlinds) * 2)")
+            
+            if blindInfo.smallBlind - amountToRaiseBlinds != 0 {
+                HStack {
+                    Text("\(blindInfo.smallBlind - amountToRaiseBlinds)")
+                    Text("|")
+                    Text("\((blindInfo.smallBlind - amountToRaiseBlinds) * 2)")
+                }
             }
             
             HStack {

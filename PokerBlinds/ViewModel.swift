@@ -41,10 +41,7 @@ class ViewModel: ObservableObject {
     
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
-    
     @Published var currentSound: Int = 0
-    var allSounds:[FreeSounds] = [.bell2, .aww, .cheer]
-    @Published var audioPlayer: AVAudioPlayer?
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
@@ -87,7 +84,8 @@ class ViewModel: ObservableObject {
                 self.pokerTimerCountdown()
                 if self.timerInfo.currentTime == 0 {
                     // play noise
-                    self.playSound(sound: self.allSounds[self.currentSound])
+                    print("Playing sound")
+                    SoundManager.instance.playSound(sound: .bell2)
                 }
                 
             // New Level
@@ -127,23 +125,5 @@ class ViewModel: ObservableObject {
         }
         
         // How to handle if this fails?
-    }
-    
-    // Play sounds!
-    func playSound(sound: FreeSounds) {
-        let path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav")!
-        let url = URL(fileURLWithPath: path)
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.play()
-        } catch {
-            // Error Handling
-        }
-    }
-    
-    enum FreeSounds: String {
-        case bell2 = "bell2"
-        case aww = "aww"
-        case cheer = "cheer"
     }
 }

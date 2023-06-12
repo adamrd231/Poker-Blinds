@@ -13,7 +13,6 @@
 		6642EA262A2FC46B0011589B /* LargeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA252A2FC46B0011589B /* LargeText.swift */; };
 		6642EA292A3368280011589B /* DoubleCheckPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA282A3368280011589B /* DoubleCheckPopup.swift */; };
 		6642EA2C2A3507530011589B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA2B2A3507530011589B /* Color.swift */; };
-		6642EA302A3510CF0011589B /* Views in Resources */ = {isa = PBXBuildFile; fileRef = 6642EA2F2A3510CF0011589B /* Views */; };
 		6659A1EF26AC91CF00BD698E /* bell2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1EE26AC91CF00BD698E /* bell2.wav */; };
 		6659A1F226AC923000BD698E /* aww.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F126AC923000BD698E /* aww.wav */; };
 		6659A1F526AC929300BD698E /* cheer.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6659A1F426AC929300BD698E /* cheer.wav */; };
@@ -21,6 +20,7 @@
 		6659A20C26C47FDE00BD698E /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6659A20B26C47FDE00BD698E /* StoreManager.swift */; };
 		6659A20F26C4816400BD698E /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6659A20E26C4816400BD698E /* Intro.swift */; };
 		6659A21226C4850900BD698E /* RemoveAdvertising.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6659A21126C4850900BD698E /* RemoveAdvertising.swift */; };
+		665BCEE22A37B2D7007023FD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BCEE12A37B2D7007023FD /* SoundManager.swift */; };
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
 		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
@@ -39,7 +39,7 @@
 		6642EA252A2FC46B0011589B /* LargeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeText.swift; sourceTree = "<group>"; };
 		6642EA282A3368280011589B /* DoubleCheckPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckPopup.swift; sourceTree = "<group>"; };
 		6642EA2B2A3507530011589B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		6642EA2F2A3510CF0011589B /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Views; sourceTree = "<group>"; };
+		6642EA2F2A3510CF0011589B /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
 		6659A1EE26AC91CF00BD698E /* bell2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell2.wav; sourceTree = "<group>"; };
 		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
 		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
@@ -47,6 +47,7 @@
 		6659A20B26C47FDE00BD698E /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		6659A20E26C4816400BD698E /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		6659A21126C4850900BD698E /* RemoveAdvertising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveAdvertising.swift; sourceTree = "<group>"; };
+		665BCEE12A37B2D7007023FD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
 		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 				668EF5E726A347AD0040FC4D /* Assets.xcassets */,
 				668EF5E926A347AD0040FC4D /* Preview Content */,
 				66E43FC926C6ACB900AE012E /* LaunchScreen.storyboard */,
+				665BCEE12A37B2D7007023FD /* SoundManager.swift */,
 			);
 			path = PokerBlinds;
 			sourceTree = "<group>";
@@ -281,7 +283,6 @@
 				66E43FCA26C6ACB900AE012E /* LaunchScreen.storyboard in Resources */,
 				6659A1F526AC929300BD698E /* cheer.wav in Resources */,
 				668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */,
-				6642EA302A3510CF0011589B /* Views in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6659A20F26C4816400BD698E /* Intro.swift in Sources */,
+				665BCEE22A37B2D7007023FD /* SoundManager.swift in Sources */,
 				668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */,
 				668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */,
 				6642EA212A2E11080011589B /* BlindsView.swift in Sources */,

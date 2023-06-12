@@ -91,9 +91,10 @@ struct OptionsView: View {
                 HStack {
                     Text("End of Round")
                     Picker("", selection: $vm.currentSound) {
-                        ForEach(vm.allSounds.indices, id: \.self) { index in
-                            Text("\(vm.allSounds[index].rawValue)")
-                        }
+                        Text("hallo")
+//                        ForEach(vm.soundPlayer.allSounds.indices, id: \.self) { index in
+//                            Text(vm.soundPlayer.allSounds[index].rawValue)
+//                        }
                     }
                 }
             }
