@@ -26,9 +26,6 @@ class ViewModel: ObservableObject {
     
     @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 10)
     
-    var totalGameTime: (Int, Int) {
-        getTotalGameTime(roundTime: timerInfo.currentTime, numberOfRounds: blindsArray.count)
-    }
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     

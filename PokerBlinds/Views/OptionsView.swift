@@ -15,7 +15,6 @@ struct OptionRowView: View {
     var body: some View {
         HStack {
             Text(text)
-                .bold()
             Spacer()
             Text(firstValue.description)
             Stepper("", value: $firstValue, in: 100...5000, step: 100)
@@ -32,7 +31,6 @@ struct OptionRowBlindView: View {
     var body: some View {
         HStack {
             Text(text)
-                .bold()
             Spacer()
             Text(blind.description)
             Text("|")
@@ -49,77 +47,62 @@ struct OptionsView: View {
     @EnvironmentObject var vm: ViewModel
     
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Text("Options")
-                    .font(.title)
-                    .fontWeight(.heavy)
-                    .foregroundColor(Color.theme.mainButton)
-                
-                Divider()
-                    .padding(.bottom)
-                
-                HStack {
-                    Text("Time in round")
-                        .bold()
-                    Spacer()
-                    HStack(spacing: .zero) {
-                        // Minutes
-                        Text(vm.timerInfo.currentMinutes.description)
-                       // Seconds
-                        Text(":")
-                        Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
-                    }
-                    Stepper("", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
-                        .fixedSize()
-        
+        VStack(alignment: .leading) {
+            Text("Game Options")
+                .font(.system(size: 20, weight: .medium, design: .rounded))
+            HStack {
+                Text("Time in round")
+                Spacer()
+                HStack(spacing: .zero) {
+                    // Minutes
+                    Text(vm.timerInfo.currentMinutes.description)
+                   // Seconds
+                    Text(":")
+                    Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
                 }
-                OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
-                OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
-                
-                HStack {
-                    Text("Blind limit")
-                        .bold()
-                    Spacer()
-                    Text(vm.blindInfo.blindLimit.description)
-                    Text("|")
-                    Text((vm.blindInfo.blindLimit * 2).description)
-                    Stepper("", value: $vm.blindInfo.blindLimit, in: 100...5000, step: 100)
-                        .fixedSize()
-                }
-                
-                HStack {
-                    Text("End of Round")
-                    Spacer()
-                    Picker("", selection: $vm.currentSound) {
-                        ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
-                            Text(SoundManager.instance.allSounds[index].rawValue)
-                        }
-                    }
-                }
+                Stepper("", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
+                    .fixedSize()
             }
-            .padding()
-
-            List {
-                Section(header: Text("Blind Table")) {
-                    ForEach(Array(zip(vm.blindsArray.indices, vm.blindsArray)), id: \.0) { index, level in
-                        HStack {
-                            Text("Level \(index + 1)")
-                            Rectangle()
-                                .foregroundColor(Color.theme.mainButton.opacity(0.5))
-                                .frame(height: 1)
-                                .padding(.horizontal)
-                            
-                            Text(level.smallBlind.description)
-                            Text("|")
-                            Text(level.bigBlind.description)
-                        }
-                    }
-                }
-            }
-            .frame(width: UIScreen.main.bounds.width)
             
+            OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
+            OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
+            OptionRowBlindView(text: "Blind limit", blind: $vm.blindInfo.blindLimit)
+            Text("Sound")
+                .font(.system(size: 20, weight: .medium, design: .rounded))
+                .padding(.top)
+            HStack {
+                Text("End of Round")
+                Spacer()
+                Picker("", selection: $vm.currentSound) {
+                    ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
+                        Text(SoundManager.instance.allSounds[index].rawValue)
+                    }
+                }
+                .onChange(of: vm.currentSound, perform: { newValue in
+                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.currentSound])
+                })
+            }
+            
+            Text("Blind Table")
+                .font(.system(size: 20, weight: .medium, design: .rounded))
+                .padding(.top)
+            List {
+                ForEach(Array(zip(vm.blindsArray.indices, vm.blindsArray)), id: \.0) { index, level in
+                    HStack {
+                        Text("Level \(index + 1)")
+                        Rectangle()
+                            .foregroundColor(Color.theme.mainButton.opacity(0.5))
+                            .frame(height: 1)
+                            .padding(.horizontal)
+                        
+                        Text(level.smallBlind.description)
+                        Text("|")
+                        Text(level.bigBlind.description)
+                    }
+                }
+            }
         }
+        .padding()
     }
 }
 

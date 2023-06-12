@@ -47,9 +47,9 @@ struct PokerGameModel: Identifiable {
 
 }
 
-func getTotalGameTime(roundTime: Int, numberOfRounds: Int) -> (min: Int, sec: Int) {
+func getTotalGameTime(roundTime: Int, numberOfRounds: Int) -> (min: String, sec: String) {
     let totalTime = roundTime * numberOfRounds
-    return (totalTime / 60, totalTime % 60)
+    return ((totalTime / 60).description, (totalTime % 60).description)
 }
 
 
