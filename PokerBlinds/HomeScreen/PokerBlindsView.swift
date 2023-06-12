@@ -38,7 +38,13 @@ struct PokerBlindsView: View {
                     )
                     
                     // Show blind information here
-                    BlindsView(blindInfo: vm.blindsArray[vm.timerInfo.currentLevel - 1], currentLevel: vm.timerInfo.currentLevel, amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds)
+                    BlindsView(
+                        blindInfo: vm.blindsArray.count >= vm.timerInfo.currentLevel
+                            ? vm.blindsArray[vm.timerInfo.currentLevel - 1]
+                            : vm.blindsArray.last ?? BlindLevel(smallBlind: 100),
+                        amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
+                        lastBlind: vm.blindsArray.count <= vm.timerInfo.currentLevel
+                    )
                 }
                 Spacer()
                 HStack(spacing: 5) {

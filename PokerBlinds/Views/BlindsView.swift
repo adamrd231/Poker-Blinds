@@ -10,8 +10,8 @@ import SwiftUI
 struct BlindsView: View {
     
     let blindInfo: BlindLevel
-    let currentLevel: Int
     let amountToRaiseBlinds: Int
+    let lastBlind: Bool
     
     var body: some View {
         VStack(alignment: .center) {
@@ -29,11 +29,14 @@ struct BlindsView: View {
             .font(.largeTitle)
             .bold()
             
-            HStack {
-                Text("\(blindInfo.smallBlind + amountToRaiseBlinds)")
-                Text("|")
-                Text("\((blindInfo.smallBlind + amountToRaiseBlinds) * 2)")
+            if !lastBlind {
+                HStack {
+                    Text("\(blindInfo.smallBlind + amountToRaiseBlinds)")
+                    Text("|")
+                    Text("\((blindInfo.smallBlind + amountToRaiseBlinds) * 2)")
+                }
             }
+            
         }
         .frame(maxWidth: .infinity)
     }
@@ -41,6 +44,6 @@ struct BlindsView: View {
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
-        BlindsView(blindInfo: BlindLevel(smallBlind: 100), currentLevel: 0, amountToRaiseBlinds: 100)
+        BlindsView(blindInfo: BlindLevel(smallBlind: 100), amountToRaiseBlinds: 100, lastBlind: true)
     }
 }

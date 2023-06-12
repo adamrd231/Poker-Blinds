@@ -16,6 +16,7 @@ struct DoubleCheckPopup: View {
             Divider()
             DoubleCheckThis(icon: "square", text: "Volume turned up")
             DoubleCheckThis(icon: "square", text: "Phone not on vibrate")
+            DoubleCheckThis(icon: "square", text: "make sure the sound is working (bluetooth connection / etc)")
             Button("Done") {
                 isShowing.toggle()
             }
