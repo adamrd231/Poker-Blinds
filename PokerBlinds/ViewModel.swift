@@ -10,7 +10,7 @@ import GoogleMobileAds
 import Combine
 import AVFoundation
 
-enum TimerStates: String {
+enum TimerStates: String, Codable {
     case isRunning
     case isPaused
     case hasNotBeenStarted
@@ -51,6 +51,7 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
+        loadInfo()
     }
     
     func addSubscribers() {
@@ -106,6 +107,7 @@ class ViewModel: ObservableObject {
     func pauseTimer() {
         self.isTimerRunning = .isPaused
         self.timer.invalidate()
+        self.saveInfo()
     }
     
     func resetTimer() {
@@ -124,22 +126,52 @@ class ViewModel: ObservableObject {
     // MARK: User --- money save state
     func saveInfo() {
         let encoder = JSONEncoder()
+        let defaults = UserDefaults.standard
         if let encoded = try? encoder.encode(timerInfo) {
-            let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "timerInfo")
         }
         if let blind = try? encoder.encode(blindInfo) {
-            let defaults = UserDefaults.standard
             defaults.set(blind, forKey: "blindInfo")
         }
+        if let screenSetting = try? encoder.encode(keepScreenOpen) {
+            defaults.set(screenSetting, forKey: "screenSetting")
+        }
+        if let level = try? encoder.encode(currentLevel) {
+            defaults.set(level, forKey: "level")
+        }
+        if let timerRunnin = try? encoder.encode(isTimerRunning) {
+            defaults.set(timerRunnin, forKey: "timer")
+        }
+        // @Published var keepScreenOpen: Bool = false
+        // @Published var currentLevel: Int = 1
     }
     
     func loadInfo() {
         let defaults = UserDefaults.standard
+        let decoder = JSONDecoder()
         if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
-            let decoder = JSONDecoder()
             if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
                 self.timerInfo = info
+            }
+        }
+        if let blindInfo = defaults.object(forKey: "blindInfo") as? Data {
+            if let blinds = try? decoder.decode(BlindsModel.self, from: blindInfo) {
+                self.blindInfo = blinds
+            }
+        }
+        if let screenSetting = defaults.object(forKey: "screenSetting") as? Data {
+            if let option = try? decoder.decode(Bool.self, from: screenSetting) {
+                self.keepScreenOpen = option
+            }
+        }
+        if let level = defaults.object(forKey: "level") as? Data {
+            if let option = try? decoder.decode(Int.self, from: level) {
+                self.currentLevel = option
+            }
+        }
+        if let timer = defaults.object(forKey: "timer") as? Data {
+            if let isRunning = try? decoder.decode(TimerStates.self, from: timer) {
+                self.isTimerRunning = isRunning
             }
         }
     }
