@@ -83,16 +83,13 @@ class ViewModel: ObservableObject {
                     // play noise
                     print("Playing sound")
                     SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.currentSound])
+                    if let backup = self.backupTimer {
+                        self.timerInfo.currentTime = backup.currentTime
+                        self.timerInfo.currentLevel += 1
+                    }
                 }
                 
             // New Level
-            } else if self.timerInfo.currentTime == 0 {
-                if let backup = self.backupTimer {
-                    self.timerInfo.currentTime = backup.currentTime
-                    self.timerInfo.currentLevel += 1
-                }
-               
-            // Reset
             } else {
                 self.resetTimer()
             }
@@ -122,5 +119,28 @@ class ViewModel: ObservableObject {
         }
         
         // How to handle if this fails?
+    }
+    
+    // MARK: User --- money save state
+    func saveInfo() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(timerInfo) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "timerInfo")
+        }
+        if let blind = try? encoder.encode(blindInfo) {
+            let defaults = UserDefaults.standard
+            defaults.set(blind, forKey: "blindInfo")
+        }
+    }
+    
+    func loadInfo() {
+        let defaults = UserDefaults.standard
+        if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
+            let decoder = JSONDecoder()
+            if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
+                self.timerInfo = info
+            }
+        }
     }
 }

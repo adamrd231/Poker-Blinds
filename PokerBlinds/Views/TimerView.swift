@@ -21,8 +21,7 @@ struct TimerView: View {
             }
             
             Circle()
-
-                .stroke(Color.theme.mainButton.opacity(0.35), style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(Color.theme.mainButton.opacity(0.25), style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: 275, height: 275)
             Circle()
                 .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
