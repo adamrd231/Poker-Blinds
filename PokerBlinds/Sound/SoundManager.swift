@@ -15,12 +15,20 @@ class SoundManager {
     var audioPlayer: AVAudioPlayer?
     // Play sounds!
     
-    var allSounds:[FreeSounds] = [.bell, .aww, .cheer, .tada]
+    var allSounds:[FreeSounds] = [
+        .bell,
+        .aww,
+        .cheer,
+        .tada,
+        .bonk,
+        .hitSomething,
+        .woodSlam
+    ]
 
     func playSound(sound: FreeSounds) {
         print("playing class")
         var path = ""
-        if sound == .tada {
+        if sound == .tada || sound == .bonk || sound == .woodSlam || sound == .hitSomething {
             path = Bundle.main.path(forResource: sound.rawValue, ofType: "mp3") ?? ""
         } else {
             path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav") ?? ""
@@ -40,5 +48,8 @@ class SoundManager {
         case aww = "aww"
         case cheer = "cheer"
         case tada = "tada"
+        case bonk = "bonk"
+        case hitSomething = "hitSomething"
+        case woodSlam = "woodSlam"
     }
 }
