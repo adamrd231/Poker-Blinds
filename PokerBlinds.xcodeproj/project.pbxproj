@@ -40,7 +40,6 @@
 		6642EA252A2FC46B0011589B /* LargeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeText.swift; sourceTree = "<group>"; };
 		6642EA282A3368280011589B /* DoubleCheckPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCheckPopup.swift; sourceTree = "<group>"; };
 		6642EA2B2A3507530011589B /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		6642EA2F2A3510CF0011589B /* Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Views; sourceTree = "<group>"; };
 		6659A1EE26AC91CF00BD698E /* bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell.wav; sourceTree = "<group>"; };
 		6659A1F126AC923000BD698E /* aww.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = aww.wav; sourceTree = "<group>"; };
 		6659A1F426AC929300BD698E /* cheer.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheer.wav; sourceTree = "<group>"; };
@@ -119,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				6659A1FE26B25C7400BD698E /* AdMob */,
-				6659A1E926AC909D00BD698E /* Sound */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				6642EA242A2FC4550011589B /* StyleModfiers */,
 			);
@@ -130,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				668EF61926A74A530040FC4D /* OptionsView.swift */,
-				6642EA2F2A3510CF0011589B /* Views */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				6659A20E26C4816400BD698E /* Intro.swift */,
 				6659A21126C4850900BD698E /* RemoveAdvertising.swift */,
@@ -188,6 +185,7 @@
 				6642EA2E2A35092B0011589B /* Views */,
 				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
 				6659A20B26C47FDE00BD698E /* StoreManager.swift */,
+				6659A1E926AC909D00BD698E /* Sound */,
 				668EF5EC26A347AD0040FC4D /* Info.plist */,
 				668EF5E726A347AD0040FC4D /* Assets.xcassets */,
 				668EF5E926A347AD0040FC4D /* Preview Content */,

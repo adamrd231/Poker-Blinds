@@ -12,13 +12,11 @@ import AppTrackingTransparency
 @main
 struct PokerBlindsApp: App {
     
-//    @StateObject var pokerBlinds = PokerBlinds()
     @StateObject var storeManager = StoreManager()
     var productIds = ["removePokerAdvertising"]
     
     func requestIDFA() {
         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-            
         })
     }
     

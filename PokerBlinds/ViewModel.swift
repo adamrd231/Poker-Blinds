@@ -51,7 +51,7 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
-        loadInfo()
+//        loadInfo()
     }
     
     func addSubscribers() {
@@ -107,7 +107,7 @@ class ViewModel: ObservableObject {
     func pauseTimer() {
         self.isTimerRunning = .isPaused
         self.timer.invalidate()
-        self.saveInfo()
+//        self.saveInfo()
     }
     
     func resetTimer() {
@@ -142,6 +142,9 @@ class ViewModel: ObservableObject {
         if let timerRunnin = try? encoder.encode(isTimerRunning) {
             defaults.set(timerRunnin, forKey: "timer")
         }
+        if let backup = try? encoder.encode(backupTimer) {
+            defaults.set(backup, forKey: "backup")
+        }
         // @Published var keepScreenOpen: Bool = false
         // @Published var currentLevel: Int = 1
     }
@@ -172,6 +175,11 @@ class ViewModel: ObservableObject {
         if let timer = defaults.object(forKey: "timer") as? Data {
             if let isRunning = try? decoder.decode(TimerStates.self, from: timer) {
                 self.isTimerRunning = isRunning
+            }
+        }
+        if let backup = defaults.object(forKey: "backup") as? Data {
+            if let info = try? decoder.decode(TimerModel.self, from: backup) {
+                self.backupTimer = info
             }
         }
     }
