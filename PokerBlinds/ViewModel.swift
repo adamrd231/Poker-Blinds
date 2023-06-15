@@ -25,15 +25,11 @@ extension TimerStates: CustomStringConvertible {
 class ViewModel: ObservableObject {
     
     @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 10)
-    
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
-    
     @Published var keepScreenOpen: Bool = false
     @Published var currentLevel: Int = 1
-    
     @Published var backupTimer: TimerModel?
-    
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
     // Store manager for in-app purchases
@@ -51,7 +47,6 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
-//        loadInfo()
     }
     
     func addSubscribers() {
@@ -99,19 +94,17 @@ class ViewModel: ObservableObject {
     
     func startTimer() {
         // make a copy for backing up stuff
-        backupTimer = timerInfo
         runTimer()
+        backupTimer = timerInfo
         
     }
     
     func pauseTimer() {
         self.isTimerRunning = .isPaused
         self.timer.invalidate()
-//        self.saveInfo()
     }
     
     func resetTimer() {
-        
         self.timer.invalidate()
         self.isTimerRunning = .hasNotBeenStarted
         // Reset to backup values
@@ -119,8 +112,6 @@ class ViewModel: ObservableObject {
             self.timerInfo = backup
             self.backupTimer = nil
         }
-        
-        // How to handle if this fails?
     }
     
     // MARK: User --- money save state
@@ -145,8 +136,6 @@ class ViewModel: ObservableObject {
         if let backup = try? encoder.encode(backupTimer) {
             defaults.set(backup, forKey: "backup")
         }
-        // @Published var keepScreenOpen: Bool = false
-        // @Published var currentLevel: Int = 1
     }
     
     func loadInfo() {
