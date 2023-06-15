@@ -13,45 +13,36 @@ struct RemoveAdvertising: View {
     
     @StateObject var storeManager: StoreManager
     
-    
     var body: some View {
         // Second Screen
         VStack(alignment: .leading) {
-            Text("Thank you!").bold().font(.system(size:35.0)).padding(.bottom)
-            Text("This poker blinds app keeps track of small and big blinds, the time and players left with some chip counts. I hope this app helps make your games more fun and run smoothly.").padding(.bottom)
-            Text("You've made it here, and I thank you. As a independent developer, I have always enjoyed solving unique problems with my own special approach. In order for me to do so, I advertise on these free apps to help make money. I get it, advertising is lame and you do not really want to see a video every time you open up. Here's the deal, help me to build my future as a developer and I'll turn them off for you, forever. Just $5.")
             HStack {
-                Button( action: {
-                    storeManager.purchaseProduct(product: storeManager.myProducts.first!)
-                }) {
-                    VStack {
-                        if storeManager.purchasedRemoveAds == true {
-                            Text("Purchased")
-                        } else {
-                            Text(storeManager.myProducts.first?.localizedTitle ?? "").bold()
-                                .padding()
-                                .font(.system(size:15.0))
-                                .background(Color(.darkGray))
-                                .foregroundColor(.white)
-                                .cornerRadius(55.0)
-                        }
-                    }
-                }.padding().disabled(storeManager.purchasedRemoveAds)
-                
-                
-                Button( action: {
+                Text("In-App Purchases")
+                    .bold()
+                Spacer()
+                Button("Restore purchases") {
                     storeManager.restoreProducts()
-                }) {
-                    Text("Restore Purchases").bold()
-                        .padding()
-                        .font(.system(size:15.0))
-                        .background(Color(.darkGray))
-                        .foregroundColor(.white)
-                        .cornerRadius(55.0)
-                }.padding(.top).padding(.bottom).padding(.trailing)
+                }
             }
-            
-        }.padding()
+            .padding(.vertical)
+
+            Text("As an independent app developer, I integrate advertising into the apps I create to sustain my full-time pursuit of app development and offer them to users for free. By engaging with occasional ads, you directly support my work, enabling me to enhance existing apps, develop new ones, and provide timely updates. I also provide the option to remove advertisements for a small fee, respecting your desire for an ad-free experience while contributing to my ability to innovate and deliver exceptional applications. Your support fuels the growth of independent app development, ensuring a thriving ecosystem of user-centric apps. Thank you for being a part of this journey!")
+
+            Text("Remove advertising")
+            List(storeManager.myProducts, id: \.self) { product in
+                HStack {
+                    VStack {
+                        Text(product.localizedTitle)
+                        Text(product.localizedDescription)
+                    }
+                    Button("\(product.price)") {
+                        storeManager.purchaseProduct(product: product)
+                    }
+                }
+               
+            }
+        }
+        .padding()
     }
 }
 

@@ -21,14 +21,14 @@ class SoundManager {
         .cheer,
         .tada,
         .bonk,
-        .hitSomething,
-        .woodSlam
+        .bang,
+        .slam
     ]
 
     func playSound(sound: FreeSounds) {
         print("playing class")
         var path = ""
-        if sound == .tada || sound == .bonk || sound == .woodSlam || sound == .hitSomething {
+        if sound == .tada || sound == .bonk || sound == .bang || sound == .slam {
             path = Bundle.main.path(forResource: sound.rawValue, ofType: "mp3") ?? ""
         } else {
             path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav") ?? ""
@@ -49,7 +49,7 @@ class SoundManager {
         case cheer = "cheer"
         case tada = "tada"
         case bonk = "bonk"
-        case hitSomething = "hitSomething"
-        case woodSlam = "woodSlam"
+        case bang = "bang"
+        case slam = "slam"
     }
 }

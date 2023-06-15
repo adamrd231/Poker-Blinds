@@ -23,8 +23,8 @@
 		665BCEE22A37B2D7007023FD /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BCEE12A37B2D7007023FD /* SoundManager.swift */; };
 		665BCEE62A37BA89007023FD /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE52A37BA89007023FD /* tada.mp3 */; };
 		665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE72A3A17B3007023FD /* bonk.mp3 */; };
-		665BCEEB2A3A17B3007023FD /* hitSomething.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE82A3A17B3007023FD /* hitSomething.mp3 */; };
-		665BCEEC2A3A17B3007023FD /* woodSlam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE92A3A17B3007023FD /* woodSlam.mp3 */; };
+		665BCEEB2A3A17B3007023FD /* bang.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE82A3A17B3007023FD /* bang.mp3 */; };
+		665BCEEC2A3A17B3007023FD /* slam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE92A3A17B3007023FD /* slam.mp3 */; };
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
 		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
@@ -53,8 +53,8 @@
 		665BCEE12A37B2D7007023FD /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		665BCEE52A37BA89007023FD /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
 		665BCEE72A3A17B3007023FD /* bonk.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bonk.mp3; sourceTree = "<group>"; };
-		665BCEE82A3A17B3007023FD /* hitSomething.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hitSomething.mp3; sourceTree = "<group>"; };
-		665BCEE92A3A17B3007023FD /* woodSlam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woodSlam.mp3; sourceTree = "<group>"; };
+		665BCEE82A3A17B3007023FD /* bang.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bang.mp3; sourceTree = "<group>"; };
+		665BCEE92A3A17B3007023FD /* slam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slam.mp3; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
 		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 				665BCEE12A37B2D7007023FD /* SoundManager.swift */,
 				6659A1EE26AC91CF00BD698E /* bell.wav */,
 				665BCEE72A3A17B3007023FD /* bonk.mp3 */,
-				665BCEE82A3A17B3007023FD /* hitSomething.mp3 */,
-				665BCEE92A3A17B3007023FD /* woodSlam.mp3 */,
+				665BCEE82A3A17B3007023FD /* bang.mp3 */,
+				665BCEE92A3A17B3007023FD /* slam.mp3 */,
 				6659A1F126AC923000BD698E /* aww.wav */,
 				6659A1F426AC929300BD698E /* cheer.wav */,
 				665BCEE52A37BA89007023FD /* tada.mp3 */,
@@ -289,14 +289,14 @@
 			files = (
 				665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */,
 				6659A1EF26AC91CF00BD698E /* bell.wav in Resources */,
-				665BCEEC2A3A17B3007023FD /* woodSlam.mp3 in Resources */,
+				665BCEEC2A3A17B3007023FD /* slam.mp3 in Resources */,
 				668EF5EB26A347AD0040FC4D /* Preview Assets.xcassets in Resources */,
 				6659A1F226AC923000BD698E /* aww.wav in Resources */,
 				665BCEE62A37BA89007023FD /* tada.mp3 in Resources */,
 				66E43FCA26C6ACB900AE012E /* LaunchScreen.storyboard in Resources */,
 				6659A1F526AC929300BD698E /* cheer.wav in Resources */,
 				668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */,
-				665BCEEB2A3A17B3007023FD /* hitSomething.mp3 in Resources */,
+				665BCEEB2A3A17B3007023FD /* bang.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

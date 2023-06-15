@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     @Published var myProducts = [SKProduct]()
     var request: SKProductsRequest!
