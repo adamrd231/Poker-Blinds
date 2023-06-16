@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  PokerBlinds
-//
-//  Created by Adam Reed on 7/17/21.
-//
-
 import SwiftUI
 import AVFoundation
 
@@ -23,13 +16,11 @@ struct PokerBlindsView: View {
                         .foregroundColor(Color.theme.mainButton)
                         .padding(.trailing, 5)
                 }
-                
                 .onTapGesture {
                     isShowingDoubleCheck.toggle()
                 }
                 .padding(.horizontal)
                 
-                    
                 VStack {
                     TimerView(
                         blinds: vm.blindInfo,
@@ -63,8 +54,6 @@ struct PokerBlindsView: View {
                     }
                     .buttonStyle(BasicButtonStyle())
 
-   
-                    
                     Button("Reset") {
                         vm.resetTimer()
                     }

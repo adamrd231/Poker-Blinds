@@ -13,15 +13,14 @@ class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestD
     @Published var myProducts = [SKProduct]()
     var request: SKProductsRequest!
     @Published var transactionState: SKPaymentTransactionState?
-    @Published var purchasedRemoveAds = UserDefaults.standard.bool(forKey: "purchasedRemoveAds") ?? false {
+    @Published var purchasedRemoveAds = UserDefaults.standard.bool(forKey: "purchasedRemoveAds") {
         didSet {
             UserDefaults.standard.setValue(self.purchasedRemoveAds, forKey: "purchasedRemoveAds")
         }
     }
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        print("Did receive response")
-        
+
         if !response.products.isEmpty {
             for fetchedProduct in response.products {
                 DispatchQueue.main.async {
@@ -54,6 +53,7 @@ class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestD
                 purchasedRemoveAds = true
                 transactionState = .purchased
             case .restored:
+                print("Restored")
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 purchasedRemoveAds = true
@@ -62,6 +62,7 @@ class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestD
                 print("Payment Queue Error: \(String(describing: transaction.error))")
                     queue.finishTransaction(transaction)
                     transactionState = .failed
+                    purchasedRemoveAds = false
                     default:
                     queue.finishTransaction(transaction)
             }
@@ -69,15 +70,15 @@ class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestD
     }
     
     func purchaseProduct(product: SKProduct) {
+        
         if SKPaymentQueue.canMakePayments() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
+            print("purchasing product")
         } else {
             print("User can't make payment.")
         }
     }
-    
-    
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Request did fail: \(error)")
@@ -87,6 +88,4 @@ class StoreManager: NSObject, Identifiable, ObservableObject, SKProductsRequestD
         print("Restoring products ...")
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
-    
-    
 }
