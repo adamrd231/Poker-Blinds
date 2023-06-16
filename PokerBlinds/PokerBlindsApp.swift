@@ -12,9 +12,6 @@ import AppTrackingTransparency
 @main
 struct PokerBlindsApp: App {
     
-    @StateObject var storeManager = StoreManager()
-    var productIds = ["removePokerAdvertising"]
-    
     func requestIDFA() {
         ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
         })
@@ -24,8 +21,8 @@ struct PokerBlindsApp: App {
         WindowGroup {
             PokerBlindsView()
                 .onAppear(perform: {
-                    SKPaymentQueue.default().add(storeManager)
-                    storeManager.getProducts(productIDs: productIds)
+//                    SKPaymentQueue.default().add(storeManager)
+//                    storeManager.getProducts(productIDs: productIds)
                     requestIDFA()
             }) 
         }

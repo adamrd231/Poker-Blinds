@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 10)
+    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 300)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -34,11 +34,13 @@ class ViewModel: ObservableObject {
     
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
+    var productIds = ["removePokerAdvertising"]
     @Published var currentSound: Int = 0
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
     @State var playedInterstitial = false
+    
     
     private var cancellable = Set<AnyCancellable>()
     
@@ -47,6 +49,7 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
+        storeManager.getProducts(productIDs: productIds)
     }
     
     func addSubscribers() {

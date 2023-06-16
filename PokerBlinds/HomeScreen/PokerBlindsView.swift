@@ -10,7 +10,7 @@ import AVFoundation
 
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
-    @State var isShowingDoubleCheck = false
+    @State var isShowingDoubleCheck = true
     
     var body: some View {
         TabView {
