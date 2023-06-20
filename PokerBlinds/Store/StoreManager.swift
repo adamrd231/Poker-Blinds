@@ -6,29 +6,53 @@
 //
 
 import Foundation
+//import SwiftUI
 import StoreKit
+//import Combine
 
 class StoreManager: ObservableObject  {
     
     @Published var products = [Product]()
     @Published var purchasedNonConsumables = Set<Product>()
     var productIds = ["removePokerAdvertising"]
+    @Published var hasRemovedAdvertising: Bool?
+    
+    var purchasedRemoveAdvertising: Bool {
+        if purchasedNonConsumables.contains(where: { $0.id == "removeProductAdvertising" }) {
+            return true
+        } else {
+            return false
+        }
+    }
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?
+//    private var cancellable = Set<AnyCancellable>()
+    
     
     init() {
         transactionListener = listenForTransactions()
         Task {
             await requestProducts()
+            // Must be called after products have already been fetched
+            // Transactions do not contain product or product info
+            await updateCurrentEntitlements()
         }
+//        addSubscribers()
     }
+    
+//    func addSubscribers() {
+//        $purchasedNonConsumables
+//            .sink { [weak self] (Product) in
+//                print("Hello")
+//            }
+//            .store(in: &cancellable)
+//    }
+    
     @MainActor
     func requestProducts() async {
         do {
-            print("Request products async")
             products = try await Product.products(for: productIds)
-            print("reeust products \(products)")
         } catch let error {
             print("Error requesting products: \(error)")
         }
@@ -56,7 +80,7 @@ class StoreManager: ObservableObject  {
     }
     
     @MainActor
-    func handle(transactionVerification result: VerificationResult <Transaction> ) async {
+    private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
         switch result {
             case let.verified(transaction):
                 guard let product = self.products.first(where: { $0.id == transaction.productID }) else { return }
@@ -66,6 +90,11 @@ class StoreManager: ObservableObject  {
         }
     }
     
+    private func updateCurrentEntitlements() async {
+        for await result in Transaction.currentEntitlements {
+            await self.handle(transactionVerification: result)
+        }
+    }
     
 //    @Published var myProducts = [SKProduct]()
 

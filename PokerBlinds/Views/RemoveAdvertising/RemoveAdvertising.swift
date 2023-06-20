@@ -41,12 +41,9 @@ struct RemoveAdvertising: View {
             }
             
             Section(header: Text("Restore")) {
-                VStack {
-                    Text("Already purchases these? Just click below to restore all the things.")
-                    Button("Restore purchases") {
-    //                    storeManager.restoreProducts()
-                    }
-                    
+                Text("Already purchases these? Just click below to restore all the things.")
+                Button("Restore purchases") {
+
                 }
                 Button("Support") {
                     

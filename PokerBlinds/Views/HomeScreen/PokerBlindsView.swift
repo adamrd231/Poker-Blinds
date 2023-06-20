@@ -61,10 +61,10 @@ struct PokerBlindsView: View {
                     .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 }
                 .padding()
-                    
-//                if vm.storeManager.purchasedRemoveAds != true {
+
+                if vm.storeManager.purchasedRemoveAdvertising != true {
                     Banner()
-//                }
+                }
             }
             .sheet(isPresented: $isShowingDoubleCheck, content: {
                 DoubleCheckPopup(isShowing: $isShowingDoubleCheck)
