@@ -31,6 +31,7 @@ struct RemoveAdvertising: View {
                             Task {
                                 print("Purchase?")
                                 try await storeManager.purchase(product)
+                                print("purchase \(storeManager.purchasedNonConsumables.count)")
                             }
                             
                         }
