@@ -49,8 +49,6 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
-        storeManager.getProducts(productIDs: productIds)
-        
     }
     
     func addSubscribers() {

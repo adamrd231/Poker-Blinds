@@ -3,7 +3,7 @@ import AVFoundation
 
 struct PokerBlindsView: View {
     @StateObject var vm = ViewModel()
-    @State var isShowingDoubleCheck = true
+    @State var isShowingDoubleCheck = false
     
     var body: some View {
         TabView {
@@ -62,9 +62,9 @@ struct PokerBlindsView: View {
                 }
                 .padding()
                     
-                if vm.storeManager.purchasedRemoveAds != true {
+//                if vm.storeManager.purchasedRemoveAds != true {
                     Banner()
-                }
+//                }
             }
             .sheet(isPresented: $isShowingDoubleCheck, content: {
                 DoubleCheckPopup(isShowing: $isShowingDoubleCheck)

@@ -1,0 +1,35 @@
+{
+  "identifier" : "06359708",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "1580802024",
+      "localizations" : [
+        {
+          "description" : "Removes all video and interstitial ads in app",
+          "displayName" : "Remove all Advertising",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "removePokerAdvertising",
+      "referenceName" : "Remove Advertising",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1580801897",
+    "_developerTeamID" : "6SFM579B5E",
+    "_lastSynchronizedDate" : 708961328.70034397
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

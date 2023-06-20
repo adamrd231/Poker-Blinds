@@ -55,6 +55,7 @@
 		665BCEE72A3A17B3007023FD /* bonk.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bonk.mp3; sourceTree = "<group>"; };
 		665BCEE82A3A17B3007023FD /* bang.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bang.mp3; sourceTree = "<group>"; };
 		665BCEE92A3A17B3007023FD /* slam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slam.mp3; sourceTree = "<group>"; };
+		668B96722A41E42C006D76A1 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
 		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
@@ -108,6 +109,8 @@
 			children = (
 				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
 				6642EA282A3368280011589B /* DoubleCheckPopup.swift */,
+				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
+				6642EA202A2E11080011589B /* BlindsView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -123,7 +126,6 @@
 		6642EA2D2A3509040011589B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6659A1FE26B25C7400BD698E /* AdMob */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				6642EA242A2FC4550011589B /* StyleModfiers */,
 			);
@@ -133,11 +135,10 @@
 		6642EA2E2A35092B0011589B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				668EF61926A74A530040FC4D /* OptionsView.swift */,
-				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
+				668B96712A41E1BD006D76A1 /* Options */,
+				668B96702A41E1A6006D76A1 /* RemoveAdvertising */,
+				6642EA272A3367F20011589B /* HomeScreen */,
 				6659A20E26C4816400BD698E /* Intro.swift */,
-				6659A21126C4850900BD698E /* RemoveAdvertising.swift */,
-				6642EA202A2E11080011589B /* BlindsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -165,9 +166,50 @@
 			path = AdMob;
 			sourceTree = "<group>";
 		};
+		668B966D2A41E135006D76A1 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6659A20B26C47FDE00BD698E /* StoreManager.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		668B966E2A41E157006D76A1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6642EA222A2FBB270011589B /* ViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		668B966F2A41E15F006D76A1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		668B96702A41E1A6006D76A1 /* RemoveAdvertising */ = {
+			isa = PBXGroup;
+			children = (
+				6659A21126C4850900BD698E /* RemoveAdvertising.swift */,
+			);
+			path = RemoveAdvertising;
+			sourceTree = "<group>";
+		};
+		668B96712A41E1BD006D76A1 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				668EF61926A74A530040FC4D /* OptionsView.swift */,
+			);
+			path = Options;
+			sourceTree = "<group>";
+		};
 		668EF5D726A347AC0040FC4D = {
 			isa = PBXGroup;
 			children = (
+				668B96722A41E42C006D76A1 /* Products.storekit */,
 				668EF5E226A347AC0040FC4D /* PokerBlinds */,
 				668EF5E126A347AC0040FC4D /* Products */,
 				A68120E229F8FEA117B2CB7E /* Pods */,
@@ -187,19 +229,19 @@
 			isa = PBXGroup;
 			children = (
 				668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */,
-				66E43F7426C48B8C00AE012E /* PokerBlinds.entitlements */,
-				6642EA222A2FBB270011589B /* ViewModel.swift */,
+				668B966F2A41E15F006D76A1 /* Model */,
+				668B966E2A41E157006D76A1 /* ViewModel */,
 				6642EA2A2A3507480011589B /* Extensions */,
-				6642EA272A3367F20011589B /* HomeScreen */,
 				6642EA2D2A3509040011589B /* Components */,
 				6642EA2E2A35092B0011589B /* Views */,
-				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
-				6659A20B26C47FDE00BD698E /* StoreManager.swift */,
 				6659A1E926AC909D00BD698E /* Sound */,
+				668B966D2A41E135006D76A1 /* Store */,
+				6659A1FE26B25C7400BD698E /* AdMob */,
+				668EF5E926A347AD0040FC4D /* Preview Content */,
 				668EF5EC26A347AD0040FC4D /* Info.plist */,
 				668EF5E726A347AD0040FC4D /* Assets.xcassets */,
-				668EF5E926A347AD0040FC4D /* Preview Content */,
 				66E43FC926C6ACB900AE012E /* LaunchScreen.storyboard */,
+				66E43F7426C48B8C00AE012E /* PokerBlinds.entitlements */,
 			);
 			path = PokerBlinds;
 			sourceTree = "<group>";
@@ -482,6 +524,8 @@
 				DEVELOPMENT_TEAM = 6SFM579B5E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PokerBlinds/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Price of Poker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -508,6 +552,8 @@
 				DEVELOPMENT_TEAM = 6SFM579B5E;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PokerBlinds/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Price of Poker";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
