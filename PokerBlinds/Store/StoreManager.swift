@@ -11,10 +11,14 @@ import StoreKit
 class StoreManager: ObservableObject  {
     
     @Published var products = [Product]()
-    @Published var purchasedNonConsumables = [Product]()
+    @Published var purchasedNonConsumables = Set<Product>()
     var productIds = ["removePokerAdvertising"]
     
+    // Listen for transactions that might be successful but not recorded
+    var transactionListener: Task <Void, Error>?
+    
     init() {
+        transactionListener = listenForTransactions()
         Task {
             await requestProducts()
         }
@@ -35,13 +39,28 @@ class StoreManager: ObservableObject  {
         let result = try await product.purchase()
         switch result {
         case .success(.verified(let transaction)):
-            purchasedNonConsumables.append(product)
+            purchasedNonConsumables.insert(product)
             await transaction.finish()
             return transaction
             
         default: return nil
         }
     }
+    
+    func listenForTransactions() -> Task <Void, Error> {
+        return Task.detached {
+            for await result in Transaction.updates {
+                switch result {
+                case let.verified(transaction):
+                    guard let product = self.products.first(where: { $0.id == transaction.productID }) else { continue }
+                    self.purchasedNonConsumables.insert(product)
+                    await transaction.finish()
+                default: continue
+                }
+            }
+        }
+    }
+    
     
     
 //    @Published var myProducts = [SKProduct]()
