@@ -52,5 +52,83 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PokerBlinds/Store/StoreManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "StoreManager"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9 - bc60ce5dc97f0b5e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PokerBlinds.StoreManager.listenForTransactions() -&gt; Swift.Task&lt;(), Swift.Error&gt;"
+                  moduleName = "PokerBlinds"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/Store/StoreManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "1440">
+               </Location>
+               <Location
+                  uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9 - a33ee55d4ff0b76e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for closure #1 @Sendable () async -&gt; () in PokerBlinds.StoreManager.listenForTransactions() -&gt; Swift.Task&lt;(), Swift.Error&gt;"
+                  moduleName = "PokerBlinds"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/Store/StoreManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9 - bf1765b92c84b77f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PokerBlinds.StoreManager.listenForTransactions() -&gt; Swift.Task&lt;(), Swift.Error&gt;"
+                  moduleName = "PokerBlinds"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/Store/StoreManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9 - bf1765b92c84b75c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PokerBlinds.StoreManager.listenForTransactions() -&gt; Swift.Task&lt;(), Swift.Error&gt;"
+                  moduleName = "PokerBlinds"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/Store/StoreManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

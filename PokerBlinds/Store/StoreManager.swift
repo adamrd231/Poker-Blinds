@@ -50,17 +50,21 @@ class StoreManager: ObservableObject  {
     func listenForTransactions() -> Task <Void, Error> {
         return Task.detached {
             for await result in Transaction.updates {
-                switch result {
-                case let.verified(transaction):
-                    guard let product = self.products.first(where: { $0.id == transaction.productID }) else { continue }
-                    self.purchasedNonConsumables.insert(product)
-                    await transaction.finish()
-                default: continue
-                }
+                await self.handle(transactionVerification: result)
             }
         }
     }
     
+    @MainActor
+    func handle(transactionVerification result: VerificationResult <Transaction> ) async {
+        switch result {
+            case let.verified(transaction):
+                guard let product = self.products.first(where: { $0.id == transaction.productID }) else { return }
+                self.purchasedNonConsumables.insert(product)
+                await transaction.finish()
+            default: return
+        }
+    }
     
     
 //    @Published var myProducts = [SKProduct]()
