@@ -61,9 +61,13 @@ struct PokerBlindsView: View {
                     .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 }
                 .padding()
-
-                if vm.storeManager.purchasedRemoveAdvertising != true {
-                    Banner()
+                .onAppear {
+                    print("Home screen \(String(describing: vm.storeManager.hasRemovedAdvertising))")
+                }
+                if let check = vm.storeManager.hasRemovedAdvertising {
+                    if check != true {
+                        Banner()
+                    }
                 }
             }
             .sheet(isPresented: $isShowingDoubleCheck, content: {

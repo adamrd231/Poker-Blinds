@@ -1,4 +1,6 @@
 import SwiftUI
+import StoreKit
+
 struct RemoveAdvertising: View {
     
     let storeManager: StoreManager
@@ -18,26 +20,38 @@ struct RemoveAdvertising: View {
             }
             
             Section(header: Text("Available Purchases")) {
-                ForEach(storeManager.products, id: \.id) { product in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(product.displayName)
-                                .bold()
-                            Text(product.description)
-                        }
-                        Spacer()
-                        Button("$\(product.price.description)") {
-                            // Make purchase
-                            Task {
-                                print("Purchase?")
-                                try await storeManager.purchase(product)
-                                print("purchase \(storeManager.purchasedNonConsumables.count)")
+                if AppStore.canMakePayments {
+                    ForEach(storeManager.products, id: \.id) { product in
+                        if storeManager.purchasedRemoveAdvertising {
+                            HStack {
+                                Text(product.displayName)
+                                Spacer()
+                                Image(systemName: "checkmark.circle")
                             }
-                            
+                        } else {
+                           // Show option to purchase
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(product.displayName)
+                                        .bold()
+                                    Text(product.description)
+                                }
+                                Spacer()
+                                Button("$\(product.price.description)") {
+                                    // Make purchase
+                                    Task {
+                                        print("Purchase?")
+                                        try await storeManager.purchase(product)
+                                        print("purchase \(storeManager.purchasedNonConsumables.count)")
+                                    }
+                                }
+                            }
                         }
                     }
-                    
+                } else {
+                    Text("You apple account is not currently setup for making payments")
                 }
+                
             }
             
             Section(header: Text("Restore")) {
