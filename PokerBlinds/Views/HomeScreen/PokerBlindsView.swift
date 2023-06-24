@@ -33,7 +33,6 @@ struct PokerBlindsView_Previews: PreviewProvider {
 }
 
 extension PokerBlindsView {
-    
     private var wrappedView: some View {
         VStack {
             if isPortrait {
@@ -48,24 +47,23 @@ extension PokerBlindsView {
         VStack {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
             BlindsView(
-                blindInfo: vm.blindsArray[vm.currentLevel],
+                blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
                 amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+                lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
             )
             .padding()
             buttons
         }
     }
     
-    
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
             VStack(spacing: 35) {
                 BlindsView(
-                    blindInfo: vm.blindsArray[vm.currentLevel],
+                    blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
                     amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                    lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+                    lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
                 )
                 .padding()
                 buttons

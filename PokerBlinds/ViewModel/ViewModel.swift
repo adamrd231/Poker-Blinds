@@ -24,11 +24,11 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 1, currentTime: 300)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 300)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
-    @Published var currentLevel: Int = 1
+
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     @Published var hasRemovedAdvertising: Bool = false
@@ -141,7 +141,7 @@ class ViewModel: ObservableObject {
         if let screenSetting = try? encoder.encode(keepScreenOpen) {
             defaults.set(screenSetting, forKey: "screenSetting")
         }
-        if let level = try? encoder.encode(currentLevel) {
+        if let level = try? encoder.encode(timerInfo.currentLevel) {
             defaults.set(level, forKey: "level")
         }
         if let timerRunnin = try? encoder.encode(isTimerRunning) {
@@ -172,7 +172,7 @@ class ViewModel: ObservableObject {
         }
         if let level = defaults.object(forKey: "level") as? Data {
             if let option = try? decoder.decode(Int.self, from: level) {
-                self.currentLevel = option
+                self.timerInfo.currentLevel = option
             }
         }
         if let timer = defaults.object(forKey: "timer") as? Data {
