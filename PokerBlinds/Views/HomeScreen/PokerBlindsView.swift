@@ -67,10 +67,20 @@ extension PokerBlindsView {
                     lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
                 )
                 HStack {
-                    Button("Start") {
-                        
-                    }
-                    .buttonStyle(BasicButtonStyle())
+                    Button {
+                        switch vm.isTimerRunning {
+                        case .hasNotBeenStarted: vm.startTimer()
+                        case .isPaused: vm.runTimer()
+                        case .isRunning: vm.pauseTimer()
+                        }
+                    } label: {
+                        switch vm.isTimerRunning {
+                        case .hasNotBeenStarted: Text("Start")
+                        case .isPaused: Text("Continue")
+                        case .isRunning: Text("Pause")
+                        }
+                    }.buttonStyle(BasicButtonStyle())
+                    
                     Button("Reset") {
                         
                     }
