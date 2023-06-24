@@ -45,11 +45,12 @@ struct OptionRowBlindView: View {
 struct OptionsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var vm: ViewModel
+    private let titleSize: CGFloat = 25
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("Game Options")
-                .font(.system(size: 20, weight: .medium, design: .rounded))
+                .font(.system(size: titleSize, weight: .bold, design: .rounded))
             HStack {
                 Text("Time in round")
                 Spacer()
@@ -68,7 +69,7 @@ struct OptionsView: View {
             OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
             OptionRowBlindView(text: "Blind limit", blind: $vm.blindInfo.blindLimit)
             Text("Sound")
-                .font(.system(size: 20, weight: .medium, design: .rounded))
+                .font(.system(size: titleSize, weight: .bold, design: .rounded))
                 .padding(.top)
             HStack {
                 Text("End of Round")
@@ -84,9 +85,9 @@ struct OptionsView: View {
             }
             
             Text("Blind Table")
-                .font(.system(size: 20, weight: .medium, design: .rounded))
+                .font(.system(size: titleSize, weight: .bold, design: .rounded))
                 .padding(.top)
-            List {
+            ScrollView {
                 ForEach(Array(zip(vm.blindsArray.indices, vm.blindsArray)), id: \.0) { index, level in
                     HStack {
                         Text("Level \(index + 1)")
