@@ -19,7 +19,7 @@ struct TimerView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                LargeText(text: "Level \(timerInfo.currentLevel)", textSize: 40)
+                LargeText(text: "Level \(timerInfo.currentLevel + 1)", textSize: 40)
                 LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", textSize: 80)
             }
             

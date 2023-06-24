@@ -95,7 +95,7 @@ extension OptionsView {
                     Text(":")
                     Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
                 }
-                Stepper("", value: $vm.timerInfo.currentTime, in: 1...1000, step: 10)
+                Stepper("", value: $vm.timerInfo.currentTime, in: 10...1000, step: 10)
                     .fixedSize()
             }
             

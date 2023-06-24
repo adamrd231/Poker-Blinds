@@ -42,7 +42,6 @@ class ViewModel: ObservableObject {
     @State var interstitial: GADInterstitialAd?
     @State var playedInterstitial = false
     
-    
     private var cancellable = Set<AnyCancellable>()
     
     // Timer object
