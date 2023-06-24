@@ -52,7 +52,8 @@ extension PokerBlindsView {
                 amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
                 lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
             )
-
+            .padding()
+            buttons
         }
     }
     
@@ -66,27 +67,32 @@ extension PokerBlindsView {
                     amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
                     lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
                 )
-                HStack {
-                    Button {
-                        switch vm.isTimerRunning {
-                        case .hasNotBeenStarted: vm.startTimer()
-                        case .isPaused: vm.runTimer()
-                        case .isRunning: vm.pauseTimer()
-                        }
-                    } label: {
-                        switch vm.isTimerRunning {
-                        case .hasNotBeenStarted: Text("Start")
-                        case .isPaused: Text("Continue")
-                        case .isRunning: Text("Pause")
-                        }
-                    }.buttonStyle(BasicButtonStyle())
-                    
-                    Button("Reset") {
-                        vm.resetTimer()
-                    }
-                    .buttonStyle(BasicButtonStyle())
-                }
+                .padding()
+                buttons
             }
+        }
+    }
+    
+    private var buttons: some View {
+        HStack {
+            Button {
+                switch vm.isTimerRunning {
+                case .hasNotBeenStarted: vm.startTimer()
+                case .isPaused: vm.runTimer()
+                case .isRunning: vm.pauseTimer()
+                }
+            } label: {
+                switch vm.isTimerRunning {
+                case .hasNotBeenStarted: Text("Start")
+                case .isPaused: Text("Continue")
+                case .isRunning: Text("Pause")
+                }
+            }.buttonStyle(BasicButtonStyle())
+            
+            Button("Reset") {
+                vm.resetTimer()
+            }
+            .buttonStyle(BasicButtonStyle())
         }
     }
 }
