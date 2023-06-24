@@ -58,7 +58,7 @@ extension PokerBlindsView {
     
     
     private var horizontalLayout: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .center, spacing: 0) {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
             VStack(spacing: 35) {
                 BlindsView(
@@ -82,7 +82,7 @@ extension PokerBlindsView {
                     }.buttonStyle(BasicButtonStyle())
                     
                     Button("Reset") {
-                        
+                        vm.resetTimer()
                     }
                     .buttonStyle(BasicButtonStyle())
                 }

@@ -47,7 +47,41 @@ struct OptionsView: View {
     @EnvironmentObject var vm: ViewModel
     private let titleSize: CGFloat = 25
     
+    @State var isPortrait: Bool = true
+    
     var body: some View {
+        wrappedView
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                guard let scene = UIApplication.shared.windows.first?.windowScene else { return }
+                self.isPortrait = scene.interfaceOrientation.isPortrait
+            }
+    }
+}
+
+struct OptionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        OptionsView().environmentObject(ViewModel())
+    }
+}
+
+extension OptionsView {
+    var wrappedView: some View {
+        VStack {
+            if isPortrait {
+                vertical
+            } else {
+                horizontal
+            }
+        }
+    }
+    
+    var horizontal: some View {
+        ScrollView {
+            vertical
+        }
+    }
+    
+    var vertical: some View {
         VStack(alignment: .leading) {
             Text("Game Options")
                 .font(.system(size: titleSize, weight: .bold, design: .rounded))
@@ -104,11 +138,5 @@ struct OptionsView: View {
             }
         }
         .padding()
-    }
-}
-
-struct OptionsView_Previews: PreviewProvider {
-    static var previews: some View {
-        OptionsView().environmentObject(ViewModel())
     }
 }
