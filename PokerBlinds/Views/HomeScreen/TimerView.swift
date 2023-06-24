@@ -12,21 +12,24 @@ struct TimerView: View {
     let blinds: BlindsModel
     let timerInfo: TimerModel
     let backupTimer: TimerModel
+    let circleSize: CGFloat = 275
+    
+    
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 LargeText(text: "Level \(timerInfo.currentLevel)", textSize: 40)
-                LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", textSize: 100)
+                LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", textSize: 80)
             }
             
             Circle()
                 .stroke(Color.theme.mainButton.opacity(0.25), style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 300)
+                .frame(width: circleSize, height: circleSize)
             Circle()
                 .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
                 .stroke(Color.theme.mainButton, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                .frame(width: UIScreen.main.bounds.width * 0.9, height: 300)
+                .frame(width: circleSize, height: circleSize)
                 .rotationEffect(.init(degrees: 270))
         }
         .frame(maxWidth: .infinity)

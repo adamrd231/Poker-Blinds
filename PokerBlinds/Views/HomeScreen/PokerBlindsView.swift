@@ -46,16 +46,37 @@ extension PokerBlindsView {
     
     private var verticalLayout: some View {
         VStack {
-            Text("Vertical")
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
+            BlindsView(
+                blindInfo: vm.blindsArray[vm.currentLevel],
+                amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
+                lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+            )
+
         }
     }
     
     
     private var horizontalLayout: some View {
-        HStack {
-            Text("Horizontal")
+        HStack(spacing: 0) {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
+            VStack(spacing: 35) {
+                BlindsView(
+                    blindInfo: vm.blindsArray[vm.currentLevel],
+                    amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
+                    lastBlind: (vm.blindsArray[vm.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+                )
+                HStack {
+                    Button("Start") {
+                        
+                    }
+                    .buttonStyle(BasicButtonStyle())
+                    Button("Reset") {
+                        
+                    }
+                    .buttonStyle(BasicButtonStyle())
+                }
+            }
         }
     }
 }
