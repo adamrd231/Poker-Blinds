@@ -31,6 +31,7 @@ class ViewModel: ObservableObject {
     @Published var currentLevel: Int = 1
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
+    @Published var hasRemovedAdvertising: Bool = false
     
     // Store manager for in-app purchases
     @Published var storeManager = StoreManager()
@@ -61,6 +62,17 @@ class ViewModel: ObservableObject {
                     start += BlindsModel.amountToRaiseBlinds
                 }
                 self?.blindsArray = newBlinds
+            }
+            .store(in: &cancellable)
+        
+        storeManager.$purchasedNonConsumables
+            .sink { [weak self] (products) in
+                print("products \(products) \(products.count)")
+                if products.count > 0 {
+                    self?.hasRemovedAdvertising = true
+                } else {
+                    self?.hasRemovedAdvertising = false
+                }
             }
             .store(in: &cancellable)
     }

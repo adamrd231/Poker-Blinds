@@ -17,23 +17,10 @@ class StoreManager: ObservableObject  {
 //    @Published var purchasedNonConsumables = [Product]()
     private var removeAdvertising = "removePokerAdvertising"
     var productIds = ["removePokerAdvertising"]
-    @Published var hasRemovedAdvertising: Bool?
-    
-    var purchasedRemoveAdvertising: Bool = false
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?
     private var cancellable = Set<AnyCancellable>()
-    
-    func checkIfRemovedAdvertising() -> Bool {
-        let check = purchasedNonConsumables.contains(where: { $0.id == removeAdvertising})
-        if check {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     
     init() {
         transactionListener = listenForTransactions()
@@ -42,20 +29,6 @@ class StoreManager: ObservableObject  {
             // Must be called after products have already been fetched
             // Transactions do not contain product or product info
             await updateCurrentEntitlements()
-            print("Removed? \(checkIfRemovedAdvertising())")
-            hasRemovedAdvertising = checkIfRemovedAdvertising()
-            print("home check \(String(describing: hasRemovedAdvertising))")
-        }
-    }
-    
-    func userPurchasedRemoveAdvertising(productID: String) -> Bool {
-        print("purchase id \(purchasedNonConsumables)")
-        if purchasedNonConsumables.contains(where: { $0.id.description == "removePokerAdvertising" }) {
-            print("purchase true")
-            return true
-        } else {
-            print("purchase false")
-            return false
         }
     }
     
@@ -92,23 +65,25 @@ class StoreManager: ObservableObject  {
 
     private func updateCurrentEntitlements() async {
         for await result in Transaction.currentEntitlements {
-            print("result 99 \(result)")
             await self.handle(transactionVerification: result)
         }
+    }
+    
+    @MainActor
+    func restorePurchases() async throws {
+        try await AppStore.sync()
+        print("transactions \(purchasedNonConsumables.count)")
     }
 
     @MainActor
     private func handle(transactionVerification result: VerificationResult <Transaction> ) async {
         switch result {
             case let.verified(transaction):
-                print("Verified transaction")
                 guard let product = self.products.first(where: { $0.id == transaction.productID }) else { return }
-            print("verified and adding \(product)")
-            print("non consumables \(self.purchasedNonConsumables)")
-            print("non consu product \(product)")
+                print("Insert product into non consumables \(product)")
+            print(product)
                 self.purchasedNonConsumables.insert(product)
-            print("non consumables \(self.purchasedNonConsumables)")
-                print("verified and appended")
+                print(self.purchasedNonConsumables.count)
                 await transaction.finish()
             default: return
         }

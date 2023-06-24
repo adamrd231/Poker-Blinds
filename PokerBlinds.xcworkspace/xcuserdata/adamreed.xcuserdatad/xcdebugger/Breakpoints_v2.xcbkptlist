@@ -7,54 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "17C2A4E5-4BD9-44EF-9E04-45B9C9A27440"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PokerBlinds/ViewModel/ViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "addSubscribers()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "17C2A4E5-4BD9-44EF-9E04-45B9C9A27440 - 4b63c7c407dde513"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PokerBlinds.ViewModel.addSubscribers() -&gt; ()"
-                  moduleName = "PokerBlinds"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/ViewModel/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "168">
-               </Location>
-               <Location
-                  uuid = "17C2A4E5-4BD9-44EF-9E04-45B9C9A27440 - fbbfdedc9c042114"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (PokerBlinds.BlindsModel) -&gt; () in PokerBlinds.ViewModel.addSubscribers() -&gt; ()"
-                  moduleName = "PokerBlinds"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/adamreed/Desktop/iOSdev/PokerBlinds/PokerBlinds/ViewModel/ViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "212">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "7EC31B73-E6CE-400A-8FB7-DBAC41A9CDD9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -62,8 +14,8 @@
             filePath = "PokerBlinds/Store/StoreManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "StoreManager"
             landmarkType = "3">
          </BreakpointContent>

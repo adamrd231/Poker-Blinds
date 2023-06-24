@@ -37,7 +37,7 @@ struct PokerBlindsView: View {
                         lastBlind: vm.blindsArray.count <= vm.timerInfo.currentLevel
                     )
                 }
-                Spacer()
+
                 HStack(spacing: 5) {
                     Button {
                         switch vm.isTimerRunning {
@@ -61,14 +61,11 @@ struct PokerBlindsView: View {
                     .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 }
                 .padding()
-                .onAppear {
-                    print("Home screen \(String(describing: vm.storeManager.hasRemovedAdvertising))")
+                
+                if vm.hasRemovedAdvertising == false {
+                    Banner()
                 }
-                if let check = vm.storeManager.hasRemovedAdvertising {
-                    if check != true {
-                        Banner()
-                    }
-                }
+                
             }
             .sheet(isPresented: $isShowingDoubleCheck, content: {
                 DoubleCheckPopup(isShowing: $isShowingDoubleCheck)

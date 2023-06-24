@@ -14,7 +14,7 @@ struct RemoveAdvertising: View {
                         .font(.title3)
                         .fontWeight(.heavy)
                     Text(
-                        "As an independent app developer, I integrate advertising into the apps I create to sustain my full-time pursuit of app development and offer them to users for free. By engaging with occasional ads, you directly support my work, enabling me to enhance existing apps, develop new ones, and provide timely updates. I also provide the option to remove advertisements for a small fee, respecting your desire for an ad-free experience while contributing to my ability to innovate and deliver exceptional applications. Your support fuels the growth of independent app development, ensuring a thriving ecosystem of user-centric apps. Thank you for being a part of this journey!"
+                        "As an independent app developer, I integrate advertising into the apps I create to sustain my full-time pursuit of app development and offer them to users for free. By engaging with occasional ads, you directly support my work, enabling me to enhance existing apps, develop new ones, and provide timely updates, thank you for being a part of this journey!"
                     )
                 }
             }
@@ -22,27 +22,22 @@ struct RemoveAdvertising: View {
             Section(header: Text("Available Purchases")) {
                 if AppStore.canMakePayments {
                     ForEach(storeManager.products, id: \.id) { product in
-                        if storeManager.purchasedRemoveAdvertising {
-                            HStack {
+
+                       // Show option to purchase
+                        HStack {
+                            VStack(alignment: .leading) {
                                 Text(product.displayName)
-                                Spacer()
-                                Image(systemName: "checkmark.circle")
+                                    .bold()
+                                Text(product.description)
                             }
-                        } else {
-                           // Show option to purchase
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(product.displayName)
-                                        .bold()
-                                    Text(product.description)
-                                }
-                                Spacer()
+                            Spacer()
+                            if storeManager.purchasedNonConsumables.count > 0 {
+                                Image(systemName: "checkmark.circle")
+                            } else {
                                 Button("$\(product.price.description)") {
                                     // Make purchase
                                     Task {
-                                        print("Purchase?")
                                         try await storeManager.purchase(product)
-                                        print("purchase \(storeManager.purchasedNonConsumables.count)")
                                     }
                                 }
                             }
@@ -55,17 +50,14 @@ struct RemoveAdvertising: View {
             }
             
             Section(header: Text("Restore")) {
-                Text("Already purchases these? Just click below to restore all the things.")
+                Text("Already purchased these? Just click below to restore all the things.")
                 Button("Restore purchases") {
-
-                }
-                Button("Support") {
-                    
+                    Task {
+                        try await storeManager.restorePurchases()
+                    }
                 }
             }
-
-                
-            }
+        }
         .padding()
     }
 }
