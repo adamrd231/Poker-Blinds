@@ -25,8 +25,9 @@
 		665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE72A3A17B3007023FD /* bonk.mp3 */; };
 		665BCEEB2A3A17B3007023FD /* bang.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE82A3A17B3007023FD /* bang.mp3 */; };
 		665BCEEC2A3A17B3007023FD /* slam.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665BCEE92A3A17B3007023FD /* slam.mp3 */; };
+		668B96782A4736BA006D76A1 /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B96772A4736BA006D76A1 /* PokerBlindsView.swift */; };
 		668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */; };
-		668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */; };
+		668EF5E626A347AC0040FC4D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* HomeView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
 		668EF5EB26A347AD0040FC4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */; };
 		668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5F326A348760040FC4D /* PokerBlindModel.swift */; };
@@ -56,9 +57,10 @@
 		665BCEE82A3A17B3007023FD /* bang.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bang.mp3; sourceTree = "<group>"; };
 		665BCEE92A3A17B3007023FD /* slam.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = slam.mp3; sourceTree = "<group>"; };
 		668B96722A41E42C006D76A1 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
+		668B96772A4736BA006D76A1 /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
 		668EF5E026A347AC0040FC4D /* PokerBlinds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokerBlinds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668EF5E326A347AC0040FC4D /* PokerBlindsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsApp.swift; sourceTree = "<group>"; };
-		668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsView.swift; sourceTree = "<group>"; };
+		668EF5E526A347AC0040FC4D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		668EF5E726A347AD0040FC4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		668EF5EC26A347AD0040FC4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,10 +109,11 @@
 		6642EA272A3367F20011589B /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				668EF5E526A347AC0040FC4D /* PokerBlindsView.swift */,
+				668EF5E526A347AC0040FC4D /* HomeView.swift */,
 				6642EA282A3368280011589B /* DoubleCheckPopup.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				6642EA202A2E11080011589B /* BlindsView.swift */,
+				668B96772A4736BA006D76A1 /* PokerBlindsView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -375,8 +378,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6659A20F26C4816400BD698E /* Intro.swift in Sources */,
+				668B96782A4736BA006D76A1 /* PokerBlindsView.swift in Sources */,
 				665BCEE22A37B2D7007023FD /* SoundManager.swift in Sources */,
-				668EF5E626A347AC0040FC4D /* PokerBlindsView.swift in Sources */,
+				668EF5E626A347AC0040FC4D /* HomeView.swift in Sources */,
 				668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */,
 				6642EA212A2E11080011589B /* BlindsView.swift in Sources */,
 				668EF60526A4A6750040FC4D /* StartButton.swift in Sources */,

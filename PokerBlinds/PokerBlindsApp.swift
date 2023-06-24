@@ -19,12 +19,11 @@ struct PokerBlindsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PokerBlindsView()
+            HomeView()
                 .onAppear(perform: {
-//                    SKPaymentQueue.default().add(storeManager)
-//                    storeManager.getProducts(productIDs: productIds)
                     requestIDFA()
-            }) 
+            })
+                
         }
     }
 }
