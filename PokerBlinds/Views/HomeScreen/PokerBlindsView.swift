@@ -15,6 +15,7 @@ struct PokerBlindsView: View {
                         .font(.system(size: 25, weight: .heavy, design: .rounded))
                         .foregroundColor(Color.theme.mainButton)
                         .padding(.trailing, 5)
+                        .padding(.bottom)
                 }
                 .onTapGesture {
                     isShowingDoubleCheck.toggle()
@@ -36,6 +37,7 @@ struct PokerBlindsView: View {
                         amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
                         lastBlind: vm.blindsArray.count <= vm.timerInfo.currentLevel
                     )
+                    .padding()
                 }
 
                 HStack(spacing: 5) {

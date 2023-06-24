@@ -9,13 +9,13 @@ import SwiftUI
 
 struct LargeText: View {
     let text: String
-    let huge: Bool
+    let textSize: Double
     
     var body: some View {
         Text(text)
             .font(
                 .system(
-                    size: huge ? 80.0 : 40.0,
+                    size: textSize,
                     weight: .heavy,
                     design: .rounded
                 )
@@ -26,6 +26,6 @@ struct LargeText: View {
 
 struct LargeText_Previews: PreviewProvider {
     static var previews: some View {
-        LargeText(text: "100", huge: true)
+        LargeText(text: "100", textSize: 50)
     }
 }

@@ -25,9 +25,9 @@ struct BlindsView: View {
             }
             
             HStack {
-                LargeText(text: "\(blindInfo.smallBlind)", huge: false)
-                LargeText(text: "|", huge: false)
-                LargeText(text: "\(blindInfo.bigBlind)", huge: false)
+                LargeText(text: "\(blindInfo.smallBlind)", textSize: 60)
+                LargeText(text: "|", textSize: 60)
+                LargeText(text: "\(blindInfo.bigBlind)", textSize: 60)
             }
             .font(.largeTitle)
             .bold()
