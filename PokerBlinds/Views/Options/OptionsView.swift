@@ -19,7 +19,6 @@ struct OptionRowView: View {
             Text(firstValue.description)
             Stepper("", value: $firstValue, in: 100...5000, step: 100)
                 .fixedSize()
-            
         }
     }
 }

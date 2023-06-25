@@ -53,6 +53,10 @@ extension PokerBlindsView {
             )
             .padding()
             buttons
+            if vm.storeManager.purchasedNonConsumables.count == 0 {
+                Banner()
+            }
+            
         }
     }
     
@@ -67,6 +71,9 @@ extension PokerBlindsView {
                 )
                 .padding()
                 buttons
+                if vm.storeManager.purchasedNonConsumables.count == 0 {
+                    Banner()
+                }
             }
         }
     }
