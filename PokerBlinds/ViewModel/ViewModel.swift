@@ -78,9 +78,8 @@ class ViewModel: ObservableObject {
     
     func pokerTimerCountdown() {
         timerInfo.currentTime -= 1
-        if timerInfo.currentTime == 0 {
-            
-        }
+        print("Current time \(timerInfo.currentTime)")
+        print("backup time \(backupTimer?.currentTime)")
     }
     
     func runTimer() {

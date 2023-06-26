@@ -14,8 +14,6 @@ struct TimerView: View {
     let backupTimer: TimerModel
     let circleSize: CGFloat = 275
     
-    
-    
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -24,11 +22,11 @@ struct TimerView: View {
             }
             
             Circle()
-                .stroke(Color.theme.mainButton.opacity(0.25), style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(Color.theme.text.opacity(0.15), style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: circleSize, height: circleSize)
             Circle()
                 .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
-                .stroke(Color.theme.mainButton, style: StrokeStyle(lineWidth: 20, lineCap: .round))
+                .stroke(Color.theme.mainButton.opacity(0.9), style: StrokeStyle(lineWidth: 20, lineCap: .round))
                 .frame(width: circleSize, height: circleSize)
                 .rotationEffect(.init(degrees: 270))
         }

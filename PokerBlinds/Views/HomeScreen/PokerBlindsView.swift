@@ -45,7 +45,7 @@ extension PokerBlindsView {
     
     private var verticalLayout: some View {
         VStack {
-            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
+            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
                 blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
                 amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
@@ -62,7 +62,7 @@ extension PokerBlindsView {
     
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
-            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.timerInfo)
+            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             VStack(spacing: 35) {
                 BlindsView(
                     blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
@@ -99,5 +99,6 @@ extension PokerBlindsView {
             }
             .buttonStyle(BasicButtonStyle())
         }
+        .padding(.horizontal)
     }
 }
