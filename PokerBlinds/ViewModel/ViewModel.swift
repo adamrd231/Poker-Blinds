@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 300)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 10)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -78,8 +78,6 @@ class ViewModel: ObservableObject {
     
     func pokerTimerCountdown() {
         timerInfo.currentTime -= 1
-        print("Current time \(timerInfo.currentTime)")
-        print("backup time \(backupTimer?.currentTime)")
     }
     
     func runTimer() {

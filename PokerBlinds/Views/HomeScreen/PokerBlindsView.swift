@@ -47,9 +47,11 @@ extension PokerBlindsView {
         VStack {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
-                blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
+                // Need to handle when index is out of the range of the blinds -- continue running
+                // TODO: Future - add a feature to for quick game (double blinds after two rounds at end)
+                blindInfo: getLastBlindLevel(),
                 amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+                lastBlind: checkIfLastBlind()
             )
             .padding()
             buttons
@@ -60,6 +62,29 @@ extension PokerBlindsView {
         }
     }
     
+    func getLastBlindLevel() -> BlindLevel {
+        print("Current Level: \(vm.timerInfo.currentLevel)")
+        print("Blind count \(vm.blindsArray.count)")
+        if vm.timerInfo.currentLevel >= vm.blindsArray.count {
+            return vm.blindsArray.last ?? BlindLevel(smallBlind: 100)
+        } else {
+            return vm.blindsArray[vm.timerInfo.currentLevel]
+        }
+    }
+    
+    func checkIfLastBlind() -> Bool {
+        print("Current Level: \(vm.timerInfo.currentLevel)")
+        print("Blind count \(vm.blindsArray.count)")
+        if vm.timerInfo.currentLevel >= vm.blindsArray.count {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    
+    
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
@@ -67,7 +92,7 @@ extension PokerBlindsView {
                 BlindsView(
                     blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
                     amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                    lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds >= vm.blindInfo.blindLimit)
+                    lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds > vm.blindInfo.blindLimit)
                 )
                 .padding()
                 buttons
