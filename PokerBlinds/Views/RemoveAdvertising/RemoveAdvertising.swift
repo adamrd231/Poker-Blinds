@@ -22,29 +22,32 @@ struct RemoveAdvertising: View {
             Section(header: Text("Available Purchases")) {
                 if AppStore.canMakePayments {
                     ForEach(storeManager.products, id: \.id) { product in
-
                        // Show option to purchase
-                        HStack {
+                        HStack(alignment: .center) {
                             VStack(alignment: .leading) {
                                 Text(product.displayName)
                                     .bold()
                                 Text(product.description)
                                     .font(.caption)
+                                
                             }
                             Spacer()
-                            Button("$\(product.price.description)") {
-                                // Make purchase
-                                Task {
-                                    try await storeManager.purchase(product)
+                            if storeManager.purchasedNonConsumables.contains(where: {$0.id == product.id}) {
+                                Image(systemName: "checkmark.circle")
+                            } else {
+                                Button("$\(product.price.description)") {
+                                    // Make purchase
+                                    Task {
+                                        try await storeManager.purchase(product)
+                                    }
                                 }
+                                .buttonStyle(.bordered)
                             }
-                            .buttonStyle(.bordered)
                         }
                     }
                 } else {
                     Text("You apple account is not currently setup for making payments")
                 }
-                
             }
             
             Section(header: Text("Restore")) {

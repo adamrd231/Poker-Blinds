@@ -86,9 +86,18 @@ struct OptionsView: View {
                         })
                     }
                     HStack {
+                        Toggle("", isOn: $vm.usingRoundTimer)
+                            .fixedSize()
                         Text("Round warning")
                         Spacer()
-                        Toggle("", isOn: $vm.usingRoundTimer)
+                        Picker("", selection: $vm.roundWarningSound) {
+                            ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
+                                Text(SoundManager.instance.allSounds[index].rawValue)
+                            }
+                        }
+                        .onChange(of: vm.currentSound, perform: { newValue in
+                            SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.currentSound])
+                        })
                     }
                     .disabled(storeManager.roundWarningUnlocked != true)
                     .foregroundColor(storeManager.roundWarningUnlocked != true ? .gray : .black)

@@ -32,9 +32,8 @@ class ViewModel: ObservableObject {
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
-
-
     @Published var currentSound: Int = 0
+    @Published var roundWarningSound: Int = 1
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
