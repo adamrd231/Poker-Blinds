@@ -86,21 +86,20 @@ struct OptionsView: View {
                         })
                     }
                     HStack {
-                        Toggle("", isOn: $vm.usingRoundTimer)
+                        Toggle("Round warning", isOn: $vm.usingRoundTimer)
                             .fixedSize()
-                        Text("Round warning")
                         Spacer()
                         Picker("", selection: $vm.roundWarningSound) {
                             ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
                                 Text(SoundManager.instance.allSounds[index].rawValue)
                             }
                         }
-                        .onChange(of: vm.currentSound, perform: { newValue in
-                            SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.currentSound])
+                        .onChange(of: vm.roundWarningSound, perform: { newValue in
+                            SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.roundWarningSound])
                         })
                     }
                     .disabled(storeManager.roundWarningUnlocked != true)
-                    .foregroundColor(storeManager.roundWarningUnlocked != true ? .gray : .black)
+                    .foregroundColor(storeManager.roundWarningUnlocked != true ? .gray : Color.theme.text)
                     
                 }
                 

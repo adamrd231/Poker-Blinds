@@ -108,8 +108,8 @@ extension PokerBlindsView {
         HStack {
             Button {
                 switch vm.isTimerRunning {
-                case .hasNotBeenStarted: vm.startTimer()
-                case .isPaused: vm.runTimer()
+                case .hasNotBeenStarted: vm.startTimer(useWarningTimer: storeManager.roundWarningUnlocked)
+                case .isPaused: vm.runTimer(useWarningTimer: storeManager.roundWarningUnlocked)
                 case .isRunning: vm.pauseTimer()
                 }
             } label: {

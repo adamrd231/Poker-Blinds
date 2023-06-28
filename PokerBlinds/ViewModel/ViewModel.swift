@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 15)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -62,35 +62,37 @@ class ViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    func pokerTimerCountdown() {
-        timerInfo.currentTime -= 1
-    }
-    
-    func runTimer() {
+    func runTimer(useWarningTimer: Bool) {
         self.isTimerRunning = .isRunning
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
-                self.pokerTimerCountdown()
-                if self.timerInfo.currentTime == 0 {
-                    // play noise
-                    print("Playing sound")
-                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.currentSound])
-                    if let backup = self.backupTimer {
-                        self.timerInfo.currentTime = backup.currentTime
-                        self.timerInfo.currentLevel += 1
-                    }
+                // Round Timer -- Update poker timer value
+                self.timerInfo.currentTime -= 1
+                // Warning Timer -- un-lockable feature
+                if useWarningTimer && self.timerInfo.currentTime == 10 {
+                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.roundWarningSound])
                 }
-                
-            // New Level
+                // New Level
+                if self.timerInfo.currentTime == 0 {
+                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.currentSound])
+                    self.startNewLevel()
+                }
             } else {
                 self.resetTimer()
             }
         }
     }
     
-    func startTimer() {
+    func startNewLevel() {
+        if let backup = self.backupTimer {
+            self.timerInfo.currentTime = backup.currentTime
+            self.timerInfo.currentLevel += 1
+        }
+    }
+    
+    func startTimer(useWarningTimer: Bool) {
         // make a copy for backing up stuff
-        runTimer()
+        runTimer(useWarningTimer: useWarningTimer)
         backupTimer = timerInfo
         
     }
