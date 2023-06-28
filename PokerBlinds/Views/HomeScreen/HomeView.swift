@@ -3,11 +3,12 @@ import AVFoundation
 
 struct HomeView: View {
     
-    @StateObject var vm = ViewModel()
+    @ObservedObject var vm = ViewModel()
+    @ObservedObject var storeManager = StoreManager()
     
     var body: some View {
         TabView {
-            PokerBlindsView()
+            PokerBlindsView(storeManager: storeManager)
                 .environmentObject(vm)
                 .tabItem {
                     HStack {
@@ -17,7 +18,7 @@ struct HomeView: View {
                 }
             
             // MARK: Second Screen
-            OptionsView()
+            OptionsView(storeManager: storeManager)
                 .environmentObject(vm)
                 .tabItem {
                     HStack {
@@ -27,7 +28,8 @@ struct HomeView: View {
                 }
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
             
-            RemoveAdvertising(storeManager: vm.storeManager)
+            RemoveAdvertising(storeManager: storeManager)
+                .environmentObject(vm)
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 .tabItem {
                     HStack {

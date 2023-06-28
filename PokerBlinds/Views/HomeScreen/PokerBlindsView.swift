@@ -10,6 +10,7 @@ import SwiftUI
 struct PokerBlindsView: View {
     
     @EnvironmentObject var vm: ViewModel
+    @ObservedObject var storeManager: StoreManager
     @State var isPortrait: Bool = true
     @State var isShowingDoubleCheck = false
     
@@ -28,7 +29,7 @@ struct PokerBlindsView: View {
 
 struct PokerBlindsView_Previews: PreviewProvider {
     static var previews: some View {
-        PokerBlindsView()
+        PokerBlindsView(storeManager: StoreManager())
     }
 }
 
@@ -55,10 +56,10 @@ extension PokerBlindsView {
             )
             .padding()
             buttons
-            if vm.storeManager.purchasedNonConsumables.count == 0 {
+            if storeManager.removedAdvertising != true {
+                Text("Removed? \(storeManager.removedAdvertising?.description ?? ":")")
                 Banner()
             }
-            
         }
     }
     
@@ -96,7 +97,7 @@ extension PokerBlindsView {
                 )
                 .padding()
                 buttons
-                if vm.storeManager.purchasedNonConsumables.count == 0 {
+                if storeManager.removedAdvertising != true {
                     Banner()
                 }
             }

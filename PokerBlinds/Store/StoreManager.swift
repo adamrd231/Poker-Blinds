@@ -14,10 +14,9 @@ class StoreManager: ObservableObject  {
     
     @Published var products:[Product] = []
     @Published var purchasedNonConsumables: Set<Product> = []
-    @Published var roundWarningUnlocked: Bool?
+    @Published var roundWarningUnlocked: Bool = false
     @Published var removedAdvertising: Bool?
 //    @Published var purchasedNonConsumables = [Product]()
-    private var removeAdvertising = "removePokerAdvertising"
     var productIds = ["removePokerAdvertising", "roundWarningFeature"]
     
     // Listen for transactions that might be successful but not recorded
@@ -31,6 +30,20 @@ class StoreManager: ObservableObject  {
             // Must be called after products have already been fetched
             // Transactions do not contain product or product info
             await updateCurrentEntitlements()
+            await updatePurchases()
+        }
+    }
+    
+    @MainActor
+    func updatePurchases() {
+        print("Updating purchases ------------")
+        if purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising"}) {
+            print("Removed advertising true")
+            self.removedAdvertising = true
+        }
+        if purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature"}) {
+            print("unlock feature true")
+            self.roundWarningUnlocked = true
         }
     }
     

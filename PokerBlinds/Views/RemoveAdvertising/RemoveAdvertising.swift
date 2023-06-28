@@ -2,8 +2,8 @@ import SwiftUI
 import StoreKit
 
 struct RemoveAdvertising: View {
-    
-    let storeManager: StoreManager
+    @EnvironmentObject var vm: ViewModel
+    @ObservedObject var storeManager: StoreManager
     
     var body: some View {
         // Second Screen

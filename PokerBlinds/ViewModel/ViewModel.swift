@@ -31,11 +31,9 @@ class ViewModel: ObservableObject {
     @Published var usingRoundTimer: Bool = false
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
-    @Published var hasRemovedAdvertising: Bool = false
     
-    // Store manager for in-app purchases
-    @Published var storeManager = StoreManager()
-    var productIds = ["removePokerAdvertising"]
+
+
     @Published var currentSound: Int = 0
     
     // Google Admob variables
@@ -61,17 +59,6 @@ class ViewModel: ObservableObject {
                     start += BlindsModel.amountToRaiseBlinds
                 }
                 self?.blindsArray = newBlinds
-            }
-            .store(in: &cancellable)
-        
-        storeManager.$purchasedNonConsumables
-            .sink { [weak self] (products) in
-                print("products \(products) \(products.count)")
-                if products.count > 0 {
-                    self?.hasRemovedAdvertising = true
-                } else {
-                    self?.hasRemovedAdvertising = false
-                }
             }
             .store(in: &cancellable)
     }

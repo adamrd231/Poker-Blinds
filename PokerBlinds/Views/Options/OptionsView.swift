@@ -44,6 +44,7 @@ struct OptionRowBlindView: View {
 struct OptionsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var vm: ViewModel
+    @ObservedObject var storeManager: StoreManager
     private let titleSize: CGFloat = 25
     
     @State var isPortrait: Bool = true
@@ -89,8 +90,8 @@ struct OptionsView: View {
                         Spacer()
                         Toggle("", isOn: $vm.usingRoundTimer)
                     }
-                    .disabled(vm.storeManager.roundWarningUnlocked != true)
-                    .foregroundColor(vm.storeManager.roundWarningUnlocked != true ? .gray : .black)
+                    .disabled(storeManager.roundWarningUnlocked != true)
+                    .foregroundColor(storeManager.roundWarningUnlocked != true ? .gray : .black)
                     
                 }
                 
@@ -120,6 +121,6 @@ struct OptionsView: View {
 
 struct OptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        OptionsView().environmentObject(ViewModel())
+        OptionsView(storeManager: StoreManager()).environmentObject(ViewModel())
     }
 }
