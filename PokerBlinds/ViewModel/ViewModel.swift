@@ -28,7 +28,7 @@ class ViewModel: ObservableObject {
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
-
+    @Published var usingRoundTimer: Bool = false
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     @Published var hasRemovedAdvertising: Bool = false

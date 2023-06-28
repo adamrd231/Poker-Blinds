@@ -84,6 +84,14 @@ struct OptionsView: View {
                             SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.currentSound])
                         })
                     }
+                    HStack {
+                        Text("Round warning")
+                        Spacer()
+                        Toggle("", isOn: $vm.usingRoundTimer)
+                    }
+                    .disabled(vm.storeManager.roundWarningUnlocked != true)
+                    .foregroundColor(vm.storeManager.roundWarningUnlocked != true ? .gray : .black)
+                    
                 }
                 
                 Section(header: Text("Blind table")) {

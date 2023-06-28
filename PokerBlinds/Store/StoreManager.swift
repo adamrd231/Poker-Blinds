@@ -14,6 +14,8 @@ class StoreManager: ObservableObject  {
     
     @Published var products:[Product] = []
     @Published var purchasedNonConsumables: Set<Product> = []
+    @Published var roundWarningUnlocked: Bool?
+    @Published var removedAdvertising: Bool?
 //    @Published var purchasedNonConsumables = [Product]()
     private var removeAdvertising = "removePokerAdvertising"
     var productIds = ["removePokerAdvertising"]
@@ -80,8 +82,6 @@ class StoreManager: ObservableObject  {
         switch result {
             case let.verified(transaction):
                 guard let product = self.products.first(where: { $0.id == transaction.productID }) else { return }
-                print("Insert product into non consumables \(product)")
-            print(product)
                 self.purchasedNonConsumables.insert(product)
                 print(self.purchasedNonConsumables.count)
                 await transaction.finish()
