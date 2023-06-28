@@ -29,19 +29,16 @@ struct RemoveAdvertising: View {
                                 Text(product.displayName)
                                     .bold()
                                 Text(product.description)
+                                    .font(.caption)
                             }
                             Spacer()
-                            if storeManager.purchasedNonConsumables.count == 0 {
-                                
-                                Button("$\(product.price.description)") {
-                                    // Make purchase
-                                    Task {
-                                        try await storeManager.purchase(product)
-                                    }
+                            Button("$\(product.price.description)") {
+                                // Make purchase
+                                Task {
+                                    try await storeManager.purchase(product)
                                 }
-                            } else {
-                                Image(systemName: "checkmark.circle")
                             }
+                            .buttonStyle(.bordered)
                         }
                     }
                 } else {

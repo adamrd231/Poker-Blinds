@@ -18,7 +18,7 @@ class StoreManager: ObservableObject  {
     @Published var removedAdvertising: Bool?
 //    @Published var purchasedNonConsumables = [Product]()
     private var removeAdvertising = "removePokerAdvertising"
-    var productIds = ["removePokerAdvertising"]
+    var productIds = ["removePokerAdvertising", "roundWarningFeature"]
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?

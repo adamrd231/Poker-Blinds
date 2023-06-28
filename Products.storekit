@@ -18,12 +18,27 @@
       "productID" : "removePokerAdvertising",
       "referenceName" : "Remove Advertising",
       "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6450722551",
+      "localizations" : [
+        {
+          "description" : "Warn players the end of the round is in 10s",
+          "displayName" : "Round warning ",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "roundWarningFeature",
+      "referenceName" : "round-warning-feature",
+      "type" : "NonConsumable"
     }
   ],
   "settings" : {
     "_applicationInternalID" : "1580801897",
     "_developerTeamID" : "6SFM579B5E",
-    "_lastSynchronizedDate" : 708961328.70034397
+    "_lastSynchronizedDate" : 709603578.13304496
   },
   "subscriptionGroups" : [
 
