@@ -69,7 +69,7 @@ class ViewModel: ObservableObject {
                 // Round Timer -- Update poker timer value
                 self.timerInfo.currentTime -= 1
                 // Warning Timer -- un-lockable feature
-                if useWarningTimer && self.timerInfo.currentTime == 10 {
+                if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
                     SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.roundWarningSound])
                 }
                 // New Level
