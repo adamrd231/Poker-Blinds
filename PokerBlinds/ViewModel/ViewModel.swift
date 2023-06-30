@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 15)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -32,8 +32,8 @@ class ViewModel: ObservableObject {
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
-    @Published var currentSound: Int = 0
-    @Published var roundWarningSound: Int = 1
+    @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: "wav")
+    @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Three Bells", path: "threeBells", type: "wav")
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
@@ -70,11 +70,11 @@ class ViewModel: ObservableObject {
                 self.timerInfo.currentTime -= 1
                 // Warning Timer -- un-lockable feature
                 if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
-                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.roundWarningSound])
+                    SoundManager.instance.playSound(sound: self.currentSound)
                 }
                 // New Level
                 if self.timerInfo.currentTime == 0 {
-                    SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[self.currentSound])
+                    SoundManager.instance.playSound(sound: self.currentSound)
                     self.startNewLevel()
                 }
             } else {

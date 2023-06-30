@@ -8,12 +8,32 @@
 import Foundation
 import AVKit
 
+struct SoundEffect: Hashable {
+    let title: String
+    let path: String
+    let type: String
+}
+
+
 class SoundManager {
     
     static let instance = SoundManager()
     
     var audioPlayer: AVAudioPlayer?
     // Play sounds!
+    
+    enum SoundFileType: String {
+        case mp3 = "mp3"
+        case wav = "wav"
+    }
+    
+    
+    var roundEndsFX: [SoundEffect] = [
+        SoundEffect(title: "Bell", path: "bell", type: "wav"),
+        SoundEffect(title: "Three Bells", path: "threeBells", type: "wav"),
+        SoundEffect(title: "Tada", path: "tada", type: "mp3")
+    ]
+    
     
     var allSounds:[FreeSounds] = [
         .bell,
@@ -22,18 +42,15 @@ class SoundManager {
         .tada,
         .bonk,
         .bang,
-        .slam
+        .slam,
+        .timesUp,
+        .clockTicking,
+        .retroChime,
+        .threeBells
     ]
 
-    func playSound(sound: FreeSounds) {
-        print("playing class")
-        var path = ""
-        if sound == .tada || sound == .bonk || sound == .bang || sound == .slam {
-            path = Bundle.main.path(forResource: sound.rawValue, ofType: "mp3") ?? ""
-        } else {
-            path = Bundle.main.path(forResource: sound.rawValue, ofType: "wav") ?? ""
-        }
-       
+    func playSound(sound: SoundEffect) {
+        let path = Bundle.main.path(forResource: sound.path, ofType: sound.type) ?? ""
         let url = URL(fileURLWithPath: path)
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
@@ -51,5 +68,9 @@ class SoundManager {
         case bonk = "bonk"
         case bang = "bang"
         case slam = "slam"
+        case timesUp = "timesUp"
+        case retroChime = "retroChime"
+        case threeBells = "threeBells"
+        case clockTicking = "clockTicking"
     }
 }

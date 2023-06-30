@@ -73,27 +73,27 @@ struct OptionsView: View {
                 }
 
                 Section(header: Text("Sound")) {
-                    HStack {
-                        Text("End of Round")
-                        Spacer()
-                        Picker("", selection: $vm.currentSound) {
-                            ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
-                                Text(SoundManager.instance.allSounds[index].rawValue)
-                            }
-                        }
-                        .onChange(of: vm.currentSound, perform: { newValue in
-                            SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.currentSound])
-                        })
-                    }
                     VStack {
+                        HStack {
+                            Text("End of Round")
+                            Spacer()
+                            Picker("", selection: $vm.currentSound) {
+                                ForEach(SoundManager.instance.roundEndsFX.indices, id: \.self) { index in
+                                    Text(SoundManager.instance.allSounds[index].rawValue)
+                                }
+                            }
+                            .onChange(of: vm.currentSound, perform: { newValue in
+                                SoundManager.instance.playSound(sound: vm.currentSound)
+                            })
+                        }
+                    }
+                    
+                    VStack {
+                       
                         HStack {
                             Text("Round warning")
                                 .bold()
-                            Spacer()
-                        }
-                        
-                        HStack {
-                            Toggle(vm.usingRoundTimer ? "On" : "Off", isOn: $vm.usingRoundTimer)
+                            Toggle("", isOn: $vm.usingRoundTimer)
                                 .fixedSize()
                             Spacer()
                             Picker("", selection: $vm.roundWarningSound) {
@@ -101,8 +101,9 @@ struct OptionsView: View {
                                     Text(SoundManager.instance.allSounds[index].rawValue)
                                 }
                             }
+                            .fixedSize()
                             .onChange(of: vm.roundWarningSound, perform: { newValue in
-                                SoundManager.instance.playSound(sound: SoundManager.instance.allSounds[vm.roundWarningSound])
+                                SoundManager.instance.playSound(sound: vm.roundWarningSound)
                             })
                         }
                     }
