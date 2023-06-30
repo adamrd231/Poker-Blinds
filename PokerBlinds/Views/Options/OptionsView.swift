@@ -78,8 +78,8 @@ struct OptionsView: View {
                             Text("End of Round")
                             Spacer()
                             Picker("", selection: $vm.currentSound) {
-                                ForEach(SoundManager.instance.roundEndsFX.indices, id: \.self) { index in
-                                    Text(SoundManager.instance.allSounds[index].rawValue)
+                                ForEach(SoundManager.instance.roundEndsFX, id: \.self) { index in
+                                    Text(index.title)
                                 }
                             }
                             .onChange(of: vm.currentSound, perform: { newValue in
