@@ -32,8 +32,8 @@ class ViewModel: ObservableObject {
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
-    @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: "wav")
-    @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Three Bells", path: "threeBells", type: "wav")
+    @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
+    @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
@@ -70,7 +70,8 @@ class ViewModel: ObservableObject {
                 self.timerInfo.currentTime -= 1
                 // Warning Timer -- un-lockable feature
                 if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
-                    SoundManager.instance.playSound(sound: self.currentSound)
+                    print("playing round warning sound")
+                    SoundManager.instance.playSound(sound: self.roundWarningSound)
                 }
                 // New Level
                 if self.timerInfo.currentTime == 0 {

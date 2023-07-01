@@ -97,8 +97,8 @@ struct OptionsView: View {
                                 .fixedSize()
                             Spacer()
                             Picker("", selection: $vm.roundWarningSound) {
-                                ForEach(SoundManager.instance.allSounds.indices, id: \.self) { index in
-                                    Text(SoundManager.instance.allSounds[index].rawValue)
+                                ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
+                                    Text(index.title)
                                 }
                             }
                             .fixedSize()
