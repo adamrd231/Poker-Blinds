@@ -57,7 +57,6 @@ extension PokerBlindsView {
             .padding()
             buttons
             if storeManager.removedAdvertising != true {
-                Text("Removed? \(storeManager.removedAdvertising?.description ?? ":")")
                 Banner()
             }
         }

@@ -12,6 +12,7 @@
 		662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD602A4E5A990027C167 /* clockTicking.wav */; };
 		662BBD632A4E5A990027C167 /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD612A4E5A990027C167 /* timesUp.wav */; };
 		662BBD652A4E5BF50027C167 /* threeBells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD642A4E5BF50027C167 /* threeBells.wav */; };
+		662BBD6A2A5217B60027C167 /* tickingTime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD692A5217B60027C167 /* tickingTime.wav */; };
 		6642EA212A2E11080011589B /* BlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA202A2E11080011589B /* BlindsView.swift */; };
 		6642EA232A2FBB270011589B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA222A2FBB270011589B /* ViewModel.swift */; };
 		6642EA262A2FC46B0011589B /* LargeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA252A2FC46B0011589B /* LargeText.swift */; };
@@ -48,6 +49,7 @@
 		662BBD602A4E5A990027C167 /* clockTicking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clockTicking.wav; sourceTree = "<group>"; };
 		662BBD612A4E5A990027C167 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
 		662BBD642A4E5BF50027C167 /* threeBells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = threeBells.wav; sourceTree = "<group>"; };
+		662BBD692A5217B60027C167 /* tickingTime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tickingTime.wav; path = ../../../../tickingTime.wav; sourceTree = "<group>"; };
 		6642EA202A2E11080011589B /* BlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindsView.swift; sourceTree = "<group>"; };
 		6642EA222A2FBB270011589B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6642EA252A2FC46B0011589B /* LargeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeText.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				665BCEE12A37B2D7007023FD /* SoundManager.swift */,
 				6659A1EE26AC91CF00BD698E /* bell.wav */,
 				665BCEE72A3A17B3007023FD /* bonk.mp3 */,
+				662BBD692A5217B60027C167 /* tickingTime.wav */,
 				665BCEE82A3A17B3007023FD /* bang.mp3 */,
 				662BBD602A4E5A990027C167 /* clockTicking.wav */,
 				662BBD612A4E5A990027C167 /* timesUp.wav */,
@@ -348,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */,
+				662BBD6A2A5217B60027C167 /* tickingTime.wav in Resources */,
 				662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */,
 				662BBD632A4E5A990027C167 /* timesUp.wav in Resources */,
 				6659A1EF26AC91CF00BD698E /* bell.wav in Resources */,

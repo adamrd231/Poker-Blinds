@@ -11,6 +11,7 @@ import AVKit
 enum SoundFileType: String {
     case mp3 = "mp3"
     case wav = "wav"
+    case flac = "flac"
 }
 
 struct SoundEffect: Hashable {
@@ -29,11 +30,11 @@ class SoundManager {
         SoundEffect(title: "Three Bells", path: "threeBells", type: .wav),
         SoundEffect(title: "Tada", path: "tada", type: .mp3),
         SoundEffect(title: "Times up", path: "timesUp", type: .wav),
-        SoundEffect(title: "Clock", path: "clockTicking", type: .mp3)
     ]
     
     var tenSecondWarningFX: [SoundEffect] = [
-        SoundEffect(title: "Clock", path: "clockTicking", type: .mp3)
+        SoundEffect(title: "Clock", path: "clockTicking", type: .wav),
+        SoundEffect(title: "Electronic ticks", path: "tickingTime", type: .wav)
     ]
     
     // Play sounds!
