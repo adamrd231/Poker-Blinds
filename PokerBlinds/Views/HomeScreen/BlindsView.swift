@@ -9,37 +9,36 @@ import SwiftUI
 
 struct BlindsView: View {
     
-    let blindInfo: BlindLevel
-    let amountToRaiseBlinds: Int
-    let lastBlind: Bool
+    let previousBlind: BlindLevel?
+    let currentBlind: BlindLevel
+    let nextBlind: BlindLevel?
     
     var body: some View {
         VStack(alignment: .center) {
             
-            if blindInfo.smallBlind - amountToRaiseBlinds != 0 {
+            if let previous = previousBlind {
                 HStack {
-                    Text("\(blindInfo.smallBlind - amountToRaiseBlinds)")
+                    Text("\(previous.smallBlind)")
                     Text("|")
-                    Text("\((blindInfo.smallBlind - amountToRaiseBlinds) * 2)")
+                    Text("\(previous.bigBlind)")
                 }
             }
             
             HStack {
-                LargeText(text: "\(blindInfo.smallBlind)", textSize: 60)
+                LargeText(text: "\(currentBlind.smallBlind)", textSize: 60)
                 LargeText(text: "|", textSize: 60)
-                LargeText(text: "\(blindInfo.bigBlind)", textSize: 60)
+                LargeText(text: "\(currentBlind.bigBlind)", textSize: 60)
             }
             .font(.largeTitle)
             .bold()
             
-            if !lastBlind {
+            if let last = nextBlind {
                 HStack {
-                    Text("\(blindInfo.smallBlind + amountToRaiseBlinds)")
+                    Text("\(last.smallBlind)")
                     Text("|")
-                    Text("\((blindInfo.smallBlind + amountToRaiseBlinds) * 2)")
+                    Text("\(last.bigBlind)")
                 }
             }
-            
         }
         .frame(maxWidth: .infinity)
     }
@@ -47,6 +46,10 @@ struct BlindsView: View {
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
-        BlindsView(blindInfo: BlindLevel(smallBlind: 100), amountToRaiseBlinds: 100, lastBlind: true)
+        BlindsView(
+            previousBlind: BlindLevel(smallBlind: 100),
+            currentBlind: BlindLevel(smallBlind: 200),
+            nextBlind: BlindLevel(smallBlind: 300)
+        )
     }
 }

@@ -48,11 +48,9 @@ extension PokerBlindsView {
         VStack {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
-                // Need to handle when index is out of the range of the blinds -- continue running
-                // TODO: Future - add a feature to for quick game (double blinds after two rounds at end)
-                blindInfo: getLastBlindLevel(),
-                amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                lastBlind: checkIfLastBlind()
+                previousBlind: vm.getPreviousBlinds(),
+                currentBlind: vm.getCurrentBlind(),
+                nextBlind: vm.getNextBlinds()
             )
             .padding()
             buttons
@@ -83,9 +81,9 @@ extension PokerBlindsView {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             VStack(spacing: 35) {
                 BlindsView(
-                    blindInfo: vm.blindsArray[vm.timerInfo.currentLevel],
-                    amountToRaiseBlinds: vm.blindInfo.amountToRaiseBlinds,
-                    lastBlind: (vm.blindsArray[vm.timerInfo.currentLevel].bigBlind + vm.blindInfo.amountToRaiseBlinds > vm.blindInfo.blindLimit)
+                    previousBlind: vm.getPreviousBlinds(),
+                    currentBlind: vm.blindsArray[vm.timerInfo.currentLevel],
+                    nextBlind: vm.getNextBlinds()
                 )
                 .padding()
                 buttons

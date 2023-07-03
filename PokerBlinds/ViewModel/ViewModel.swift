@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 10)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -47,6 +47,36 @@ class ViewModel: ObservableObject {
     
     init() {
         addSubscribers()
+    }
+    
+    func getPreviousBlinds() -> BlindLevel? {
+        if timerInfo.currentLevel == 0 {
+            return nil
+        } else if timerInfo.currentLevel - 1 > blindsArray.count {
+            return blindsArray[blindsArray.count - 1]
+        } else {
+            return blindsArray[timerInfo.currentLevel - 1]
+        }
+    }
+    
+    func getCurrentBlind() -> BlindLevel {
+        if timerInfo.currentLevel + 1 >= blindsArray.count {
+            return blindsArray.last ?? BlindLevel(smallBlind: 1000)
+        } else {
+            return blindsArray[timerInfo.currentLevel]
+        }
+    }
+    
+    func getNextBlinds() -> BlindLevel? {
+        print("timer info: \(timerInfo.currentLevel)")
+        print("blinds info: \(blindsArray.count)")
+        if timerInfo.currentLevel + 1 >= blindsArray.count {
+            print("nill")
+            return nil
+        } else {
+            print("Returning array plus one")
+            return blindsArray[timerInfo.currentLevel + 1]
+        }
     }
     
     func addSubscribers() {
