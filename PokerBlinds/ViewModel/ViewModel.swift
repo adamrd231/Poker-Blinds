@@ -29,6 +29,7 @@ class ViewModel: ObservableObject {
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
     @Published var usingRoundTimer: Bool = false
+    @Published var quickEndGame: Bool = false
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     

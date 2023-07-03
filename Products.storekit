@@ -5,7 +5,37 @@
   ],
   "products" : [
     {
-      "displayPrice" : "2.99",
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6450722551",
+      "localizations" : [
+        {
+          "description" : "Warn players the end of the round is in 10s",
+          "displayName" : "Round warning ",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "roundWarningFeature",
+      "referenceName" : "10 second warning",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6450902668",
+      "localizations" : [
+        {
+          "description" : "Blinds double two levels after the max",
+          "displayName" : "Quick end game",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "quickEndGame",
+      "referenceName" : "Quick end game",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "4.99",
       "familyShareable" : false,
       "internalID" : "1580802024",
       "localizations" : [
@@ -18,27 +48,12 @@
       "productID" : "removePokerAdvertising",
       "referenceName" : "Remove Advertising",
       "type" : "NonConsumable"
-    },
-    {
-      "displayPrice" : "0.99",
-      "familyShareable" : false,
-      "internalID" : "6450722551",
-      "localizations" : [
-        {
-          "description" : "Warn players the end of the round is in 10s",
-          "displayName" : "Round warning ",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "roundWarningFeature",
-      "referenceName" : "round-warning-feature",
-      "type" : "NonConsumable"
     }
   ],
   "settings" : {
     "_applicationInternalID" : "1580801897",
     "_developerTeamID" : "6SFM579B5E",
-    "_lastSynchronizedDate" : 709603578.13304496
+    "_lastSynchronizedDate" : 710096929.70562506
   },
   "subscriptionGroups" : [
 

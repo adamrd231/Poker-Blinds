@@ -14,10 +14,12 @@ class StoreManager: ObservableObject  {
     
     @Published var products:[Product] = []
     @Published var purchasedNonConsumables: Set<Product> = []
-    @Published var roundWarningUnlocked: Bool = false
-    @Published var removedAdvertising: Bool?
 //    @Published var purchasedNonConsumables = [Product]()
-    var productIds = ["removePokerAdvertising", "roundWarningFeature"]
+    var productIds = [
+        "removePokerAdvertising",
+        "roundWarningFeature",
+        "quickEndGame"
+    ]
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?
@@ -30,27 +32,13 @@ class StoreManager: ObservableObject  {
             // Must be called after products have already been fetched
             // Transactions do not contain product or product info
             await updateCurrentEntitlements()
-            await updatePurchases()
-        }
-    }
-    
-    @MainActor
-    func updatePurchases() {
-        print("Updating purchases ------------")
-        if purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising"}) {
-            print("Removed advertising true")
-            self.removedAdvertising = true
-        }
-        if purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature"}) {
-            print("unlock feature true")
-            self.roundWarningUnlocked = true
         }
     }
     
     @MainActor
     func requestProducts() async {
         do {
-            products = try await Product.products(for: productIds)
+            products = try await Product.products(for: productIds).sorted(by: { $0.price > $1.price })
         } catch let error {
             print("Error requesting products: \(error)")
         }

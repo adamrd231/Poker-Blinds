@@ -70,6 +70,17 @@ struct OptionsView: View {
                     OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
                     OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
                     OptionRowBlindView(text: "Blind limit", blind: $vm.blindInfo.blindLimit)
+                    VStack {
+                        HStack {
+                            Text("Quick end game")
+                                .bold()
+                            Spacer()
+                            Toggle("", isOn: $vm.quickEndGame)
+                                .fixedSize()
+                        }
+                    }
+                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }))
+                    .foregroundColor(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? .gray : Color.theme.text)
                 }
 
                 Section(header: Text("Sound")) {
@@ -107,9 +118,8 @@ struct OptionsView: View {
                             })
                         }
                     }
-                    .disabled(storeManager.roundWarningUnlocked != true)
-                    .foregroundColor(storeManager.roundWarningUnlocked != true ? .gray : Color.theme.text)
-                    
+                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
+                    .foregroundColor(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? .gray : Color.theme.text)
                 }
                 
                 Section(header: Text("Blind table")) {

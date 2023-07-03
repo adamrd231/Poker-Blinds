@@ -4,7 +4,7 @@ import AVFoundation
 struct HomeView: View {
     
     @ObservedObject var vm = ViewModel()
-    @ObservedObject var storeManager = StoreManager()
+    @StateObject var storeManager = StoreManager()
     
     var body: some View {
         TabView {

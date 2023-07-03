@@ -29,9 +29,10 @@ struct RemoveAdvertising: View {
                                     .bold()
                                 Text(product.description)
                                     .font(.caption)
-                                
                             }
+                            
                             Spacer()
+                            
                             if storeManager.purchasedNonConsumables.contains(where: {$0.id == product.id}) {
                                 Image(systemName: "checkmark.circle")
                             } else {

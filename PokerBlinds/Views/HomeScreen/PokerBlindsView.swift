@@ -56,15 +56,13 @@ extension PokerBlindsView {
             )
             .padding()
             buttons
-            if storeManager.removedAdvertising != true {
+            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                 Banner()
             }
         }
     }
     
     func getLastBlindLevel() -> BlindLevel {
-        print("Current Level: \(vm.timerInfo.currentLevel)")
-        print("Blind count \(vm.blindsArray.count)")
         if vm.timerInfo.currentLevel >= vm.blindsArray.count {
             return vm.blindsArray.last ?? BlindLevel(smallBlind: 100)
         } else {
@@ -73,17 +71,12 @@ extension PokerBlindsView {
     }
     
     func checkIfLastBlind() -> Bool {
-        print("Current Level: \(vm.timerInfo.currentLevel)")
-        print("Blind count \(vm.blindsArray.count)")
         if vm.timerInfo.currentLevel >= vm.blindsArray.count {
             return true
         } else {
             return false
         }
     }
-    
-    
-    
     
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -96,7 +89,7 @@ extension PokerBlindsView {
                 )
                 .padding()
                 buttons
-                if storeManager.removedAdvertising != true {
+                if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                     Banner()
                 }
             }
@@ -107,8 +100,8 @@ extension PokerBlindsView {
         HStack {
             Button {
                 switch vm.isTimerRunning {
-                case .hasNotBeenStarted: vm.startTimer(useWarningTimer: storeManager.roundWarningUnlocked)
-                case .isPaused: vm.runTimer(useWarningTimer: storeManager.roundWarningUnlocked)
+                case .hasNotBeenStarted: vm.startTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
+                case .isPaused: vm.runTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
                 case .isRunning: vm.pauseTimer()
                 }
             } label: {
