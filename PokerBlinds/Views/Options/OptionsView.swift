@@ -70,17 +70,17 @@ struct OptionsView: View {
                     OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
                     OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
                     OptionRowBlindView(text: "Blind limit", blind: $vm.blindInfo.blindLimit)
+                   
                     VStack {
-                        HStack {
+                        HStack(alignment: .center) {
+                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? "lock.open" : "lock")
                             Text("Quick end game")
-                                .bold()
                             Spacer()
                             Toggle("", isOn: $vm.quickEndGame)
                                 .fixedSize()
                         }
                     }
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }))
-                    .foregroundColor(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? .gray : Color.theme.text)
                 }
 
                 Section(header: Text("Sound")) {
@@ -101,25 +101,31 @@ struct OptionsView: View {
                     
                     VStack {
                        
-                        HStack {
-                            Text("Round warning")
-                                .bold()
-                            Toggle("", isOn: $vm.usingRoundTimer)
-                                .fixedSize()
-                            Spacer()
-                            Picker("", selection: $vm.roundWarningSound) {
-                                ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
-                                    Text(index.title)
-                                }
+                        VStack(alignment: .trailing) {
+                            HStack {
+                                Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
+                                Text("Round warning")
+                                Spacer()
+                                Toggle("", isOn: $vm.usingRoundTimer)
+                                    .fixedSize()
                             }
-                            .fixedSize()
-                            .onChange(of: vm.roundWarningSound, perform: { newValue in
-                                SoundManager.instance.playSound(sound: vm.roundWarningSound)
-                            })
+                           
+                            if storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) && vm.usingRoundTimer {
+                                Picker("", selection: $vm.roundWarningSound) {
+                                    ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
+                                        Text(index.title)
+                                    }
+                                }
+                                .fixedSize()
+                                .onChange(of: vm.roundWarningSound, perform: { newValue in
+                                    SoundManager.instance.playSound(sound: vm.roundWarningSound)
+                                })
+                        
+                            }
+                            
                         }
                     }
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
-                    .foregroundColor(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? .gray : Color.theme.text)
                 }
                 
                 Section(header: Text("Blind table")) {
