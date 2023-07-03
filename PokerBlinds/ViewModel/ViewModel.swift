@@ -24,7 +24,7 @@ extension TimerStates: CustomStringConvertible {
 
 class ViewModel: ObservableObject {
     
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 10)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 10, elapsedTIme: 0)
     @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     @Published var keepScreenOpen: Bool = false
@@ -52,7 +52,7 @@ class ViewModel: ObservableObject {
     func getPreviousBlinds() -> BlindLevel? {
         if timerInfo.currentLevel == 0 {
             return nil
-        } else if timerInfo.currentLevel - 1 > blindsArray.count {
+        } else if timerInfo.currentLevel + 1 > blindsArray.count {
             return blindsArray[blindsArray.count - 1]
         } else {
             return blindsArray[timerInfo.currentLevel - 1]
@@ -103,6 +103,7 @@ class ViewModel: ObservableObject {
     
     func runTimer(useWarningTimer: Bool) {
         self.isTimerRunning = .isRunning
+        self.timerInfo.elapsedTIme += 1
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
                 // Round Timer -- Update poker timer value

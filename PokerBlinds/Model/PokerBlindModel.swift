@@ -30,6 +30,7 @@ struct BlindsModel: Codable {
 struct TimerModel: Codable {
     var currentLevel: Int
     var currentTime: Int
+    var elapsedTIme: Int
     var currentSeconds: Int {
         return currentTime % 60
     }

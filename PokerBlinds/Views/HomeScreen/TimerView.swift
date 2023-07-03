@@ -44,8 +44,13 @@ struct TimerView_Previews: PreviewProvider {
                 blindLimit: 2000),
             timerInfo: TimerModel(
                 currentLevel: 1,
-                currentTime: 10
-            ), backupTimer: TimerModel(currentLevel: 100, currentTime: 300)
+                currentTime: 10,
+                elapsedTIme: 0),
+            backupTimer: TimerModel(
+                currentLevel: 100,
+                currentTime: 300,
+                elapsedTIme: 1
+            )
         )
     }
 }
