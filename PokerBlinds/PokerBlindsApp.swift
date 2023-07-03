@@ -12,18 +12,12 @@ import AppTrackingTransparency
 @main
 struct PokerBlindsApp: App {
     
-    func requestIDFA() {
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-        })
-    }
-    
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .onAppear(perform: {
-                    requestIDFA()
-            })
-                
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                    ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in })
+                }
         }
     }
 }
