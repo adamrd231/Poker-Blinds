@@ -14,9 +14,13 @@ struct OptionRowView: View {
     
     var body: some View {
         HStack {
-            Text(text)
+            VStack(alignment: .leading) {
+                Text(text)
+                    .font(.caption)
+                Text(firstValue.description)
+                    .font(.title)
+            }
             Spacer()
-            Text(firstValue.description)
             Stepper("", value: $firstValue, in: 100...5000, step: 100)
                 .fixedSize()
         }
@@ -29,11 +33,17 @@ struct OptionRowBlindView: View {
     
     var body: some View {
         HStack {
-            Text(text)
+            VStack(alignment: .leading) {
+                Text(text)
+                    .font(.caption)
+                HStack {
+                    Text(blind.description)
+                    Text("|")
+                    Text((blind * 2).description)
+                }
+                .font(.title)
+            }
             Spacer()
-            Text(blind.description)
-            Text("|")
-            Text((blind * 2).description)
             Stepper("", value: $blind, in: 100...5000, step: 100)
                 .fixedSize()
         }
@@ -53,16 +63,21 @@ struct OptionsView: View {
         VStack {
             List {
                 Section(header: Text("Game settings")) {
-                    HStack {
-                        Text("Time in round")
-                        Spacer()
-                        HStack(spacing: .zero) {
-                            // Minutes
-                            Text(vm.timerInfo.currentMinutes.description)
-                           // Seconds
-                            Text(":")
-                            Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
+                    HStack(spacing: 5) {
+                        VStack(alignment: .leading) {
+                            Text("Time in round")
+                                .font(.caption)
+                            HStack(spacing: .zero) {
+                                Text(vm.timerInfo.currentMinutes.description)
+                                // Seconds
+                                Text(":")
+                                Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
+                                
+                            }
+                            .font(.title)
+                            .fixedSize()
                         }
+                        Spacer()
                         Stepper("", value: $vm.timerInfo.currentTime, in: 10...1000, step: 10)
                             .fixedSize()
                     }
@@ -76,7 +91,8 @@ struct OptionsView: View {
                             Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? "lock.open" : "lock")
                             Text("Quick end game")
                             Spacer()
-                            Toggle("", isOn: $vm.quickEndGame)
+                            Toggle(vm.quickEndGame ? "on" : "off", isOn: $vm.quickEndGame)
+                                .font(.caption)
                                 .fixedSize()
                         }
                     }
@@ -106,7 +122,8 @@ struct OptionsView: View {
                                 Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
                                 Text("Round warning")
                                 Spacer()
-                                Toggle("", isOn: $vm.usingRoundTimer)
+                                Toggle(vm.usingRoundTimer ? "on" : "off", isOn: $vm.usingRoundTimer)
+                                    .font(.caption)
                                     .fixedSize()
                             }
                            
