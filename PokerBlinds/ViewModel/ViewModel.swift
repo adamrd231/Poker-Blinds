@@ -51,12 +51,20 @@ class ViewModel: ObservableObject {
     
     func addSubscribers() {
         $blindInfo
-            .sink { [weak self] (BlindsModel) in
+            .combineLatest($quickEndGame)
+            .sink { [weak self] (BlindsModel, usingQuickEndGame) in
                 var newBlinds:[BlindLevel] = []
                 var start = BlindsModel.startingSmallBlind
                 while start <= BlindsModel.blindLimit {
                     newBlinds.append(BlindLevel(smallBlind: start))
                     start += BlindsModel.amountToRaiseBlinds
+                }
+                if usingQuickEndGame {
+                    print("Add end game rules")
+                    // Add double time as final level - or double levels?
+                    newBlinds.append(newBlinds.last ?? BlindLevel(smallBlind: 1000))
+                    // Double last blind for final level
+                    newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
                 }
                 self?.blindsArray = newBlinds
             }
