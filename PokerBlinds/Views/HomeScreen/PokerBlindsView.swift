@@ -86,13 +86,20 @@ extension PokerBlindsView {
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
-            VStack(spacing: 35) {
+            VStack() {
+                Text("Elapsed time")
+                    .bold()
+                HStack(spacing: .zero) {
+                    Text(vm.timerInfo.elapsedTImeCurrentMinutes < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentMinutes)" : "\(vm.timerInfo.elapsedTImeCurrentMinutes)")
+                    Text(":")
+                    Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
+                }
                 BlindsView(
                     previousBlind: vm.getPreviousBlinds(),
-                    currentBlind: vm.blindsArray[vm.timerInfo.currentLevel],
+                    currentBlind: vm.getCurrentBlind(),
                     nextBlind: vm.getNextBlinds()
                 )
-                .padding()
+                .padding(.horizontal)
                 buttons
                 if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                     Banner()
