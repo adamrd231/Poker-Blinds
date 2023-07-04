@@ -67,25 +67,9 @@ extension PokerBlindsView {
         }
     }
     
-    func getLastBlindLevel() -> BlindLevel {
-        if vm.timerInfo.currentLevel >= vm.blindsArray.count {
-            return vm.blindsArray.last ?? BlindLevel(smallBlind: 100)
-        } else {
-            return vm.blindsArray[vm.timerInfo.currentLevel]
-        }
-    }
-    
-    func checkIfLastBlind() -> Bool {
-        if vm.timerInfo.currentLevel >= vm.blindsArray.count {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
-            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
+            TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             VStack() {
                 Text("Elapsed time")
                     .bold()
@@ -95,9 +79,9 @@ extension PokerBlindsView {
                     Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
                 }
                 BlindsView(
-                    previousBlind: vm.getPreviousBlinds(),
-                    currentBlind: vm.getCurrentBlind(),
-                    nextBlind: vm.getNextBlinds()
+                    previousBlind: vm.blinds.getPreviousBlinds(),
+                    currentBlind: vm.blinds.getCurrentBlind(),
+                    nextBlind: vm.blinds.getNextBlinds()
                 )
                 .padding(.horizontal)
                 buttons
