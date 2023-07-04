@@ -37,6 +37,13 @@ struct TimerModel: Codable {
     var currentMinutes: Int {
         return currentTime / 60
     }
+    
+    var elapsedTImeCurrentSeconds: Int {
+        return elapsedTIme % 60
+    }
+    var elapsedTImeCurrentMinutes: Int {
+        return elapsedTIme / 60
+    }
 }
 
 struct PokerGameModel: Identifiable {

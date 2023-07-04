@@ -46,6 +46,13 @@ extension PokerBlindsView {
     
     private var verticalLayout: some View {
         VStack {
+            Text("Elapsed time")
+                .bold()
+            HStack(spacing: .zero) {
+                Text(vm.timerInfo.elapsedTImeCurrentMinutes < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentMinutes)" : "\(vm.timerInfo.elapsedTImeCurrentMinutes)")
+                Text(":")
+                Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
+            }
             TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
                 previousBlind: vm.getPreviousBlinds(),
