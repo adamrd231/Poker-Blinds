@@ -53,11 +53,11 @@ extension PokerBlindsView {
                 Text(":")
                 Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
             }
-            TimerView(blinds: vm.blindInfo, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
+            TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
-                previousBlind: vm.getPreviousBlinds(),
-                currentBlind: vm.getCurrentBlind(),
-                nextBlind: vm.getNextBlinds()
+                previousBlind: vm.blinds.getPreviousBlinds(),
+                currentBlind: vm.blinds.getCurrentBlind(),
+                nextBlind: vm.blinds.getNextBlinds()
             )
             .padding()
             buttons

@@ -22,72 +22,82 @@ extension TimerStates: CustomStringConvertible {
     }
 }
 
-class ViewModel: ObservableObject {
+class BlindLevelModel {
+    var currentLevel: Int = 0
+    var startingOptions: BlindsModel = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
+    var blindLevels: [BlindLevel] = []
     
+    func getCurrentBlind() -> BlindLevel {
+        if currentLevel + 1 >= blindLevels.count {
+            return blindLevels.last ?? BlindLevel(smallBlind: 1000)
+        } else {
+            return blindLevels[currentLevel]
+        }
+    }
+    
+    func getPreviousBlinds() -> BlindLevel? {
+        if currentLevel == 0 {
+            return nil
+        } else if currentLevel + 1 > blindLevels.count {
+            return blindLevels[blindLevels.count - 1]
+        } else {
+            return blindLevels[currentLevel - 1]
+        }
+    }
+    
+    func getNextBlinds() -> BlindLevel? {
+        if currentLevel + 1 >= blindLevels.count {
+            return nil
+        } else {
+            return blindLevels[currentLevel + 1]
+        }
+    }
+}
+
+class ViewModel: ObservableObject {
+    // Models for app
+    var timer = Timer()
     @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTIme: 0)
-    @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
-    @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
-    @Published var keepScreenOpen: Bool = false
-    @Published var usingRoundTimer: Bool = false
-    @Published var quickEndGame: Bool = false
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
-    @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
-    @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
+    // Blind info and levels
+    @Published var blinds = BlindLevelModel()
+    
+//    @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
+//    @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
     @State var playedInterstitial = false
     
+    // In-App Purchases -- track whether users have access
+    @Published var usingRoundTimer: Bool = false
+    @Published var quickEndGame: Bool = false
+    
+    // Options for user
+    @Published var keepScreenOpen: Bool = false
+    // Sound selections
+    @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
+    @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
+    
     private var cancellable = Set<AnyCancellable>()
     
-    // Timer object
-    var timer = Timer()
-    
     init() {
+        // Setup subscriber on blind model to populate blind table
+        // Updates whenever a user changes blind options
         addSubscribers()
     }
     
-    func getPreviousBlinds() -> BlindLevel? {
-        if timerInfo.currentLevel == 0 {
-            return nil
-        } else if timerInfo.currentLevel + 1 > blindsArray.count {
-            return blindsArray[blindsArray.count - 1]
-        } else {
-            return blindsArray[timerInfo.currentLevel - 1]
-        }
-    }
-    
-    func getCurrentBlind() -> BlindLevel {
-        if timerInfo.currentLevel + 1 >= blindsArray.count {
-            return blindsArray.last ?? BlindLevel(smallBlind: 1000)
-        } else {
-            return blindsArray[timerInfo.currentLevel]
-        }
-    }
-    
-    func getNextBlinds() -> BlindLevel? {
-        print("timer info: \(timerInfo.currentLevel)")
-        print("blinds info: \(blindsArray.count)")
-        if timerInfo.currentLevel + 1 >= blindsArray.count {
-            print("nill")
-            return nil
-        } else {
-            print("Returning array plus one")
-            return blindsArray[timerInfo.currentLevel + 1]
-        }
-    }
-    
     func addSubscribers() {
-        $blindInfo
+        $blinds
             .combineLatest($quickEndGame)
             .sink { [weak self] (BlindsModel, usingQuickEndGame) in
                 var newBlinds:[BlindLevel] = []
-                var start = BlindsModel.startingSmallBlind
-                while start <= BlindsModel.blindLimit {
+                var start = BlindsModel.startingOptions.startingSmallBlind
+                while start <= BlindsModel.startingOptions.blindLimit {
                     newBlinds.append(BlindLevel(smallBlind: start))
-                    start += BlindsModel.amountToRaiseBlinds
+                    start += BlindsModel.startingOptions.amountToRaiseBlinds
                 }
                 if usingQuickEndGame {
                     print("Add end game rules")
@@ -96,7 +106,7 @@ class ViewModel: ObservableObject {
                     // Double last blind for final level
                     newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
                 }
-                self?.blindsArray = newBlinds
+                self?.blinds.blindLevels = newBlinds
             }
             .store(in: &cancellable)
     }
@@ -154,61 +164,61 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: User --- money save state
-    func saveInfo() {
-        let encoder = JSONEncoder()
-        let defaults = UserDefaults.standard
-        if let encoded = try? encoder.encode(timerInfo) {
-            defaults.set(encoded, forKey: "timerInfo")
-        }
-        if let blind = try? encoder.encode(blindInfo) {
-            defaults.set(blind, forKey: "blindInfo")
-        }
-        if let screenSetting = try? encoder.encode(keepScreenOpen) {
-            defaults.set(screenSetting, forKey: "screenSetting")
-        }
-        if let level = try? encoder.encode(timerInfo.currentLevel) {
-            defaults.set(level, forKey: "level")
-        }
-        if let timerRunnin = try? encoder.encode(isTimerRunning) {
-            defaults.set(timerRunnin, forKey: "timer")
-        }
-        if let backup = try? encoder.encode(backupTimer) {
-            defaults.set(backup, forKey: "backup")
-        }
-    }
-    
-    func loadInfo() {
-        let defaults = UserDefaults.standard
-        let decoder = JSONDecoder()
-        if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
-            if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
-                self.timerInfo = info
-            }
-        }
-        if let blindInfo = defaults.object(forKey: "blindInfo") as? Data {
-            if let blinds = try? decoder.decode(BlindsModel.self, from: blindInfo) {
-                self.blindInfo = blinds
-            }
-        }
-        if let screenSetting = defaults.object(forKey: "screenSetting") as? Data {
-            if let option = try? decoder.decode(Bool.self, from: screenSetting) {
-                self.keepScreenOpen = option
-            }
-        }
-        if let level = defaults.object(forKey: "level") as? Data {
-            if let option = try? decoder.decode(Int.self, from: level) {
-                self.timerInfo.currentLevel = option
-            }
-        }
-        if let timer = defaults.object(forKey: "timer") as? Data {
-            if let isRunning = try? decoder.decode(TimerStates.self, from: timer) {
-                self.isTimerRunning = isRunning
-            }
-        }
-        if let backup = defaults.object(forKey: "backup") as? Data {
-            if let info = try? decoder.decode(TimerModel.self, from: backup) {
-                self.backupTimer = info
-            }
-        }
-    }
+//    func saveInfo() {
+//        let encoder = JSONEncoder()
+//        let defaults = UserDefaults.standard
+//        if let encoded = try? encoder.encode(timerInfo) {
+//            defaults.set(encoded, forKey: "timerInfo")
+//        }
+//        if let blind = try? encoder.encode(blindInfo) {
+//            defaults.set(blind, forKey: "blindInfo")
+//        }
+//        if let screenSetting = try? encoder.encode(keepScreenOpen) {
+//            defaults.set(screenSetting, forKey: "screenSetting")
+//        }
+//        if let level = try? encoder.encode(timerInfo.currentLevel) {
+//            defaults.set(level, forKey: "level")
+//        }
+//        if let timerRunnin = try? encoder.encode(isTimerRunning) {
+//            defaults.set(timerRunnin, forKey: "timer")
+//        }
+//        if let backup = try? encoder.encode(backupTimer) {
+//            defaults.set(backup, forKey: "backup")
+//        }
+//    }
+//    
+//    func loadInfo() {
+//        let defaults = UserDefaults.standard
+//        let decoder = JSONDecoder()
+//        if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
+//            if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
+//                self.timerInfo = info
+//            }
+//        }
+//        if let blindInfo = defaults.object(forKey: "blindInfo") as? Data {
+//            if let blinds = try? decoder.decode(BlindsModel.self, from: blindInfo) {
+//                self.blindInfo = blinds
+//            }
+//        }
+//        if let screenSetting = defaults.object(forKey: "screenSetting") as? Data {
+//            if let option = try? decoder.decode(Bool.self, from: screenSetting) {
+//                self.keepScreenOpen = option
+//            }
+//        }
+//        if let level = defaults.object(forKey: "level") as? Data {
+//            if let option = try? decoder.decode(Int.self, from: level) {
+//                self.timerInfo.currentLevel = option
+//            }
+//        }
+//        if let timer = defaults.object(forKey: "timer") as? Data {
+//            if let isRunning = try? decoder.decode(TimerStates.self, from: timer) {
+//                self.isTimerRunning = isRunning
+//            }
+//        }
+//        if let backup = defaults.object(forKey: "backup") as? Data {
+//            if let info = try? decoder.decode(TimerModel.self, from: backup) {
+//                self.backupTimer = info
+//            }
+//        }
+//    }
 }

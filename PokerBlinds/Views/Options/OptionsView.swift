@@ -82,9 +82,9 @@ struct OptionsView: View {
                             .fixedSize()
                     }
                     
-                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindInfo.startingSmallBlind)
-                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blindInfo.amountToRaiseBlinds)
-                    OptionRowBlindView(text: "Blind limit", blind: $vm.blindInfo.blindLimit)
+                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blinds.startingOptions.startingSmallBlind)
+                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blinds.startingOptions.amountToRaiseBlinds)
+                    OptionRowBlindView(text: "Blind limit", blind: $vm.blinds.startingOptions.blindLimit)
                    
                     VStack {
                         HStack(alignment: .center) {
@@ -146,7 +146,7 @@ struct OptionsView: View {
                 }
                 
                 Section(header: Text("Blind table")) {
-                        ForEach(Array(zip(vm.blindsArray.indices, vm.blindsArray)), id: \.0) { index, level in
+                    ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
                             HStack {
                                 Text("Level \(index + 1)")
                                 Rectangle()
