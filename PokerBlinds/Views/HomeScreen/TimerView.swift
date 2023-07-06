@@ -18,7 +18,7 @@ struct TimerView: View {
         ZStack {
             VStack(spacing: 0) {
                 LargeText(text: "Level \(timerInfo.currentLevel + 1)", textSize: 40)
-                LargeText(text: timerInfo.currentSeconds < 10 ? "\(timerInfo.currentMinutes):0\(timerInfo.currentSeconds)" : "\(timerInfo.currentMinutes):\(timerInfo.currentSeconds)", textSize: 80)
+                ClockLayout(currentSeconds: timerInfo.currentSeconds, currentMinutes: timerInfo.currentMinutes, largeText: true)
             }
             
             Circle()
@@ -45,11 +45,11 @@ struct TimerView_Previews: PreviewProvider {
             timerInfo: TimerModel(
                 currentLevel: 1,
                 currentTime: 10,
-                elapsedTIme: 0),
+                elapsedTime: 0),
             backupTimer: TimerModel(
                 currentLevel: 100,
                 currentTime: 300,
-                elapsedTIme: 1
+                elapsedTime: 1
             )
         )
     }

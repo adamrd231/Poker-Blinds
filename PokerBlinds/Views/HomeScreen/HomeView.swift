@@ -33,8 +33,8 @@ struct HomeView: View {
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
                 .tabItem {
                     HStack {
-                        Image(systemName: "pip.remove")
-                        Text("No Ads")
+                        Image(systemName: "lock.rotation.open")
+                        Text("In-App")
                     }
                 }
         }

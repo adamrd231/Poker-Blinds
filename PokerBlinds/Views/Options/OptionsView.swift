@@ -145,7 +145,7 @@ struct OptionsView: View {
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
                 }
                 
-                Section(header: Text("Blind table")) {
+                Section(header: ClockLayout(currentSeconds: 10, currentMinutes: 5, largeText: false)) {
                     ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
                             HStack {
                                 Text("Level \(index + 1)")

@@ -10,12 +10,17 @@ struct RemoveAdvertising: View {
         List {
             Section(header: Text("In-App Purchases")) {
                 VStack(alignment: .leading) {
-                    Text("The big question, why?")
+                    Text("Why?")
                         .font(.title3)
                         .fontWeight(.heavy)
                     Text(
-                        "As an independent app developer, I integrate advertising into the apps I create to sustain my full-time pursuit of app development and offer them to users for free. By engaging with occasional ads, you directly support my work, enabling me to enhance existing apps, develop new ones, and provide timely updates, thank you for being a part of this journey!"
+                        """
+                        I am a software engineer working towards supporting myself with revenue from the apps I develop. I use google admob to advertise on
+                        my platforms, and by advertising and offering in-app purchases, I can afford to spend more time on new features and apps. Thank you
+                        for supporting my on my journey!
+                        """
                     )
+                    .font(.caption)
                 }
             }
             
@@ -53,9 +58,11 @@ struct RemoveAdvertising: View {
             
             Section(header: Text("Restore")) {
                 Text("Already purchased these? Just click below to restore all the things.")
+                    .font(.caption)
                 Button("Restore purchases") {
                     Task {
-                        try await storeManager.restorePurchases()
+                        let result = try await storeManager.restorePurchases()
+                        print("Result \(result)")
                     }
                 }
             }

@@ -25,7 +25,7 @@ extension TimerStates: CustomStringConvertible {
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTIme: 0)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTime: 0)
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     
@@ -65,7 +65,6 @@ class ViewModel: ObservableObject {
                     start += BlindsModel.startingOptions.amountToRaiseBlinds
                 }
                 if usingQuickEndGame {
-                    print("Add end game rules")
                     // Add double time as final level - or double levels?
                     newBlinds.append(newBlinds.last ?? BlindLevel(smallBlind: 1000))
                     // Double last blind for final level
@@ -82,10 +81,9 @@ class ViewModel: ObservableObject {
             if self.timerInfo.currentTime > 0 {
                 // Round Timer -- Update poker timer value
                 self.timerInfo.currentTime -= 1
-                self.timerInfo.elapsedTIme += 1
+                self.timerInfo.elapsedTime += 1
                 // Warning Timer -- un-lockable feature
                 if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
-                    print("playing round warning sound")
                     SoundManager.instance.playSound(sound: self.roundWarningSound)
                 }
                 // New Level

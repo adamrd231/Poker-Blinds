@@ -75,7 +75,7 @@ class StoreManager: ObservableObject  {
     @MainActor
     func restorePurchases() async throws {
         try await AppStore.sync()
-        print("transactions \(purchasedNonConsumables.count)")
+
     }
 
     @MainActor

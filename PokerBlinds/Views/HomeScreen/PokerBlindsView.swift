@@ -48,11 +48,7 @@ extension PokerBlindsView {
         VStack {
             Text("Elapsed time")
                 .bold()
-            HStack(spacing: .zero) {
-                Text(vm.timerInfo.elapsedTImeCurrentMinutes < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentMinutes)" : "\(vm.timerInfo.elapsedTImeCurrentMinutes)")
-                Text(":")
-                Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
-            }
+            ClockLayout(currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, largeText: false)
             TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
                 previousBlind: vm.blinds.getPreviousBlinds(),
@@ -73,11 +69,7 @@ extension PokerBlindsView {
             VStack() {
                 Text("Elapsed time")
                     .bold()
-                HStack(spacing: .zero) {
-                    Text(vm.timerInfo.elapsedTImeCurrentMinutes < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentMinutes)" : "\(vm.timerInfo.elapsedTImeCurrentMinutes)")
-                    Text(":")
-                    Text(vm.timerInfo.elapsedTImeCurrentSeconds < 10 ? "0\(vm.timerInfo.elapsedTImeCurrentSeconds)" : "\(vm.timerInfo.elapsedTImeCurrentSeconds)")
-                }
+                ClockLayout(currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, largeText: false)
                 BlindsView(
                     previousBlind: vm.blinds.getPreviousBlinds(),
                     currentBlind: vm.blinds.getCurrentBlind(),
