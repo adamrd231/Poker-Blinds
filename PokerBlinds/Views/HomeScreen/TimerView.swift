@@ -18,7 +18,7 @@ struct TimerView: View {
         ZStack {
             VStack(spacing: 0) {
                 LargeText(text: "Level \(timerInfo.currentLevel + 1)", textSize: 40)
-                ClockLayout(currentSeconds: timerInfo.currentSeconds, currentMinutes: timerInfo.currentMinutes, largeText: true)
+                ClockLayout(currentHours: timerInfo.currentTime / 3600, currentMinutes: timerInfo.currentMinutes, currentSeconds: timerInfo.currentSeconds, largeText: true)
             }
             
             Circle()

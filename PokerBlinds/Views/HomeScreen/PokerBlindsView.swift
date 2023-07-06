@@ -48,7 +48,7 @@ extension PokerBlindsView {
         VStack {
             Text("Elapsed time")
                 .bold()
-            ClockLayout(currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, largeText: false)
+            ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
             TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
                 previousBlind: vm.blinds.getPreviousBlinds(),
@@ -69,7 +69,7 @@ extension PokerBlindsView {
             VStack() {
                 Text("Elapsed time")
                     .bold()
-                ClockLayout(currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, largeText: false)
+                ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
                 BlindsView(
                     previousBlind: vm.blinds.getPreviousBlinds(),
                     currentBlind: vm.blinds.getCurrentBlind(),

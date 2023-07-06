@@ -143,24 +143,9 @@ struct OptionsView: View {
                         }
                     }
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
+                    BlindTable
                 }
-                
-                Section(header: ClockLayout(currentSeconds: 10, currentMinutes: 5, largeText: false)) {
-                    ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
-                            HStack {
-                                Text("Level \(index + 1)")
-                                Rectangle()
-                                    .foregroundColor(Color.theme.mainButton.opacity(0.5))
-                                    .frame(height: 1)
-                                    .padding(.horizontal)
-                                
-                                Text(level.smallBlind.description)
-                                Text("|")
-                                Text(level.bigBlind.description)
-                            }
-                        }
-                    }
-                }
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
             guard let scene = UIApplication.shared.windows.first?.windowScene else { return }
@@ -172,5 +157,34 @@ struct OptionsView: View {
 struct OptionsView_Previews: PreviewProvider {
     static var previews: some View {
         OptionsView(storeManager: StoreManager()).environmentObject(ViewModel())
+    }
+}
+
+extension OptionsView {
+    var BlindTable: some View {
+        Section(header: HStack {
+            Text("Blind Table")
+            Spacer()
+            ClockLayout(
+                currentHours: Int(vm.totalGameTime?.totalHours ?? 0),
+                currentMinutes: Int(vm.totalGameTime?.totalMinutes ?? 0),
+                currentSeconds: vm.totalGameTime?.totalSeconds ?? 0,
+                largeText: false)
+ 
+        }) {
+            ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
+                    HStack {
+                        Text("Level \(index + 1)")
+                        Rectangle()
+                            .foregroundColor(Color.theme.mainButton.opacity(0.5))
+                            .frame(height: 1)
+                            .padding(.horizontal)
+                        
+                        Text(level.smallBlind.description)
+                        Text("|")
+                        Text(level.bigBlind.description)
+                    }
+                }
+            }
     }
 }

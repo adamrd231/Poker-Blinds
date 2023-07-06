@@ -11,11 +11,19 @@ struct TimerModel: Codable {
     var currentLevel: Int
     var currentTime: Int
     var elapsedTime: Int
-    var currentSeconds: Int {
-        return currentTime % 60
+    
+    var currentHours: Int {
+        return currentTime / 3600
     }
     var currentMinutes: Int {
         return currentTime / 60
+    }
+    var currentSeconds: Int {
+        return currentTime % 60
+    }
+
+    var elapsedTimeCurrentHours: Int {
+        return elapsedTime / 3600
     }
     
     var elapsedTImeCurrentSeconds: Int {

@@ -22,12 +22,27 @@ extension TimerStates: CustomStringConvertible {
     }
 }
 
+struct ElapsedTimer {
+    var totalTime: Int
+    
+    var totalHours: Double {
+        return Double(totalSeconds) / 3600
+    }
+    var totalMinutes: Double {
+        return totalHours * 60
+    }
+    var totalSeconds: Int {
+        return totalSeconds % 60
+    }
+}
+
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
     @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTime: 0)
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
+    @Published var totalGameTime: ElapsedTimer?
     
     // Blind info and levels
     @Published var blinds = BlindLevelModel()
@@ -42,6 +57,7 @@ class ViewModel: ObservableObject {
     
     // Options for user
     @Published var keepScreenOpen: Bool = false
+
     // Sound selections
     @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
     @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
@@ -70,6 +86,9 @@ class ViewModel: ObservableObject {
                     // Double last blind for final level
                     newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
                 }
+                let totalGameTime = newBlinds.count * (self?.timerInfo.currentTime ?? 0)
+                print("total game time \(totalGameTime)")
+                self?.totalGameTime = ElapsedTimer(totalTime: newBlinds.count * (self?.timerInfo.currentTime ?? 0))
                 self?.blinds.blindLevels = newBlinds
             }
             .store(in: &cancellable)
