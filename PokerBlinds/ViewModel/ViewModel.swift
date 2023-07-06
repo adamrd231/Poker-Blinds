@@ -22,38 +22,6 @@ extension TimerStates: CustomStringConvertible {
     }
 }
 
-class BlindLevelModel {
-    var currentLevel: Int = 0
-    var startingOptions: BlindsModel = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
-    var blindLevels: [BlindLevel] = []
-    
-    func getCurrentBlind() -> BlindLevel {
-        if currentLevel + 1 >= blindLevels.count {
-            return blindLevels.last ?? BlindLevel(smallBlind: 1000)
-        } else {
-            return blindLevels[currentLevel]
-        }
-    }
-    
-    func getPreviousBlinds() -> BlindLevel? {
-        if currentLevel == 0 {
-            return nil
-        } else if currentLevel + 1 > blindLevels.count {
-            return blindLevels[blindLevels.count - 1]
-        } else {
-            return blindLevels[currentLevel - 1]
-        }
-    }
-    
-    func getNextBlinds() -> BlindLevel? {
-        if currentLevel + 1 >= blindLevels.count {
-            return nil
-        } else {
-            return blindLevels[currentLevel + 1]
-        }
-    }
-}
-
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
@@ -63,9 +31,6 @@ class ViewModel: ObservableObject {
     
     // Blind info and levels
     @Published var blinds = BlindLevelModel()
-    
-//    @Published var blindInfo = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
-//    @Published var blindsArray: [BlindLevel] = [BlindLevel(smallBlind: 100)]
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?

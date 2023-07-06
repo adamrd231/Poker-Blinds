@@ -13,6 +13,9 @@
 		662BBD632A4E5A990027C167 /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD612A4E5A990027C167 /* timesUp.wav */; };
 		662BBD652A4E5BF50027C167 /* threeBells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD642A4E5BF50027C167 /* threeBells.wav */; };
 		662BBD6A2A5217B60027C167 /* tickingTime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD692A5217B60027C167 /* tickingTime.wav */; };
+		662BBD6C2A5708C40027C167 /* BlindLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */; };
+		662BBD6E2A570A4B0027C167 /* Blinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6D2A570A4B0027C167 /* Blinds.swift */; };
+		662BBD702A570A690027C167 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6F2A570A690027C167 /* TimerModel.swift */; };
 		6642EA212A2E11080011589B /* BlindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA202A2E11080011589B /* BlindsView.swift */; };
 		6642EA232A2FBB270011589B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA222A2FBB270011589B /* ViewModel.swift */; };
 		6642EA262A2FC46B0011589B /* LargeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6642EA252A2FC46B0011589B /* LargeText.swift */; };
@@ -36,7 +39,6 @@
 		668EF5E626A347AC0040FC4D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5E526A347AC0040FC4D /* HomeView.swift */; };
 		668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5E726A347AD0040FC4D /* Assets.xcassets */; };
 		668EF5EB26A347AD0040FC4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */; };
-		668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5F326A348760040FC4D /* PokerBlindModel.swift */; };
 		668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF5FE26A49F3A0040FC4D /* TimerView.swift */; };
 		668EF60526A4A6750040FC4D /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF60426A4A6750040FC4D /* StartButton.swift */; };
 		668EF61A26A74A530040FC4D /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668EF61926A74A530040FC4D /* OptionsView.swift */; };
@@ -50,6 +52,9 @@
 		662BBD612A4E5A990027C167 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
 		662BBD642A4E5BF50027C167 /* threeBells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = threeBells.wav; sourceTree = "<group>"; };
 		662BBD692A5217B60027C167 /* tickingTime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tickingTime.wav; path = ../../../../tickingTime.wav; sourceTree = "<group>"; };
+		662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindLevelModel.swift; sourceTree = "<group>"; };
+		662BBD6D2A570A4B0027C167 /* Blinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blinds.swift; sourceTree = "<group>"; };
+		662BBD6F2A570A690027C167 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		6642EA202A2E11080011589B /* BlindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindsView.swift; sourceTree = "<group>"; };
 		6642EA222A2FBB270011589B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6642EA252A2FC46B0011589B /* LargeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeText.swift; sourceTree = "<group>"; };
@@ -76,7 +81,6 @@
 		668EF5E726A347AD0040FC4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		668EF5EA26A347AD0040FC4D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		668EF5EC26A347AD0040FC4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		668EF5F326A348760040FC4D /* PokerBlindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindModel.swift; sourceTree = "<group>"; };
 		668EF5FE26A49F3A0040FC4D /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		668EF60426A4A6750040FC4D /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		668EF61926A74A530040FC4D /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
@@ -206,7 +210,9 @@
 		668B966F2A41E15F006D76A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				668EF5F326A348760040FC4D /* PokerBlindModel.swift */,
+				662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */,
+				662BBD6D2A570A4B0027C167 /* Blinds.swift */,
+				662BBD6F2A570A690027C167 /* TimerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 				6659A20F26C4816400BD698E /* Intro.swift in Sources */,
 				668B96782A4736BA006D76A1 /* PokerBlindsView.swift in Sources */,
 				665BCEE22A37B2D7007023FD /* SoundManager.swift in Sources */,
+				662BBD6E2A570A4B0027C167 /* Blinds.swift in Sources */,
 				668EF5E626A347AC0040FC4D /* HomeView.swift in Sources */,
 				668EF5E426A347AC0040FC4D /* PokerBlindsApp.swift in Sources */,
 				6642EA212A2E11080011589B /* BlindsView.swift in Sources */,
@@ -412,12 +419,13 @@
 				6642EA232A2FBB270011589B /* ViewModel.swift in Sources */,
 				668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */,
 				6659A20026B25C8A00BD698E /* BannerAdMob.swift in Sources */,
+				662BBD6C2A5708C40027C167 /* BlindLevelModel.swift in Sources */,
 				668B967A2A47785A006D76A1 /* BasicButtonStyle.swift in Sources */,
 				6659A20C26C47FDE00BD698E /* StoreManager.swift in Sources */,
 				6642EA262A2FC46B0011589B /* LargeText.swift in Sources */,
 				6659A21226C4850900BD698E /* RemoveAdvertising.swift in Sources */,
+				662BBD702A570A690027C167 /* TimerModel.swift in Sources */,
 				6642EA292A3368280011589B /* DoubleCheckPopup.swift in Sources */,
-				668EF5F426A348760040FC4D /* PokerBlindModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
