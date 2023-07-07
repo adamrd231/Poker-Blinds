@@ -143,8 +143,10 @@ struct OptionsView: View {
                         }
                     }
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
-                    BlindTable
                 }
+                
+                
+                BlindTable
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
@@ -173,18 +175,21 @@ extension OptionsView {
  
         }) {
             ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
-                    HStack {
-                        Text("Level \(index + 1)")
-                        Rectangle()
-                            .foregroundColor(Color.theme.mainButton.opacity(0.5))
-                            .frame(height: 1)
-                            .padding(.horizontal)
-                        
-                        Text(level.smallBlind.description)
-                        Text("|")
-                        Text(level.bigBlind.description)
-                    }
+                HStack {
+                    Text("Level \(index + 1)")
+                    Rectangle()
+                        .foregroundColor(Color.theme.mainButton.opacity(0.5))
+                        .frame(height: 1)
+                        .padding(.horizontal)
+                    
+                    Text(level.smallBlind.description)
+                    Text("|")
+                    Text(level.bigBlind.description)
                 }
             }
+        }
+        .onAppear {
+            print("total game time options view \(vm.totalGameTime?.totalHours)")
+        }
     }
 }

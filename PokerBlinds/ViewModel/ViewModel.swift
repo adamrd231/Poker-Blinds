@@ -26,13 +26,14 @@ struct ElapsedTimer {
     var totalTime: Int
     
     var totalHours: Double {
-        return Double(totalSeconds) / 3600
+        print("total hours \(Double(totalTime)) results in: \(Double(totalTime) / 3600)")
+        return Double(totalTime) / 3600
     }
     var totalMinutes: Double {
-        return totalHours * 60
+        return totalHours.truncatingRemainder(dividingBy: 1) * 60
     }
     var totalSeconds: Int {
-        return totalSeconds % 60
+        return totalTime % 60
     }
 }
 
@@ -89,6 +90,7 @@ class ViewModel: ObservableObject {
                 let totalGameTime = newBlinds.count * (self?.timerInfo.currentTime ?? 0)
                 print("total game time \(totalGameTime)")
                 self?.totalGameTime = ElapsedTimer(totalTime: newBlinds.count * (self?.timerInfo.currentTime ?? 0))
+                print("total game time \(self?.totalGameTime)")
                 self?.blinds.blindLevels = newBlinds
             }
             .store(in: &cancellable)

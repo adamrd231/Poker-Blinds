@@ -36,7 +36,7 @@ struct ClockLayout: View {
         }
         .onAppear {
             print("Current minutes \(currentMinutes)")
-            print("Current minutes \(currentSeconds)")
+            print("Current seconds \(currentSeconds)")
         }
     }
 }
