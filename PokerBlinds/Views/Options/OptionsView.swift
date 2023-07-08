@@ -167,11 +167,11 @@ extension OptionsView {
         Section(header: HStack {
             Text("Blind Table")
             Spacer()
-            ClockLayout(
-                currentHours: Int(vm.totalGameTime?.totalHours ?? 0),
-                currentMinutes: Int(vm.totalGameTime?.totalMinutes ?? 0),
-                currentSeconds: vm.totalGameTime?.totalSeconds ?? 0,
-                largeText: false)
+//            ClockLayout(
+//                currentHours: Int(vm.totalGameTime?.totalHours ?? 0),
+//                currentMinutes: Int(vm.totalGameTime?.totalMinutes ?? 0),
+//                currentSeconds: vm.totalGameTime?.totalSeconds ?? 0,
+//                largeText: false)
  
         }) {
             ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in

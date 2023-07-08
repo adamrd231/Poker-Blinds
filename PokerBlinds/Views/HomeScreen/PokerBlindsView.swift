@@ -14,6 +14,9 @@ struct PokerBlindsView: View {
     @State var isPortrait: Bool = true
     @State var isShowingDoubleCheck = false
     
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.dynamicTypeSize) var typeSize
+    
     var body: some View {
         wrappedView
             .sheet(isPresented: $isShowingDoubleCheck, content: {
@@ -46,9 +49,7 @@ extension PokerBlindsView {
     
     private var verticalLayout: some View {
         VStack {
-            Text("Elapsed time")
-                .bold()
-            ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
+
             TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             BlindsView(
                 previousBlind: vm.blinds.getPreviousBlinds(),
@@ -69,7 +70,7 @@ extension PokerBlindsView {
             VStack() {
                 Text("Elapsed time")
                     .bold()
-                ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
+//                ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
                 BlindsView(
                     previousBlind: vm.blinds.getPreviousBlinds(),
                     currentBlind: vm.blinds.getCurrentBlind(),
