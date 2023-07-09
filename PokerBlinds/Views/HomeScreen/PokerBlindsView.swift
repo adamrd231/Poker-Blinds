@@ -36,6 +36,16 @@ struct PokerBlindsView: View {
     @State var isShowingDoubleCheck = false
     // Orientation variable
     @State private var orientation = UIDeviceOrientation.unknown
+    var mainFontSize: Double {
+        return isIpad ? 200 : 80
+    }
+    var durationClockFontSize: Double {
+        return isIpad ? 50 : 25
+    }
+    var blindFontSize: Double {
+        return isIpad ? 150 : 60
+    }
+    private var isIpad : Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
     var body: some View {
         VStack {
@@ -51,6 +61,7 @@ struct PokerBlindsView: View {
         })
         .onRotate { newOrientation in
             orientation = newOrientation
+            print("idiom \(isIpad)")
         }
     }
 }
@@ -65,10 +76,17 @@ struct PokerBlindsView_Previews: PreviewProvider {
 extension PokerBlindsView {
     private var verticalLayout: some View {
         VStack(spacing: .zero) {
-            TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
+            TimerView(
+                blinds: vm.blinds.startingOptions,
+                timerInfo: vm.timerInfo,
+                backupTimer: vm.backupTimer ?? vm.timerInfo,
+                clockFontSize: mainFontSize,
+                durationClockFontSize: durationClockFontSize
+                
+            )
 
             BlindsView(
-                fontSize: vm.fontSize,
+                fontSize: blindFontSize,
                 previousBlind: vm.blinds.getPreviousBlinds(),
                 currentBlind: vm.blinds.getCurrentBlind(),
                 nextBlind: vm.blinds.getNextBlinds()
@@ -83,10 +101,16 @@ extension PokerBlindsView {
     
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
-            TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
+            TimerView(
+                blinds: vm.blinds.startingOptions,
+                timerInfo: vm.timerInfo,
+                backupTimer: vm.backupTimer ?? vm.timerInfo,
+                clockFontSize: mainFontSize,
+                durationClockFontSize: durationClockFontSize
+            )
             VStack() {
                 BlindsView(
-                    fontSize: vm.fontSize,
+                    fontSize: blindFontSize,
                     previousBlind: vm.blinds.getPreviousBlinds(),
                     currentBlind: vm.blinds.getCurrentBlind(),
                     nextBlind: vm.blinds.getNextBlinds()

@@ -12,18 +12,20 @@ struct TimerView: View {
     let blinds: BlindsModel
     let timerInfo: TimerModel
     let backupTimer: TimerModel
+    let clockFontSize: Double
+    let durationClockFontSize: Double
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 Text("Level \(timerInfo.currentLevel + 1)")
                     .fontWeight(.bold)
-                ClockLayout(time: timerInfo.currentTime, fontSize: 80)
+                ClockLayout(time: timerInfo.currentTime, fontSize: clockFontSize)
                 VStack(spacing: .zero) {
                     Text("Elapsed time")
                         .fontWeight(.bold)
                      
-                    ClockLayout(time: timerInfo.elapsedTime, fontSize: 20)
+                    ClockLayout(time: timerInfo.elapsedTime, fontSize: durationClockFontSize)
                         .fontWeight(.regular)
                 }
             }
@@ -56,7 +58,9 @@ struct TimerView_Previews: PreviewProvider {
                 currentLevel: 100,
                 currentTime: 300,
                 elapsedTime: 1
-            )
+            ),
+            clockFontSize: 10,
+            durationClockFontSize: 10
         )
     }
 }

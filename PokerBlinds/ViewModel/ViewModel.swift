@@ -65,8 +65,6 @@ class ViewModel: ObservableObject {
     
     private var cancellable = Set<AnyCancellable>()
     
-    let fontSize: Double = 60
-    
     init() {
         // Setup subscriber on blind model to populate blind table
         // Updates whenever a user changes blind options
