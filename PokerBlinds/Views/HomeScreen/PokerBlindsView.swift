@@ -37,10 +37,10 @@ struct PokerBlindsView: View {
     // Orientation variable
     @State private var orientation = UIDeviceOrientation.unknown
     var mainFontSize: Double {
-        return isIpad ? 200 : 80
+        return isIpad ? 200 : 90
     }
     var durationClockFontSize: Double {
-        return isIpad ? 50 : 25
+        return isIpad ? 50 : 20
     }
     var blindFontSize: Double {
         return isIpad ? 150 : 60
@@ -75,7 +75,7 @@ struct PokerBlindsView_Previews: PreviewProvider {
 
 extension PokerBlindsView {
     private var verticalLayout: some View {
-        VStack(spacing: .zero) {
+        VStack(spacing: 5) {
             TimerView(
                 blinds: vm.blinds.startingOptions,
                 timerInfo: vm.timerInfo,
