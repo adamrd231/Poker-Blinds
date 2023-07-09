@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct OptionRowView: View {
-    
     let text: String
     @Binding var firstValue: Int
     
@@ -18,7 +17,7 @@ struct OptionRowView: View {
                 Text(text)
                     .font(.caption)
                 Text(firstValue.description)
-                    .font(.title)
+                    .font(.title2)
             }
             Spacer()
             Stepper("", value: $firstValue, in: 100...5000, step: 100)
@@ -41,7 +40,7 @@ struct OptionRowBlindView: View {
                     Text("|")
                     Text((blind * 2).description)
                 }
-                .font(.title)
+                .font(.title2)
             }
             Spacer()
             Stepper("", value: $blind, in: 100...5000, step: 100)
@@ -74,11 +73,11 @@ struct OptionsView: View {
                                 Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
                                 
                             }
-                            .font(.title)
+                            .font(.title2)
                             .fixedSize()
                         }
                         Spacer()
-                        Stepper("", value: $vm.timerInfo.currentTime, in: 10...1000, step: 10)
+                        Stepper("", value: $vm.timerInfo.currentTime, in: 10...10_000, step: 10)
                             .fixedSize()
                     }
                     
@@ -96,6 +95,7 @@ struct OptionsView: View {
                                 .fixedSize()
                         }
                     }
+                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? 0.5 : 1.0)
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }))
                 }
 
@@ -115,31 +115,30 @@ struct OptionsView: View {
                         }
                     }
                     
-                    VStack {
-                        VStack(alignment: .trailing) {
-                            HStack {
-                                Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
-                                Text("Round warning")
-                                Spacer()
-                                Toggle(vm.usingRoundTimer ? "on" : "off", isOn: $vm.usingRoundTimer)
-                                    .font(.caption)
-                                    .fixedSize()
-                            }
-                           
-                            if storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) && vm.usingRoundTimer {
-                                Picker("", selection: $vm.roundWarningSound) {
-                                    ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
-                                        Text(index.title)
-                                    }
-                                }
+     
+                    VStack(alignment: .trailing) {
+                        HStack {
+                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
+                            Text("Round warning")
+                            Spacer()
+                            Toggle(vm.usingRoundTimer ? "on" : "off", isOn: $vm.usingRoundTimer)
+                                .font(.caption)
                                 .fixedSize()
-                                .onChange(of: vm.roundWarningSound, perform: { newValue in
-                                    SoundManager.instance.playSound(sound: vm.roundWarningSound)
-                                })
-                        
+                        }
+                       
+                        if storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) && vm.usingRoundTimer {
+                            Picker("", selection: $vm.roundWarningSound) {
+                                ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
+                                    Text(index.title)
+                                }
                             }
+                            .fixedSize()
+                            .onChange(of: vm.roundWarningSound, perform: { newValue in
+                                SoundManager.instance.playSound(sound: vm.roundWarningSound)
+                            })
                         }
                     }
+                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? 0.5 : 1.0)
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
                 }
                 BlindTable
@@ -159,7 +158,9 @@ extension OptionsView {
         Section(header: HStack {
             Text("Blind Table")
             Spacer()
-            ClockLayout(time: vm.totalGameTime ?? 0, fontSize: 10)
+            Text("prediction: ")
+                .font(.system(size: 12))
+            ClockLayout(time: vm.totalGameTime ?? 0, fontSize: 12)
  
         }) {
             ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in

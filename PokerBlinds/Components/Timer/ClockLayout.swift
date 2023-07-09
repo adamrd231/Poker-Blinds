@@ -26,7 +26,7 @@ struct ClockLayout: View {
     var body: some View {
         HStack(alignment: .center, spacing: .zero) {
             if hours >= 1 {
-                Text(hours < 10 ? "0\(Int(hours))" : "\(Int(hours))")
+                Text("\(Int(hours))")
                 Text(":")
             }
             // if hours greater than one and minutes less than 10, show 0 placeholder
