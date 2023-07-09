@@ -22,28 +22,13 @@ extension TimerStates: CustomStringConvertible {
     }
 }
 
-struct ElapsedTimer {
-    var totalTime: Int
-    
-    var totalHours: Double {
-        print("total hours \(Double(totalTime)) results in: \(Double(totalTime) / 3600)")
-        return Double(totalTime) / 3600
-    }
-    var totalMinutes: Double {
-        return totalHours.truncatingRemainder(dividingBy: 1) * 60
-    }
-    var totalSeconds: Int {
-        return totalTime % 60
-    }
-}
-
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
     @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTime: 0)
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
-    @Published var totalGameTime: ElapsedTimer?
+    @Published var totalGameTime: Int = 0
     
     // Blind info and levels
     @Published var blinds = BlindLevelModel()
@@ -72,28 +57,35 @@ class ViewModel: ObservableObject {
     }
     
     func addSubscribers() {
+        // Subscribe to the blinds so to update blind tables
         $blinds
-            .combineLatest($quickEndGame)
-            .sink { [weak self] (BlindsModel, usingQuickEndGame) in
-                var newBlinds:[BlindLevel] = []
-                var start = BlindsModel.startingOptions.startingSmallBlind
-                while start <= BlindsModel.startingOptions.blindLimit {
-                    newBlinds.append(BlindLevel(smallBlind: start))
-                    start += BlindsModel.startingOptions.amountToRaiseBlinds
-                }
-                if usingQuickEndGame {
-                    // Add double time as final level - or double levels?
-                    newBlinds.append(newBlinds.last ?? BlindLevel(smallBlind: 1000))
-                    // Double last blind for final level
-                    newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
-                }
-                let totalGameTime = newBlinds.count * (self?.timerInfo.currentTime ?? 0)
-                print("total game time \(totalGameTime)")
-                self?.totalGameTime = ElapsedTimer(totalTime: newBlinds.count * (self?.timerInfo.currentTime ?? 0))
-                print("total game time \(self?.totalGameTime)")
-                self?.blinds.blindLevels = newBlinds
+            .combineLatest($quickEndGame, $timerInfo)
+            .map(updateBlindTables)
+            .sink { [weak self] (returnedBlinds, returnedGameTime) in
+                self?.blinds.blindLevels = returnedBlinds
+                self?.totalGameTime = returnedGameTime
             }
             .store(in: &cancellable)
+    }
+    
+    func updateBlindTables(blinds: BlindLevelModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
+        // Blinds
+        var newBlinds:[BlindLevel] = []
+        var start = blinds.startingOptions.startingSmallBlind
+        while start <= blinds.startingOptions.blindLimit {
+            newBlinds.append(BlindLevel(smallBlind: start))
+            start += blinds.startingOptions.amountToRaiseBlinds
+        }
+        if usingQuickEndgameRule {
+            // Add double time as final level - or double levels?
+            newBlinds.append(newBlinds.last ?? BlindLevel(smallBlind: 1000))
+            // Double last blind for final level
+            newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
+        }
+        
+        let totalGameTime = newBlinds.count * timer.currentTime
+        
+        return (newBlinds, totalGameTime)
     }
     
     func runTimer(useWarningTimer: Bool) {

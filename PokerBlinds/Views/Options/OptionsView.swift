@@ -159,7 +159,7 @@ extension OptionsView {
         Section(header: HStack {
             Text("Blind Table")
             Spacer()
-            ClockLayout(time: vm.totalGameTime?.totalTime ?? 0, fontSize: 10)
+            ClockLayout(time: vm.totalGameTime ?? 0, fontSize: 10)
  
         }) {
             ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
@@ -175,9 +175,6 @@ extension OptionsView {
                     Text(level.bigBlind.description)
                 }
             }
-        }
-        .onAppear {
-            print("total game time options view \(vm.totalGameTime?.totalHours)")
         }
     }
 }

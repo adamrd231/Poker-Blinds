@@ -61,7 +61,6 @@ struct PokerBlindsView: View {
         })
         .onRotate { newOrientation in
             orientation = newOrientation
-            print("idiom \(isIpad)")
         }
     }
 }
