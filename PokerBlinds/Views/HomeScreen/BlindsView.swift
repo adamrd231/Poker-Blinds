@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct BlindsView: View {
-    
+    let fontSize: Double
     let previousBlind: BlindLevel?
     let currentBlind: BlindLevel
     let nextBlind: BlindLevel?
     
     var body: some View {
         VStack(alignment: .center) {
-            
             if let previous = previousBlind {
                 HStack {
                     Text("\(previous.smallBlind)")
                     Text("|")
                     Text("\(previous.bigBlind)")
                 }
+            } else {
+                Text("Good luck!")
             }
             
             HStack {
@@ -29,7 +30,8 @@ struct BlindsView: View {
                 Text("|")
                 Text("\(currentBlind.bigBlind)")
             }
-            .font(.largeTitle)
+            .font(.system(size: fontSize, weight: .heavy, design: .rounded))
+            .minimumScaleFactor(0.1)
             .bold()
             
             if let last = nextBlind {
@@ -38,18 +40,20 @@ struct BlindsView: View {
                     Text("|")
                     Text("\(last.bigBlind)")
                 }
+            }else {
+                Text("no more blinds!")
             }
         }
-        .frame(maxWidth: .infinity)
     }
 }
 
 struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
         BlindsView(
-            previousBlind: BlindLevel(smallBlind: 100),
-            currentBlind: BlindLevel(smallBlind: 200),
-            nextBlind: BlindLevel(smallBlind: 300)
+            fontSize: 80,
+            previousBlind: nil,
+            currentBlind: BlindLevel(smallBlind: 100),
+            nextBlind: nil
         )
     }
 }

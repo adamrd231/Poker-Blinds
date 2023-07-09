@@ -7,56 +7,73 @@
 
 import SwiftUI
 
+// Our custom view modifier to track rotation and
+// call our action
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+// A View wrapper to make the modifier easier to use
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
+
 struct PokerBlindsView: View {
-    
+    // Data objects and services
     @EnvironmentObject var vm: ViewModel
     @ObservedObject var storeManager: StoreManager
-    @State var isPortrait: Bool = true
+    // Explanation screen control
     @State var isShowingDoubleCheck = false
-    
-    @Environment(\.horizontalSizeClass) var sizeClass
-    @Environment(\.dynamicTypeSize) var typeSize
-    
+    // Orientation variable
+    @State private var orientation = UIDeviceOrientation.unknown
+
     var body: some View {
-        wrappedView
-            .sheet(isPresented: $isShowingDoubleCheck, content: {
-                DoubleCheckPopup(isShowing: $isShowingDoubleCheck)
-                    .presentationDetents([.medium])
-            })
-            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                guard let scene = UIApplication.shared.windows.first?.windowScene else { return }
-                self.isPortrait = scene.interfaceOrientation.isPortrait
+        VStack {
+            if orientation == .portrait || orientation == .unknown {
+                verticalLayout
+            } else {
+                horizontalLayout
             }
+        }
+        .sheet(isPresented: $isShowingDoubleCheck, content: {
+            DoubleCheckPopup(isShowing: $isShowingDoubleCheck)
+                .presentationDetents([.medium])
+        })
+        .onRotate { newOrientation in
+            orientation = newOrientation
+        }
     }
 }
 
 struct PokerBlindsView_Previews: PreviewProvider {
     static var previews: some View {
         PokerBlindsView(storeManager: StoreManager())
+            .environmentObject(ViewModel())
     }
 }
 
 extension PokerBlindsView {
-    private var wrappedView: some View {
-        VStack {
-            if isPortrait {
-                verticalLayout
-            } else {
-                horizontalLayout
-            }
-        }
-    }
-    
     private var verticalLayout: some View {
-        VStack {
-
+        VStack(spacing: .zero) {
             TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
+
             BlindsView(
+                fontSize: vm.fontSize,
                 previousBlind: vm.blinds.getPreviousBlinds(),
                 currentBlind: vm.blinds.getCurrentBlind(),
                 nextBlind: vm.blinds.getNextBlinds()
             )
-            .padding()
+            Spacer()
             buttons
             if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                 Banner()
@@ -68,15 +85,12 @@ extension PokerBlindsView {
         HStack(alignment: .center, spacing: 0) {
             TimerView(blinds: vm.blinds.startingOptions, timerInfo: vm.timerInfo, backupTimer: vm.backupTimer ?? vm.timerInfo)
             VStack() {
-                Text("Elapsed time")
-                    .bold()
-//                ClockLayout(currentHours: vm.timerInfo.currentTime / 3600, currentMinutes: vm.timerInfo.elapsedTImeCurrentMinutes, currentSeconds: vm.timerInfo.elapsedTImeCurrentSeconds, largeText: false)
                 BlindsView(
+                    fontSize: vm.fontSize,
                     previousBlind: vm.blinds.getPreviousBlinds(),
                     currentBlind: vm.blinds.getCurrentBlind(),
                     nextBlind: vm.blinds.getNextBlinds()
                 )
-                .padding(.horizontal)
                 buttons
                 if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                     Banner()
@@ -107,5 +121,6 @@ extension PokerBlindsView {
             .buttonStyle(BasicButtonStyle())
         }
         .padding(.horizontal)
+        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
     }
 }

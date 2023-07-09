@@ -116,7 +116,6 @@ struct OptionsView: View {
                     }
                     
                     VStack {
-                       
                         VStack(alignment: .trailing) {
                             HStack {
                                 Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
@@ -139,19 +138,12 @@ struct OptionsView: View {
                                 })
                         
                             }
-                            
                         }
                     }
                     .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
                 }
-                
-                
                 BlindTable
             }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-            guard let scene = UIApplication.shared.windows.first?.windowScene else { return }
-            self.isPortrait = scene.interfaceOrientation.isPortrait
         }
     }
 }
