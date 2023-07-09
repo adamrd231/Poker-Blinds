@@ -15,11 +15,9 @@ struct ClockLayout: View {
         return time % 60
     }
     var hours: Double {
-        print("hours: \(Double(time) / 3600)")
         return Double(time) / 3600
     }
     var minutes: Double {
-        print("minutes: \(hours.truncatingRemainder(dividingBy: 1) * 60)")
         return hours.truncatingRemainder(dividingBy: 1) * 60
     }
     

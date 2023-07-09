@@ -82,9 +82,7 @@ class ViewModel: ObservableObject {
             // Double last blind for final level
             newBlinds.append(BlindLevel(smallBlind: (newBlinds.last?.smallBlind ?? 1000) * 2))
         }
-        
         let totalGameTime = newBlinds.count * timer.currentTime
-        
         return (newBlinds, totalGameTime)
     }
     

@@ -62,7 +62,6 @@ struct RemoveAdvertising: View {
                 Button("Restore purchases") {
                     Task {
                         let result = try await storeManager.restorePurchases()
-                        print("Result \(result)")
                     }
                 }
             }

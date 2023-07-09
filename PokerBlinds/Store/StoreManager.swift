@@ -84,7 +84,6 @@ class StoreManager: ObservableObject  {
             case let.verified(transaction):
                 guard let product = self.products.first(where: { $0.id == transaction.productID }) else { return }
                 self.purchasedNonConsumables.insert(product)
-                print(self.purchasedNonConsumables.count)
                 await transaction.finish()
             default: return
         }
