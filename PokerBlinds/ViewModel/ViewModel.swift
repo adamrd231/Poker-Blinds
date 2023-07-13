@@ -48,6 +48,9 @@ class ViewModel: ObservableObject {
     @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
     @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
     
+    // Idle timer
+    @Published var isIdleTimerActive: Bool = false
+    
     private var cancellable = Set<AnyCancellable>()
     
     init() {
@@ -88,6 +91,7 @@ class ViewModel: ObservableObject {
     
     func runTimer(useWarningTimer: Bool) {
         self.isTimerRunning = .isRunning
+        isIdleTimerActive = true
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
                 // Round Timer -- Update poker timer value
@@ -119,17 +123,18 @@ class ViewModel: ObservableObject {
         // make a copy for backing up stuff
         runTimer(useWarningTimer: useWarningTimer)
         backupTimer = timerInfo
-        
     }
     
     func pauseTimer() {
         self.isTimerRunning = .isPaused
         self.timer.invalidate()
+        isIdleTimerActive = false
     }
     
     func resetTimer() {
         self.timer.invalidate()
         self.isTimerRunning = .hasNotBeenStarted
+        isIdleTimerActive = false
         // Reset to backup values
         if let backup = self.backupTimer {
             self.timerInfo = backup

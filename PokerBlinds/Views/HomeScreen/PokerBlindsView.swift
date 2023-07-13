@@ -55,6 +55,10 @@ struct PokerBlindsView: View {
                 horizontalLayout
             }
         }
+        .onChange(of: vm.isIdleTimerActive, perform: { isActive in
+            print("Idle timer: \(isActive)")
+            UIApplication.shared.isIdleTimerDisabled = isActive
+        })
         .sheet(isPresented: $isShowingDoubleCheck, content: {
             DoubleCheckPopup(isShowing: $isShowingDoubleCheck)
                 .presentationDetents([.medium])
