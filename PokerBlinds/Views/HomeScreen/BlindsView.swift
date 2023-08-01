@@ -9,13 +9,16 @@ import SwiftUI
 
 struct BlindsView: View {
     let fontSize: Double
-    let previousBlind: BlindLevel?
-    let currentBlind: BlindLevel
-    let nextBlind: BlindLevel?
+    let vm: ViewModel
+    let currentLevel: Int
+    
+//    let previousBlind: BlindLevel?
+//    let currentBlind: BlindLevel
+//    let nextBlind: BlindLevel?
     
     var body: some View {
         VStack(alignment: .center) {
-            if let previous = previousBlind {
+            if let previous = vm.blinds.getPreviousBlinds(currentLevel: currentLevel) {
                 HStack {
                     Text("\(previous.smallBlind)")
                     Text("|")
@@ -26,15 +29,15 @@ struct BlindsView: View {
             }
             
             HStack {
-                Text("\(currentBlind.smallBlind)")
+                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).smallBlind)")
                 Text("|")
-                Text("\(currentBlind.bigBlind)")
+                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).bigBlind)")
             }
             .font(.system(size: fontSize, weight: .heavy, design: .rounded))
             .minimumScaleFactor(0.1)
             .bold()
             
-            if let last = nextBlind {
+            if let last = vm.blinds.getNextBlinds(currentLevel: currentLevel) {
                 HStack {
                     Text("\(last.smallBlind)")
                     Text("|")
@@ -51,9 +54,8 @@ struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
         BlindsView(
             fontSize: 80,
-            previousBlind: nil,
-            currentBlind: BlindLevel(smallBlind: 100),
-            nextBlind: nil
+            vm: ViewModel(),
+            currentLevel: 0
         )
     }
 }

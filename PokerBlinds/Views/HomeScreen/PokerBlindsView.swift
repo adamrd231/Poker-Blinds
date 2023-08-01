@@ -79,12 +79,10 @@ extension PokerBlindsView {
                 durationClockFontSize: durationClockFontSize
                 
             )
-
             BlindsView(
                 fontSize: blindFontSize,
-                previousBlind: vm.blinds.getPreviousBlinds(),
-                currentBlind: vm.blinds.getCurrentBlind(),
-                nextBlind: vm.blinds.getNextBlinds()
+                vm: vm,
+                currentLevel: vm.timerInfo.currentLevel
             )
             Spacer()
             buttons
@@ -106,9 +104,8 @@ extension PokerBlindsView {
             VStack() {
                 BlindsView(
                     fontSize: blindFontSize,
-                    previousBlind: vm.blinds.getPreviousBlinds(),
-                    currentBlind: vm.blinds.getCurrentBlind(),
-                    nextBlind: vm.blinds.getNextBlinds()
+                    vm: vm,
+                    currentLevel: vm.timerInfo.currentLevel
                 )
                 buttons
                 if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {

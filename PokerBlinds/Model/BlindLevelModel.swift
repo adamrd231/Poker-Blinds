@@ -8,11 +8,10 @@
 import SwiftUI
 
 class BlindLevelModel {
-    var currentLevel: Int = 0
     var startingOptions: BlindsModel = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     var blindLevels: [BlindLevel] = []
     
-    func getCurrentBlind() -> BlindLevel {
+    func getCurrentBlind(currentLevel: Int) -> BlindLevel {
         if currentLevel + 1 >= blindLevels.count {
             return blindLevels.last ?? BlindLevel(smallBlind: 1000)
         } else {
@@ -20,7 +19,7 @@ class BlindLevelModel {
         }
     }
     
-    func getPreviousBlinds() -> BlindLevel? {
+    func getPreviousBlinds(currentLevel: Int) -> BlindLevel? {
         if currentLevel == 0 {
             return nil
         } else if currentLevel + 1 > blindLevels.count {
@@ -30,7 +29,7 @@ class BlindLevelModel {
         }
     }
     
-    func getNextBlinds() -> BlindLevel? {
+    func getNextBlinds(currentLevel: Int) -> BlindLevel? {
         if currentLevel + 1 >= blindLevels.count {
             return nil
         } else {
