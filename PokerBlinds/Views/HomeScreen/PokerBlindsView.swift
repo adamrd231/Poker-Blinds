@@ -42,7 +42,7 @@ struct PokerBlindsView: View {
 
     var body: some View {
         VStack {
-            if orientation == .portrait || orientation == .unknown {
+            if orientation == .portrait || orientation == .unknown || orientation == .faceUp {
                 verticalLayout
             } else {
                 horizontalLayout
@@ -56,6 +56,7 @@ struct PokerBlindsView: View {
                 .presentationDetents([.medium])
         })
         .onRotate { newOrientation in
+            print("orientation: \(newOrientation.isFlat)")
             orientation = newOrientation
         }
     }
