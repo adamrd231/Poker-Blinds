@@ -56,7 +56,6 @@ struct PokerBlindsView: View {
                 .presentationDetents([.medium])
         })
         .onRotate { newOrientation in
-            print("orientation: \(newOrientation.isFlat)")
             orientation = newOrientation
         }
     }
