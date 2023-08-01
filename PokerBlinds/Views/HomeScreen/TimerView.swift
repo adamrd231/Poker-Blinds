@@ -51,7 +51,7 @@ struct TimerView_Previews: PreviewProvider {
                 amountToRaiseBlinds: 100,
                 blindLimit: 2000),
             timerInfo: TimerModel(
-                currentLevel: 1,
+                currentLevel: 0,
                 currentTime: 10,
                 elapsedTime: 0),
             backupTimer: TimerModel(

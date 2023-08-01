@@ -1,10 +1,3 @@
-//
-//  PokerBlindsView.swift
-//  PokerBlinds
-//
-//  Created by Adam Reed on 6/24/23.
-//
-
 import SwiftUI
 
 // Our custom view modifier to track rotation and

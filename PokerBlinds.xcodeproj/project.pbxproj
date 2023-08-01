@@ -12,7 +12,6 @@
 		662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD602A4E5A990027C167 /* clockTicking.wav */; };
 		662BBD632A4E5A990027C167 /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD612A4E5A990027C167 /* timesUp.wav */; };
 		662BBD652A4E5BF50027C167 /* threeBells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD642A4E5BF50027C167 /* threeBells.wav */; };
-		662BBD6A2A5217B60027C167 /* tickingTime.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD692A5217B60027C167 /* tickingTime.wav */; };
 		662BBD6C2A5708C40027C167 /* BlindLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */; };
 		662BBD6E2A570A4B0027C167 /* Blinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6D2A570A4B0027C167 /* Blinds.swift */; };
 		662BBD702A570A690027C167 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6F2A570A690027C167 /* TimerModel.swift */; };
@@ -51,7 +50,6 @@
 		662BBD602A4E5A990027C167 /* clockTicking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clockTicking.wav; sourceTree = "<group>"; };
 		662BBD612A4E5A990027C167 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
 		662BBD642A4E5BF50027C167 /* threeBells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = threeBells.wav; sourceTree = "<group>"; };
-		662BBD692A5217B60027C167 /* tickingTime.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tickingTime.wav; path = ../../../../tickingTime.wav; sourceTree = "<group>"; };
 		662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindLevelModel.swift; sourceTree = "<group>"; };
 		662BBD6D2A570A4B0027C167 /* Blinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blinds.swift; sourceTree = "<group>"; };
 		662BBD6F2A570A690027C167 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
@@ -133,6 +131,7 @@
 		6642EA272A3367F20011589B /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				662BBD712A570B7B0027C167 /* Timer */,
 				668EF5E526A347AC0040FC4D /* HomeView.swift */,
 				6642EA282A3368280011589B /* DoubleCheckPopup.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
@@ -153,7 +152,6 @@
 		6642EA2D2A3509040011589B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				662BBD712A570B7B0027C167 /* Timer */,
 				668EF60326A4A65D0040FC4D /* Buttons */,
 				6642EA242A2FC4550011589B /* StyleModfiers */,
 			);
@@ -177,7 +175,6 @@
 				665BCEE12A37B2D7007023FD /* SoundManager.swift */,
 				6659A1EE26AC91CF00BD698E /* bell.wav */,
 				665BCEE72A3A17B3007023FD /* bonk.mp3 */,
-				662BBD692A5217B60027C167 /* tickingTime.wav */,
 				665BCEE82A3A17B3007023FD /* bang.mp3 */,
 				662BBD602A4E5A990027C167 /* clockTicking.wav */,
 				662BBD612A4E5A990027C167 /* timesUp.wav */,
@@ -365,7 +362,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */,
-				662BBD6A2A5217B60027C167 /* tickingTime.wav in Resources */,
 				662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */,
 				662BBD632A4E5A990027C167 /* timesUp.wav in Resources */,
 				6659A1EF26AC91CF00BD698E /* bell.wav in Resources */,
