@@ -33,3 +33,15 @@ struct TimerModel: Codable {
         return elapsedTime / 60
     }
 }
+
+enum TimerStates: String, Codable {
+    case isRunning
+    case isPaused
+    case hasNotBeenStarted
+}
+
+extension TimerStates: CustomStringConvertible {
+    var description: String {
+        return "\(rawValue)"
+    }
+}

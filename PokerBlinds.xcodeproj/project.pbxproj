@@ -12,7 +12,6 @@
 		662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD602A4E5A990027C167 /* clockTicking.wav */; };
 		662BBD632A4E5A990027C167 /* timesUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD612A4E5A990027C167 /* timesUp.wav */; };
 		662BBD652A4E5BF50027C167 /* threeBells.wav in Resources */ = {isa = PBXBuildFile; fileRef = 662BBD642A4E5BF50027C167 /* threeBells.wav */; };
-		662BBD6C2A5708C40027C167 /* BlindLevelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */; };
 		662BBD6E2A570A4B0027C167 /* Blinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6D2A570A4B0027C167 /* Blinds.swift */; };
 		662BBD702A570A690027C167 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD6F2A570A690027C167 /* TimerModel.swift */; };
 		662BBD732A570B970027C167 /* ClockLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662BBD722A570B970027C167 /* ClockLayout.swift */; };
@@ -50,7 +49,6 @@
 		662BBD602A4E5A990027C167 /* clockTicking.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clockTicking.wav; sourceTree = "<group>"; };
 		662BBD612A4E5A990027C167 /* timesUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = timesUp.wav; sourceTree = "<group>"; };
 		662BBD642A4E5BF50027C167 /* threeBells.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = threeBells.wav; sourceTree = "<group>"; };
-		662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindLevelModel.swift; sourceTree = "<group>"; };
 		662BBD6D2A570A4B0027C167 /* Blinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blinds.swift; sourceTree = "<group>"; };
 		662BBD6F2A570A690027C167 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		662BBD722A570B970027C167 /* ClockLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockLayout.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 		668B966F2A41E15F006D76A1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				662BBD6B2A5708C40027C167 /* BlindLevelModel.swift */,
 				662BBD6D2A570A4B0027C167 /* Blinds.swift */,
 				662BBD6F2A570A690027C167 /* TimerModel.swift */,
 			);
@@ -424,7 +421,6 @@
 				6642EA232A2FBB270011589B /* ViewModel.swift in Sources */,
 				668EF5FF26A49F3A0040FC4D /* TimerView.swift in Sources */,
 				6659A20026B25C8A00BD698E /* BannerAdMob.swift in Sources */,
-				662BBD6C2A5708C40027C167 /* BlindLevelModel.swift in Sources */,
 				668B967A2A47785A006D76A1 /* BasicButtonStyle.swift in Sources */,
 				6659A20C26C47FDE00BD698E /* StoreManager.swift in Sources */,
 				6659A21226C4850900BD698E /* RemoveAdvertising.swift in Sources */,

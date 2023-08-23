@@ -160,7 +160,7 @@ extension OptionsView {
             Spacer()
             Text("prediction: ")
                 .font(.system(size: 12))
-            ClockLayout(time: vm.totalGameTime ?? 0, fontSize: 12)
+            ClockLayout(time: vm.totalGameTime , fontSize: 12)
  
         }) {
             ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in

@@ -28,14 +28,23 @@ struct BlindsView: View {
                 Text("Good luck!")
             }
             
+//            HStack {
+//                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).smallBlind)")
+//                Text("|")
+//                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).bigBlind)")
+//            }
             HStack {
-                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).smallBlind)")
+                Text("\(vm.blinds.blindLevels[currentLevel].smallBlind)")
                 Text("|")
-                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).bigBlind)")
+                Text("\(vm.blinds.blindLevels[currentLevel].bigBlind)")
             }
             .font(.system(size: fontSize, weight: .heavy, design: .rounded))
             .minimumScaleFactor(0.1)
             .bold()
+            .onAppear {
+                print("Current level: \(currentLevel)")
+                print("blinds are: \(vm.blinds.blindLevels)")
+            }
             
             if let last = vm.blinds.getNextBlinds(currentLevel: currentLevel) {
                 HStack {

@@ -10,18 +10,6 @@ import GoogleMobileAds
 import Combine
 import AVFoundation
 
-enum TimerStates: String, Codable {
-    case isRunning
-    case isPaused
-    case hasNotBeenStarted
-}
-
-extension TimerStates: CustomStringConvertible {
-    var description: String {
-        return "\(rawValue)"
-    }
-}
-
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
@@ -31,7 +19,8 @@ class ViewModel: ObservableObject {
     @Published var totalGameTime: Int = 0
     
     // Blind info and levels
-    @Published var blinds = BlindLevelModel()
+    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 2000)
+    @Published var blindLevels: [BlindLevel] = []
     
     // Google Admob variables
     @State var interstitial: GADInterstitialAd?
@@ -61,17 +50,17 @@ class ViewModel: ObservableObject {
     
     func addSubscribers() {
         // Subscribe to the blinds so to update blind tables
-        $blinds
+        $blindGameOptions
             .combineLatest($quickEndGame, $timerInfo)
             .map(updateBlindTables)
             .sink { [weak self] (returnedBlinds, returnedGameTime) in
-                self?.blinds.blindLevels = returnedBlinds
+                self?.blindLevels = returnedBlinds
                 self?.totalGameTime = returnedGameTime
             }
             .store(in: &cancellable)
     }
     
-    func updateBlindTables(blinds: BlindLevelModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
+    func updateBlindTables(blinds: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
         // Blinds
         var newBlinds:[BlindLevel] = []
         var start = blinds.startingOptions.startingSmallBlind
