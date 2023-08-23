@@ -81,9 +81,9 @@ struct OptionsView: View {
                             .fixedSize()
                     }
                     
-                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blinds.startingOptions.startingSmallBlind)
-                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blinds.startingOptions.amountToRaiseBlinds)
-                    OptionRowBlindView(text: "Blind limit", blind: $vm.blinds.startingOptions.blindLimit)
+                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind)
+                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds)
+                    OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit)
                    
                     VStack {
                         HStack(alignment: .center) {
@@ -115,7 +115,6 @@ struct OptionsView: View {
                         }
                     }
                     
-     
                     VStack(alignment: .trailing) {
                         HStack {
                             Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
@@ -163,7 +162,7 @@ extension OptionsView {
             ClockLayout(time: vm.totalGameTime , fontSize: 12)
  
         }) {
-            ForEach(Array(zip(vm.blinds.blindLevels.indices, vm.blinds.blindLevels)), id: \.0) { index, level in
+            ForEach(Array(zip(vm.blindLevels.indices, vm.blindLevels)), id: \.0) { index, level in
                 HStack {
                     Text("Level \(index + 1)")
                     Rectangle()

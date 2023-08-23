@@ -29,6 +29,7 @@ struct PokerBlindsView: View {
     @State var isShowingDoubleCheck = false
     // Orientation variable
     @State private var orientation = UIDeviceOrientation.unknown
+    @State var isShowingGameResetConfirmation = false
     var mainFontSize: Double {
         return isIpad ? 200 : 90
     }
@@ -72,7 +73,7 @@ extension PokerBlindsView {
     private var verticalLayout: some View {
         VStack(spacing: 5) {
             TimerView(
-                blinds: vm.blinds.startingOptions,
+                blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,
                 backupTimer: vm.backupTimer ?? vm.timerInfo,
                 clockFontSize: mainFontSize,
@@ -95,7 +96,7 @@ extension PokerBlindsView {
     private var horizontalLayout: some View {
         HStack(alignment: .center, spacing: 0) {
             TimerView(
-                blinds: vm.blinds.startingOptions,
+                blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,
                 backupTimer: vm.backupTimer ?? vm.timerInfo,
                 clockFontSize: mainFontSize,
@@ -132,9 +133,14 @@ extension PokerBlindsView {
             }.buttonStyle(BasicButtonStyle())
             
             Button("Reset") {
-                vm.resetTimer()
+                isShowingGameResetConfirmation.toggle()
             }
             .buttonStyle(BasicButtonStyle())
+            .confirmationDialog("Are you sure?", isPresented: $isShowingGameResetConfirmation) {
+                Button("This action can not be undone") {
+                    vm.resetTimer()
+                }
+            }
         }
         .padding(.horizontal)
         .frame(maxWidth: UIScreen.main.bounds.width * 0.9)

@@ -63,10 +63,10 @@ class ViewModel: ObservableObject {
     func updateBlindTables(blinds: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
         // Blinds
         var newBlinds:[BlindLevel] = []
-        var start = blinds.startingOptions.startingSmallBlind
-        while start <= blinds.startingOptions.blindLimit {
+        var start = blindGameOptions.startingSmallBlind
+        while start <= blindGameOptions.blindLimit {
             newBlinds.append(BlindLevel(smallBlind: start))
-            start += blinds.startingOptions.amountToRaiseBlinds
+            start += blindGameOptions.amountToRaiseBlinds
         }
         if usingQuickEndgameRule {
             // Add double time as final level - or double levels?

@@ -18,15 +18,15 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            if let previous = vm.blinds.getPreviousBlinds(currentLevel: currentLevel) {
-                HStack {
-                    Text("\(previous.smallBlind)")
-                    Text("|")
-                    Text("\(previous.bigBlind)")
-                }
-            } else {
-                Text("Good luck!")
-            }
+//            if let previous = vm.blinds.getPreviousBlinds(currentLevel: currentLevel) {
+//                HStack {
+//                    Text("\(previous.smallBlind)")
+//                    Text("|")
+//                    Text("\(previous.bigBlind)")
+//                }
+//            } else {
+//                Text("Good luck!")
+//            }
             
 //            HStack {
 //                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).smallBlind)")
@@ -34,27 +34,27 @@ struct BlindsView: View {
 //                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).bigBlind)")
 //            }
             HStack {
-                Text("\(vm.blinds.blindLevels[currentLevel].smallBlind)")
+                Text("\(vm.blindLevels[currentLevel].smallBlind)")
                 Text("|")
-                Text("\(vm.blinds.blindLevels[currentLevel].bigBlind)")
+                Text("\(vm.blindLevels[currentLevel].bigBlind)")
             }
             .font(.system(size: fontSize, weight: .heavy, design: .rounded))
             .minimumScaleFactor(0.1)
             .bold()
             .onAppear {
                 print("Current level: \(currentLevel)")
-                print("blinds are: \(vm.blinds.blindLevels)")
+                print("blinds are: \(vm.blindLevels)")
             }
             
-            if let last = vm.blinds.getNextBlinds(currentLevel: currentLevel) {
-                HStack {
-                    Text("\(last.smallBlind)")
-                    Text("|")
-                    Text("\(last.bigBlind)")
-                }
-            }else {
-                Text("no more blinds!")
-            }
+//            if let last = vm.blinds.getNextBlinds(currentLevel: currentLevel) {
+//                HStack {
+//                    Text("\(last.smallBlind)")
+//                    Text("|")
+//                    Text("\(last.bigBlind)")
+//                }
+//            }else {
+//                Text("no more blinds!")
+//            }
         }
     }
 }
