@@ -7,7 +7,6 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-
             if currentLevel - 1 >= 0 {
                 if let smallBlindInfo = blindLevels[currentLevel - 1] {
                     HStack {

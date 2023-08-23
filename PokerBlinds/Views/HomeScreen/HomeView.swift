@@ -2,9 +2,10 @@ import SwiftUI
 import AVFoundation
 
 struct HomeView: View {
-    
     @ObservedObject var vm = ViewModel()
+    @ObservedObject var adsViewModel = AdsViewModel()
     @StateObject var storeManager = StoreManager()
+    @State var playedVideo = false
     
     var body: some View {
         TabView {
@@ -14,6 +15,11 @@ struct HomeView: View {
                     HStack {
                         Image(systemName: "house")
                         Text("Home")
+                    }
+                }
+                .onAppear {
+                    if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
+                        adsViewModel.showInterstitial = true
                     }
                 }
             
