@@ -10,7 +10,7 @@ private struct BannerVC: UIViewControllerRepresentable  {
     func makeUIViewController(context: Context) -> UIViewController {
         let view = GADBannerView(adSize: kGADAdSizeBanner)
         let viewController = UIViewController()
-        view.adUnitID = testBannerAdId
+        view.adUnitID = realBannerAdId
         view.rootViewController = viewController
         viewController.view.addSubview(view)
         viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)

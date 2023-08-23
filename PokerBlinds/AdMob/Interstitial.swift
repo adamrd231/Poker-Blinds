@@ -21,7 +21,7 @@ class InterstitialAdManager: NSObject, ObservableObject {
             let request = GADRequest()
             request.scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             
-            GADInterstitialAd.load(withAdUnitID: AdMobConstant.testInterstitialID, request: request, completionHandler: { [self] ad, error in
+            GADInterstitialAd.load(withAdUnitID: AdMobConstant.interstitialID, request: request, completionHandler: { [self] ad, error in
                 if let error = error {
                     print("Failed to load interstitial ad with error: \(error.localizedDescription)")
                     return
