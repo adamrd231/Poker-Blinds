@@ -19,7 +19,7 @@ class ViewModel: ObservableObject {
     @Published var totalGameTime: Int = 0
     
     // Blind info and levels
-    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 2000)
+    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindLevels: [BlindLevel] = []
     
     // Google Admob variables
@@ -60,10 +60,12 @@ class ViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
-    func updateBlindTables(blinds: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
+    func updateBlindTables(blindGameOptions: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
         // Blinds
         var newBlinds:[BlindLevel] = []
+
         var start = blindGameOptions.startingSmallBlind
+        print("Start = \(start)")
         while start <= blindGameOptions.blindLimit {
             newBlinds.append(BlindLevel(smallBlind: start))
             start += blindGameOptions.amountToRaiseBlinds

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BlindsView: View {
     let fontSize: Double
-    let vm: ViewModel
+    let blindLevels: [BlindLevel]
     let currentLevel: Int
     
 //    let previousBlind: BlindLevel?
@@ -18,43 +18,44 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-//            if let previous = vm.blinds.getPreviousBlinds(currentLevel: currentLevel) {
-//                HStack {
-//                    Text("\(previous.smallBlind)")
-//                    Text("|")
-//                    Text("\(previous.bigBlind)")
-//                }
-//            } else {
-//                Text("Good luck!")
-//            }
+
+            if currentLevel - 1 >= 0 {
+                if let smallBlindInfo = blindLevels[currentLevel - 1] {
+                    HStack {
+                        Text("\(smallBlindInfo.smallBlind)")
+                        Text("|")
+                        Text("\(smallBlindInfo.bigBlind)")
+                    }
+                }
+            } else {
+                Text("Good Luck!")
+            }
             
-//            HStack {
-//                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).smallBlind)")
-//                Text("|")
-//                Text("\(vm.blinds.getCurrentBlind(currentLevel: currentLevel).bigBlind)")
-//            }
             HStack {
-                Text("\(vm.blindLevels[currentLevel].smallBlind)")
+                Text("\(blindLevels[currentLevel].smallBlind)")
                 Text("|")
-                Text("\(vm.blindLevels[currentLevel].bigBlind)")
+                Text("\(blindLevels[currentLevel].bigBlind)")
             }
             .font(.system(size: fontSize, weight: .heavy, design: .rounded))
             .minimumScaleFactor(0.1)
             .bold()
             .onAppear {
                 print("Current level: \(currentLevel)")
-                print("blinds are: \(vm.blindLevels)")
+                print("blinds are: \(blindLevels)")
             }
             
-//            if let last = vm.blinds.getNextBlinds(currentLevel: currentLevel) {
-//                HStack {
-//                    Text("\(last.smallBlind)")
-//                    Text("|")
-//                    Text("\(last.bigBlind)")
-//                }
-//            }else {
-//                Text("no more blinds!")
-//            }
+            if currentLevel + 1 < blindLevels.count {
+                if let nextBlind = blindLevels[currentLevel + 1] {
+                    HStack {
+                        Text("\(nextBlind.smallBlind)")
+                        Text("|")
+                        Text("\(nextBlind.bigBlind)")
+                    }
+                }
+            } else {
+                Text("No more blinds!")
+            }
+
         }
     }
 }
@@ -63,7 +64,10 @@ struct Blinds_Previews: PreviewProvider {
     static var previews: some View {
         BlindsView(
             fontSize: 80,
-            vm: ViewModel(),
+            blindLevels: [
+                BlindLevel(smallBlind: 100),
+                BlindLevel(smallBlind: 200)
+            ],
             currentLevel: 0
         )
     }

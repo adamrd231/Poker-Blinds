@@ -82,7 +82,7 @@ extension PokerBlindsView {
             )
             BlindsView(
                 fontSize: blindFontSize,
-                vm: vm,
+                blindLevels: vm.blindLevels,
                 currentLevel: vm.timerInfo.currentLevel
             )
             Spacer()
@@ -105,7 +105,7 @@ extension PokerBlindsView {
             VStack() {
                 BlindsView(
                     fontSize: blindFontSize,
-                    vm: vm,
+                    blindLevels: vm.blindLevels,
                     currentLevel: vm.timerInfo.currentLevel
                 )
                 buttons
