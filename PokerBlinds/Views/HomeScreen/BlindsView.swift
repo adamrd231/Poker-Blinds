@@ -1,20 +1,9 @@
-//
-//  Blinds.swift
-//  PokerBlinds
-//
-//  Created by Adam Reed on 6/5/23.
-//
-
 import SwiftUI
 
 struct BlindsView: View {
     let fontSize: Double
     let blindLevels: [BlindLevel]
     let currentLevel: Int
-    
-//    let previousBlind: BlindLevel?
-//    let currentBlind: BlindLevel
-//    let nextBlind: BlindLevel?
     
     var body: some View {
         VStack(alignment: .center) {
