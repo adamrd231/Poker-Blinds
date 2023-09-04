@@ -31,13 +31,13 @@ struct PokerBlindsView: View {
     @State private var orientation = UIDeviceOrientation.unknown
     @State var isShowingGameResetConfirmation = false
     var mainFontSize: Double {
-        return isIpad ? 200 : 90
+        return isIpad ? 200 : 70
     }
     var durationClockFontSize: Double {
-        return isIpad ? 50 : 20
+        return isIpad ? 50 : 15
     }
     var blindFontSize: Double {
-        return isIpad ? 150 : 60
+        return isIpad ? 150 : 50
     }
     private var isIpad : Bool { UIDevice.current.userInterfaceIdiom == .pad }
 

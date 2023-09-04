@@ -8,40 +8,16 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            if currentLevel - 1 >= 0 {
-                if let smallBlindInfo = blindLevels[currentLevel - 1] {
-                    HStack {
-                        Text("\(smallBlindInfo.smallBlind)")
-                        Text("|")
-                        Text("\(smallBlindInfo.bigBlind)")
-                    }
-                }
-            } else {
-                Text("Good Luck!")
-            }
-            
-            HStack {
+            VStack {
+                Text("small")
                 Text("\(blindLevels[currentLevel].smallBlind)")
-                Text("|")
+                    .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                Text("big")
                 Text("\(blindLevels[currentLevel].bigBlind)")
+                    .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
             }
-            .frame(maxWidth: UIScreen.main.bounds.width)
-            .font(.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
-
-            
-            if currentLevel + 1 < blindLevels.count {
-                if let nextBlind = blindLevels[currentLevel + 1] {
-                    HStack {
-                        Text("\(nextBlind.smallBlind)")
-                        Text("|")
-                        Text("\(nextBlind.bigBlind)")
-                    }
-                }
-            } else {
-                Text("No more blinds!")
-            }
-
         }
+        .padding(.horizontal)
     }
 }
 
