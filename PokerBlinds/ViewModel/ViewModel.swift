@@ -10,6 +10,11 @@ import GoogleMobileAds
 import Combine
 import AVFoundation
 
+struct Player: Identifiable {
+    let id = UUID()
+    var startingStack:Int = 10_000
+}
+
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
@@ -17,6 +22,7 @@ class ViewModel: ObservableObject {
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     @Published var totalGameTime: Int = 0
+    @Published var players: [Player] = [Player(), Player(), Player(), Player(), Player()]
     
     // Blind info and levels
     @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
