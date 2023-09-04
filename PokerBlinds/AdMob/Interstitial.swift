@@ -4,8 +4,11 @@ import GoogleMobileAds
 class InterstitialAdManager: NSObject, ObservableObject {
     
     private struct AdMobConstant {
-        static let interstitialID = "ca-app-pub-4186253562269967/8239676117"
-        static let testInterstitialID = "ca-app-pub-3940256099942544/4411468910"
+        #if DEBUG
+            static var interstitialID = "ca-app-pub-3940256099942544/4411468910"
+        #else
+            static var interstitialID = "ca-app-pub-4186253562269967/8239676117"
+        #endif
     }
     
     final class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {

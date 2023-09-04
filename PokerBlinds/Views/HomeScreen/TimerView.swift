@@ -39,8 +39,6 @@ struct TimerView: View {
                 }
             }
         }
-        .minimumScaleFactor(0.01)
-        .padding(30)
     }
 }
 

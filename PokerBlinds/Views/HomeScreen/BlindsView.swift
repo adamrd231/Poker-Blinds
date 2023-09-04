@@ -4,6 +4,7 @@ struct BlindsView: View {
     let fontSize: Double
     let blindLevels: [BlindLevel]
     let currentLevel: Int
+    @Environment(\.sizeCategory) var sizeCategory
     
     var body: some View {
         VStack(alignment: .center) {
