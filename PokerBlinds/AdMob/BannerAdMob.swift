@@ -2,8 +2,6 @@ import SwiftUI
 import GoogleMobileAds
 import UIKit
 
-
-
 private struct BannerVC: UIViewControllerRepresentable  {
     
     private struct BannerAdMobConstant {
@@ -22,7 +20,6 @@ private struct BannerVC: UIViewControllerRepresentable  {
         viewController.view.addSubview(view)
         viewController.view.frame = CGRect(origin: .zero, size: kGADAdSizeBanner.size)
         view.load(GADRequest())
-
         return viewController
     }
 

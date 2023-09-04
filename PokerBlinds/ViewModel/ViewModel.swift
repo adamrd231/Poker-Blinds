@@ -69,9 +69,7 @@ class ViewModel: ObservableObject {
     func updateBlindTables(blindGameOptions: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
         // Blinds
         var newBlinds:[BlindLevel] = []
-
         var start = blindGameOptions.startingSmallBlind
-        print("Start = \(start)")
         while start <= blindGameOptions.blindLimit {
             newBlinds.append(BlindLevel(smallBlind: start))
             start += blindGameOptions.amountToRaiseBlinds
