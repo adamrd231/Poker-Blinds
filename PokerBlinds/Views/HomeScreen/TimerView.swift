@@ -14,17 +14,21 @@ struct TimerView: View {
     let backupTimer: TimerModel
     let clockFontSize: Double
     let durationClockFontSize: Double
-    
+    let cgSize: CGSize = CGSizeMake(50, 50)
     var body: some View {
         ZStack {
             ZStack {
-                Circle()
-                    .stroke(Color.theme.text.opacity(0.15), style: StrokeStyle(lineWidth: 20, lineCap: .round))
-             
-                Circle()
+//                Circle()
+//                    .stroke(Color.theme.text.opacity(0.15), style: StrokeStyle(lineWidth: 20, lineCap: .round))
+//
+//                Circle()
+//                    .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
+//                    .stroke(Color.theme.mainButton.opacity(0.9), style: StrokeStyle(lineWidth: 20, lineCap: .round))
+//    //                .rotationEffect(.init(degrees: 270))
+                
+                RoundedRectangle(cornerSize: cgSize)
                     .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
-                    .stroke(Color.theme.mainButton.opacity(0.9), style: StrokeStyle(lineWidth: 20, lineCap: .round))
-    //                .rotationEffect(.init(degrees: 270))
+                    .foregroundColor(Color.gray.opacity(0.15))
             }
             .frame(maxWidth: .infinity, maxHeight: 200)
             .padding()

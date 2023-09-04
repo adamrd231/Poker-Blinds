@@ -7,7 +7,6 @@ struct DeviceRotationViewModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onAppear()
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                 action(UIDevice.current.orientation)
             }
@@ -71,7 +70,7 @@ struct PokerBlindsView_Previews: PreviewProvider {
 
 extension PokerBlindsView {
     private var verticalLayout: some View {
-        VStack(spacing: 5) {
+        VStack {
             TimerView(
                 blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,
@@ -85,8 +84,8 @@ extension PokerBlindsView {
                 blindLevels: vm.blindLevels,
                 currentLevel: vm.timerInfo.currentLevel
             )
-            Spacer()
             buttons
+            Spacer()
             if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                 Banner()
             }
@@ -126,14 +125,32 @@ extension PokerBlindsView {
                 }
             } label: {
                 switch vm.isTimerRunning {
-                case .hasNotBeenStarted: Text("Start")
-                case .isPaused: Text("Continue")
-                case .isRunning: Text("Pause")
+                case .hasNotBeenStarted:  HStack {
+                    Image(systemName: "play")
+                    Text("start")
+                    
+                }
+                case .isPaused: HStack {
+                    Image(systemName: "play")
+                    Text("continue")
+                    
+                }
+                case .isRunning: HStack {
+                    Image(systemName: "pause")
+                    Text("pause")
+                    
+                }
                 }
             }.buttonStyle(BasicButtonStyle())
             
-            Button("Reset") {
+            Button {
                 isShowingGameResetConfirmation.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "arrow.uturn.backward")
+                    Text("Reset")
+                    
+                }
             }
             .buttonStyle(BasicButtonStyle())
             .confirmationDialog("Are you sure?", isPresented: $isShowingGameResetConfirmation) {

@@ -60,5 +60,6 @@ class AdsViewModel: ObservableObject {
                 interstitial.requestInterstitialAds()
             }
         }
+
     }
 }
