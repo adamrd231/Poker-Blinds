@@ -25,7 +25,7 @@ class ViewModel: ObservableObject {
     @Published var players: [Player] = [Player(), Player(), Player(), Player(), Player()]
     
     // Blind info and levels
-    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
+    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 1000, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindLevels: [BlindLevel] = []
     
     // Google Admob variables

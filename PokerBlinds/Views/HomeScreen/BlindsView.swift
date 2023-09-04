@@ -24,13 +24,9 @@ struct BlindsView: View {
                 Text("|")
                 Text("\(blindLevels[currentLevel].bigBlind)")
             }
-            .font(.system(size: fontSize, weight: .heavy, design: .rounded))
-            .minimumScaleFactor(0.1)
-            .bold()
-            .onAppear {
-                print("Current level: \(currentLevel)")
-                print("blinds are: \(blindLevels)")
-            }
+            .frame(maxWidth: UIScreen.main.bounds.width)
+            .font(.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+
             
             if currentLevel + 1 < blindLevels.count {
                 if let nextBlind = blindLevels[currentLevel + 1] {

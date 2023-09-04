@@ -27,6 +27,7 @@ struct TimerView: View {
                      
                     ClockLayout(time: timerInfo.elapsedTime, fontSize: durationClockFontSize)
                         .fontWeight(.regular)
+                        .minimumScaleFactor(0.01)
                 }
             }
             

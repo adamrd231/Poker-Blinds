@@ -36,8 +36,7 @@ struct ClockLayout: View {
             Text(":")
             Text(seconds < 10 ? "0\(seconds)" : "\(seconds)")
         }
-        .font(.system(size: fontSize, weight: .heavy, design: .rounded))
-        .minimumScaleFactor(0.10)
+        .font(.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
         .lineLimit(1)
     }
 }
