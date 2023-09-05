@@ -27,8 +27,10 @@ struct TimerView: View {
 //    //                .rotationEffect(.init(degrees: 270))
                 
                 RoundedRectangle(cornerSize: cgSize)
-                    .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
                     .foregroundColor(Color.gray.opacity(0.15))
+                RoundedRectangle(cornerSize: cgSize)
+                    .foregroundColor(Color.blue.opacity(0.15))
+                    .frame(height: 100 * ( CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime)))
             }
             .frame(maxWidth: .infinity, maxHeight: 200)
             .padding()

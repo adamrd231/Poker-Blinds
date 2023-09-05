@@ -8,13 +8,24 @@ struct BlindsView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            VStack {
-                Text("small")
-                Text("\(blindLevels[currentLevel].smallBlind)")
-                    .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
-                Text("big")
-                Text("\(blindLevels[currentLevel].bigBlind)")
-                    .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+            if let blinds = blindLevels[currentLevel] {
+                VStack {
+                    Text("small")
+                    Text("\(blinds.smallBlind)")
+                        .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                    Text("big")
+                    Text("\(blinds.bigBlind)")
+                        .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                }
+            } else if let lastBlind = blindLevels.last {
+                VStack {
+                    Text("small")
+                    Text("\(lastBlind.smallBlind)")
+                        .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                    Text("big")
+                    Text("\(lastBlind.bigBlind)")
+                        .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                }
             }
         }
         .padding(.horizontal)

@@ -12,7 +12,7 @@ import AVFoundation
 
 struct Player: Identifiable {
     let id = UUID()
-    var startingStack:Int = 10_000
+    var startingStack: Int = 10_000
 }
 
 class ViewModel: ObservableObject {
