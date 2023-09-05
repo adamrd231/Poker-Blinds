@@ -14,4 +14,5 @@ extension Color {
 struct ColorTheme {
     var mainButton = Color("mainButton")
     var text = Color("text")
+    var lightGray = Color("lightGray")
 }
