@@ -18,14 +18,14 @@ struct Player: Identifiable {
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTime: 0)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 60, elapsedTime: 0)
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     @Published var totalGameTime: Int = 0
     @Published var players: [Player] = [Player(), Player(), Player(), Player(), Player()]
     
     // Blind info and levels
-    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 1000, amountToRaiseBlinds: 100, blindLimit: 1000)
+    @Published var blindGameOptions = BlindsModel(startingSmallBlind: 100, amountToRaiseBlinds: 100, blindLimit: 1000)
     @Published var blindLevels: [BlindLevel] = []
     
     // Google Admob variables
@@ -105,6 +105,16 @@ class ViewModel: ObservableObject {
                 self.resetTimer()
             }
         }
+    }
+    
+    func fastForward() {
+        guard timerInfo.currentTime - 10 > 0 else { return }
+        timerInfo.currentTime -= 10
+    }
+
+    func rewind() {
+        guard timerInfo.currentTime + 10 < backupTimer?.currentTime ?? 0 else { return }
+        timerInfo.currentTime += 10
     }
     
     func startNewLevel() {

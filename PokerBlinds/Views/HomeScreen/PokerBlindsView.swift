@@ -118,6 +118,13 @@ extension PokerBlindsView {
     private var buttons: some View {
         HStack {
             Button {
+                // rewind!
+                vm.rewind()
+            } label: {
+                ButtonText(image: "backward.end", title: "rewind")
+            }
+            .buttonStyle(OutlineButtonStyle())
+            Button {
                 switch vm.isTimerRunning {
                 case .hasNotBeenStarted: vm.startTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
                 case .isPaused: vm.runTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
@@ -125,41 +132,46 @@ extension PokerBlindsView {
                 }
             } label: {
                 switch vm.isTimerRunning {
-                case .hasNotBeenStarted:  HStack {
-                    Image(systemName: "play")
-                    Text("start")
-                    
+                    case .hasNotBeenStarted: ButtonText(image: "play", title: "play")
+                    case .isPaused: ButtonText(image: "play", title: "play")
+                    case .isRunning: ButtonText(image: "pause", title: "pause")
                 }
-                case .isPaused: HStack {
-                    Image(systemName: "play")
-                    Text("continue")
-                    
-                }
-                case .isRunning: HStack {
-                    Image(systemName: "pause")
-                    Text("pause")
-                    
-                }
-                }
-            }.buttonStyle(BasicButtonStyle())
+            }
             
             Button {
                 isShowingGameResetConfirmation.toggle()
             } label: {
-                HStack {
-                    Image(systemName: "arrow.uturn.backward")
-                    Text("Reset")
-                    
-                }
+                ButtonText(image: "arrow.uturn.backward", title: "reset")
             }
-            .buttonStyle(BasicButtonStyle())
-            .confirmationDialog("Are you sure?", isPresented: $isShowingGameResetConfirmation) {
-                Button("This action can not be undone") {
-                    vm.resetTimer()
-                }
+            Button {
+                // forward!
+                vm.fastForward()
+            } label: {
+                ButtonText(image: "forward.end", title: "forward")
             }
+            .buttonStyle(OutlineButtonStyle())
         }
+        .buttonStyle(BasicButtonStyle())
         .padding(.horizontal)
         .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
+        .confirmationDialog("Are you sure?", isPresented: $isShowingGameResetConfirmation) {
+            Button("This action can not be undone") {
+                vm.resetTimer()
+            }
+        }
+    }
+}
+
+struct ButtonText: View {
+    let image: String
+    let title: String
+    
+    var body: some View {
+        VStack(spacing: 3) {
+            Image(systemName: image)
+            Text(title)
+                .font(.footnote)
+                .bold()
+        }
     }
 }

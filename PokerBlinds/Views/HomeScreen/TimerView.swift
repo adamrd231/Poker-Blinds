@@ -28,9 +28,10 @@ struct TimerView: View {
                 
                 RoundedRectangle(cornerSize: cgSize)
                     .foregroundColor(Color.gray.opacity(0.15))
+                    .frame(height: 200)
                 RoundedRectangle(cornerSize: cgSize)
                     .foregroundColor(Color.blue.opacity(0.15))
-                    .frame(height: 100 * ( CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime)))
+                    .frame(height: 200 * ( CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime)))
             }
             .frame(maxWidth: .infinity, maxHeight: 200)
             .padding()
