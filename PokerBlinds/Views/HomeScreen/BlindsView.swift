@@ -4,22 +4,39 @@ struct BlindsView: View {
     let fontSize: Double
     let blindLevels: [BlindLevel]
     let currentLevel: Int
+    let orientation: UIDeviceOrientation
     @Environment(\.sizeCategory) var sizeCategory
     
     var body: some View {
         VStack(alignment: .center) {
             if let blinds = blindLevels[currentLevel] {
                 VStack(spacing: 10) {
-                    VStack(spacing: .zero) {
-                        SmallBlindHeader()
-                        Text("\(blinds.smallBlind)")
-                            .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                    if orientation == UIDeviceOrientation.portrait || orientation == UIDeviceOrientation.portraitUpsideDown || orientation == UIDeviceOrientation.unknown {
+                        VStack(spacing: .zero) {
+                             SmallBlindHeader()
+                             Text("\(blinds.smallBlind)")
+                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                         }
+                         VStack(spacing: .zero) {
+                             BigBlindHeader()
+                             Text("\(blinds.bigBlind)")
+                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                         }
+                    } else {
+                        HStack {
+                            VStack(spacing: .zero) {
+                                 SmallBlindHeader()
+                                 Text("\(blinds.smallBlind)")
+                                     .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                             }
+                             VStack(spacing: .zero) {
+                                 BigBlindHeader()
+                                 Text("\(blinds.bigBlind)")
+                                     .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+                             }
+                        }
                     }
-                    VStack(spacing: .zero) {
-                        BigBlindHeader()
-                        Text("\(blinds.bigBlind)")
-                            .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
-                    }
+                   
                    
 
                 }
@@ -46,7 +63,8 @@ struct Blinds_Previews: PreviewProvider {
                 BlindLevel(smallBlind: 100),
                 BlindLevel(smallBlind: 200)
             ],
-            currentLevel: 0
+            currentLevel: 0,
+            orientation: .portrait
         )
     }
 }

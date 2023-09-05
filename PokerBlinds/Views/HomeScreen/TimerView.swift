@@ -18,17 +18,14 @@ struct TimerView: View {
     var body: some View {
         ZStack {
             ZStack {
-                
                 RoundedRectangle(cornerSize: cgSize)
                     .foregroundColor(Color.gray.opacity(0.1))
-                    .frame(height: 200)
+                    .frame(height: UIScreen.main.bounds.height * 0.3)
                 RoundedRectangle(cornerSize: cgSize)
                     .foregroundColor(Color.blue.opacity(0.15))
-                    .frame(height: 200 * ( CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime)))
+                    .frame(height: UIScreen.main.bounds.height * 0.3 * ( CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime)))
             }
-            .frame(maxWidth: .infinity, maxHeight: 200)
-            .padding()
-            
+            .frame(maxHeight: UIScreen.main.bounds.height * 0.3)
             
             VStack(spacing: 0) {
                 Text("Level \(timerInfo.currentLevel + 1)")
@@ -44,6 +41,7 @@ struct TimerView: View {
                 }
             }
         }
+        .fixedSize()
     }
 }
 

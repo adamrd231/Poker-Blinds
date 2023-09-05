@@ -71,6 +71,7 @@ struct PokerBlindsView_Previews: PreviewProvider {
 extension PokerBlindsView {
     private var verticalLayout: some View {
         VStack {
+
             TimerView(
                 blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,
@@ -79,17 +80,20 @@ extension PokerBlindsView {
                 durationClockFontSize: durationClockFontSize
                 
             )
+            .frame(maxHeight: .infinity)
             BlindsView(
                 fontSize: blindFontSize,
                 blindLevels: vm.blindLevels,
-                currentLevel: vm.timerInfo.currentLevel
+                currentLevel: vm.timerInfo.currentLevel,
+                orientation: orientation
             )
+            .frame(maxHeight: .infinity)
             buttons
-            Spacer()
             if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                 Banner()
             }
         }
+      
     }
     
     private var horizontalLayout: some View {
@@ -102,13 +106,13 @@ extension PokerBlindsView {
                     clockFontSize: mainFontSize,
                     durationClockFontSize: durationClockFontSize
                 )
+  
                 BlindsView(
                     fontSize: blindFontSize,
                     blindLevels: vm.blindLevels,
-                    currentLevel: vm.timerInfo.currentLevel
+                    currentLevel: vm.timerInfo.currentLevel,
+                    orientation: orientation
                 )
-                    
-                
             }
             buttons
             if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
