@@ -93,26 +93,29 @@ extension PokerBlindsView {
     }
     
     private var horizontalLayout: some View {
-        HStack(alignment: .center, spacing: 0) {
-            TimerView(
-                blinds: vm.blindGameOptions,
-                timerInfo: vm.timerInfo,
-                backupTimer: vm.backupTimer ?? vm.timerInfo,
-                clockFontSize: mainFontSize,
-                durationClockFontSize: durationClockFontSize
-            )
-            VStack() {
+        VStack {
+            HStack(alignment: .center, spacing: 0) {
+                TimerView(
+                    blinds: vm.blindGameOptions,
+                    timerInfo: vm.timerInfo,
+                    backupTimer: vm.backupTimer ?? vm.timerInfo,
+                    clockFontSize: mainFontSize,
+                    durationClockFontSize: durationClockFontSize
+                )
                 BlindsView(
                     fontSize: blindFontSize,
                     blindLevels: vm.blindLevels,
                     currentLevel: vm.timerInfo.currentLevel
                 )
-                buttons
-                if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
-                    Banner()
-                }
+                    
+                
+            }
+            buttons
+            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
+                Banner()
             }
         }
+        
     }
     
     private var buttons: some View {
