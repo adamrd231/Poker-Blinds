@@ -14,9 +14,9 @@ struct PokerChip: View {
     var body: some View {
         ZStack {
             Image(systemName: "circle.fill")
-                .foregroundColor(Color.theme.lightGray)
-            Image(systemName: "circle.dashed.inset.filled")
                 .foregroundColor(chipColor)
+            Image(systemName: "circle.dashed.inset.filled")
+                .foregroundColor(Color.theme.lightGray)
         }
     }
 }
@@ -25,7 +25,7 @@ struct SmallBlindHeader: View {
     var body: some View {
         HStack {
             PokerChip(chipColor: Color.theme.mainButton)
-            Text("small")
+            Text("small blind")
                 .bold()
                 .foregroundColor(Color.theme.text)
             
@@ -37,11 +37,12 @@ struct BigBlindHeader: View {
     var body: some View {
         HStack {
             ZStack {
+                PokerChip(chipColor: Color.theme.mainButton)
+                .offset(x: 3)
                 PokerChip(chipColor: Color.theme.text)
                     .offset(x: -3)
                 
-                PokerChip(chipColor: Color.theme.mainButton)
-                .offset(x: 3)
+               
             }
             .rotationEffect(Angle(degrees: 30))
             Text("big blind")
