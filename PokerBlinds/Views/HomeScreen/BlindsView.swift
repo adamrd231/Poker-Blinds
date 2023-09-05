@@ -11,18 +11,18 @@ struct BlindsView: View {
         VStack(alignment: .center) {
             if let blinds = blindLevels[currentLevel] {
                 VStack(spacing: 10) {
-                    if orientation == UIDeviceOrientation.portrait || orientation == UIDeviceOrientation.portraitUpsideDown || orientation == UIDeviceOrientation.unknown {
-                        VStack(spacing: .zero) {
-                             SmallBlindHeader()
-                             Text("\(blinds.smallBlind)")
-                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
-                         }
-                         VStack(spacing: .zero) {
-                             BigBlindHeader()
-                             Text("\(blinds.bigBlind)")
-                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
-                         }
-                    } else {
+//                    if orientation == UIDeviceOrientation.portrait || orientation == UIDeviceOrientation.portraitUpsideDown || orientation == UIDeviceOrientation.unknown {
+//                        VStack(spacing: .zero) {
+//                             SmallBlindHeader()
+//                             Text("\(blinds.smallBlind)")
+//                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+//                         }
+//                         VStack(spacing: .zero) {
+//                             BigBlindHeader()
+//                             Text("\(blinds.bigBlind)")
+//                                 .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
+//                         }
+//                    } else {
                         HStack {
                             VStack(spacing: .zero) {
                                  SmallBlindHeader()
@@ -35,7 +35,7 @@ struct BlindsView: View {
                                      .font(Font.system(size: UIFontMetrics.default.scaledValue(for: fontSize), weight: .heavy, design: .rounded))
                              }
                         }
-                    }
+//                    }
                    
                    
 

@@ -13,18 +13,34 @@ struct PokerChip: View {
     
     var body: some View {
         ZStack {
-            Image(systemName: "circle.fill")
-                .foregroundColor(chipColor)
-            Image(systemName: "circle.dashed.inset.filled")
+            Circle()
+                .frame(width: 20, height: 20)
                 .foregroundColor(Color.theme.lightGray)
+            Circle()
+                .strokeBorder(lineWidth: 4)
+                .foregroundColor(chipColor)
+                .frame(width: 20, height: 20)
+            
+            Image(systemName: "circle.dashed")
+                .resizable()
+                .foregroundColor(Color.theme.lightGray)
+                .frame(width: 17, height: 17)
         }
     }
 }
 
+struct PokerChip_Previews: PreviewProvider {
+    static var previews: some View {
+        PokerChip(chipColor: Color.theme.mainButton)
+            .previewLayout(.sizeThatFits)
+    }
+}
+
+
 struct SmallBlindHeader: View {
     var body: some View {
         HStack {
-            PokerChip(chipColor: Color.theme.mainButton)
+            PokerChip(chipColor: Color.theme.text)
             Text("small blind")
                 .bold()
                 .foregroundColor(Color.theme.text)
