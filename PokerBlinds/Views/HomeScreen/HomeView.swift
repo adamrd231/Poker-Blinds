@@ -37,6 +37,14 @@ struct HomeView: View {
                 }
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
             
+            PayoutsView()
+                .tabItem {
+                    HStack {
+                        Image(systemName: "banknote")
+                        Text("Payouts")
+                    }
+                }
+            
             RemoveAdvertising(storeManager: storeManager)
                 .environmentObject(vm)
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
