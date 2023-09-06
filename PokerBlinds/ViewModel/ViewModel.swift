@@ -95,6 +95,7 @@ class ViewModel: ObservableObject {
                 // Warning Timer -- un-lockable feature
                 if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
                     SoundManager.instance.playSound(sound: self.roundWarningSound)
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 }
                 // New Level
                 if self.timerInfo.currentTime == 0 {

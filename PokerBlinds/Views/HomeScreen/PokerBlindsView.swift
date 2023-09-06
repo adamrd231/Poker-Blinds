@@ -9,6 +9,7 @@ struct DeviceRotationViewModifier: ViewModifier {
         content
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                 action(UIDevice.current.orientation)
+                print("Current orientation \(UIDevice.current.orientation)")
             }
     }
 }
@@ -30,13 +31,13 @@ struct PokerBlindsView: View {
     @State private var orientation = UIDeviceOrientation.unknown
     @State var isShowingGameResetConfirmation = false
     var mainFontSize: Double {
-        return isIpad ? 200 : 70
+        return isIpad ? 140 : 70
     }
     var durationClockFontSize: Double {
-        return isIpad ? 50 : 15
+        return isIpad ? 30 : 15
     }
     var blindFontSize: Double {
-        return isIpad ? 150 : 50
+        return isIpad ? 100 : 40
     }
     private var isIpad : Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
@@ -71,7 +72,6 @@ struct PokerBlindsView_Previews: PreviewProvider {
 extension PokerBlindsView {
     private var verticalLayout: some View {
         VStack {
-
             TimerView(
                 blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,
@@ -89,7 +89,7 @@ extension PokerBlindsView {
             )
             .frame(maxHeight: .infinity)
             buttons
-            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
+            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) && orientation != .landscapeLeft || orientation != .landscapeRight {
                 Banner()
             }
         }
@@ -98,7 +98,7 @@ extension PokerBlindsView {
     
     private var horizontalLayout: some View {
         VStack {
-            HStack(alignment: .center, spacing: 0) {
+            HStack(alignment: .center) {
                 TimerView(
                     blinds: vm.blindGameOptions,
                     timerInfo: vm.timerInfo,
@@ -106,7 +106,8 @@ extension PokerBlindsView {
                     clockFontSize: mainFontSize,
                     durationClockFontSize: durationClockFontSize
                 )
-  
+                .frame(maxWidth: UIScreen.main.bounds.width * 0.5)
+            
                 BlindsView(
                     fontSize: blindFontSize,
                     blindLevels: vm.blindLevels,
@@ -114,7 +115,11 @@ extension PokerBlindsView {
                     orientation: orientation
                 )
             }
+            
+            // Buttons along bottom of screen
             buttons
+            
+            // Admob Banner
             if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                 Banner()
             }

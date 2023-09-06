@@ -39,8 +39,6 @@ struct TimerView: View {
                 }
             }
         }
-        .padding(.top)
-        .padding(.horizontal)
     }
 }
 
