@@ -73,11 +73,14 @@ struct PayoutsView: View {
                     }
                 }
                 Text("Enter final total for either player")
+                Text("Players in game \(payoutsVM.players.count)")
                 TextField("Enter either player chip total", value: $twoPlayerPayout, formatter: numberFormatter)
+        
                 Button("Calculate payout") {
   
                     let removeCommas = twoPlayerPayoutTotal.replacingOccurrences(of: ",", with: "")
                     let numberEntered = Double(removeCommas)
+
                     let percentage = (numberEntered ?? 0) / Double(payoutsVM.players.count * payoutsVM.startingStack)
                     let finalAmount = percentage * Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
                     
