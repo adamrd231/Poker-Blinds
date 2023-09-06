@@ -82,26 +82,17 @@ struct PayoutsView: View {
   
                     let removeCommas = twoPlayerPayoutTotal.replacingOccurrences(of: ",", with: "")
                     let numberEntered = Double(removeCommas)
-                    
                     let percentage = (numberEntered ?? 0) / Double(payoutsVM.players.count * payoutsVM.startingStack)
-                    
                     let finalAmount = percentage * Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
-                    print("Final amount: \(finalAmount)")
                     
                     // Get two values for first and second place
                     if Int(finalAmount) > payoutsVM.firstPlacePrize || Int(finalAmount) < payoutsVM.secondPlacePrize {
-                        print("outside of bounds, set prizes directly")
                         playerOnePayout = payoutsVM.firstPlacePrize
                         playerTwoPayout = payoutsVM.secondPlacePrize
                     } else {
-                        print("inside of bounds")
                         let firstAmount = Int(finalAmount)
-                        print("first amount \(firstAmount)")
                         let secondAmount = (payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize) - firstAmount
-                        print("payouts 1: \(payoutsVM.firstPlacePrize)")
-                        print("payouts 1: \(payoutsVM.secondPlacePrize)")
-                        print("Second amount \(secondAmount)")
-                        
+ 
                         if firstAmount > secondAmount {
                             playerOnePayout = firstAmount
                             playerTwoPayout = secondAmount
