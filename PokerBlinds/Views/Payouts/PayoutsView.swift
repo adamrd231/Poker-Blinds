@@ -15,6 +15,9 @@ struct PayoutsView: View {
     @State var playerOnePayout: Int = 0
     @State var playerTwoPayout: Int = 0
     
+    @State var playerArray = ["1st place", "2nd place"]
+    @State var selectedPlayer = "1st place"
+    
     var body: some View {
         List {
             Section(header: Text("Payouts calc")) {
@@ -42,10 +45,49 @@ struct PayoutsView: View {
             }
             
             Section(header: Text("End game with two players")) {
-                Text("Enter either player total")
-                TextField(twoPlayerPayoutTotal, text: $twoPlayerPayoutTotal)
+                Text("Enter total for either player")
+                
+                TextField("Enter player chip total", text: $twoPlayerPayoutTotal)
                 Button("Calculate payout") {
+  
+                    let removeCommas = twoPlayerPayoutTotal.replacingOccurrences(of: ",", with: "")
+                    let numberEntered = Double(removeCommas)
                     
+                    let percentage = (numberEntered ?? 0) / Double(payoutsVM.players.count * payoutsVM.startingStack)
+                    
+                    let finalAmount = percentage * Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
+                    print("Final amount: \(finalAmount)")
+                    
+                    // Get two values for first and second place
+                    if Int(finalAmount) > payoutsVM.firstPlacePrize || Int(finalAmount) < payoutsVM.secondPlacePrize {
+                        print("outside of bounds, set prizes directly")
+                        playerOnePayout = payoutsVM.firstPlacePrize
+                        playerTwoPayout = payoutsVM.secondPlacePrize
+                    } else {
+                        print("inside of bounds")
+                        let firstAmount = Int(finalAmount)
+                        print("first amount \(firstAmount)")
+                        let secondAmount = (payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize) - firstAmount
+                        print("payouts 1: \(payoutsVM.firstPlacePrize)")
+                        print("payouts 1: \(payoutsVM.secondPlacePrize)")
+                        print("Second amount \(secondAmount)")
+                        
+                        if firstAmount > secondAmount {
+                            playerOnePayout = firstAmount
+                            playerTwoPayout = secondAmount
+                        } else {
+                            playerOnePayout = secondAmount
+                            playerTwoPayout = firstAmount
+                        }
+                        
+                    }
+                    
+                }
+                if playerOnePayout != 0 {
+                    PayoutRowView(place: "First place", payout: playerOnePayout)
+                }
+                if playerTwoPayout != 0 {
+                    PayoutRowView(place: "Second place", payout: playerTwoPayout)
                 }
             }
         }
