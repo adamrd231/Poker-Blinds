@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct PayoutsView: View {
     
     @StateObject var payoutsVM = PayoutsViewModel()
@@ -15,36 +16,25 @@ struct PayoutsView: View {
         List {
             Section(header: Text("Payouts calc")) {
                 HStack {
-                    Text("Players")
-                    Text(payoutsVM.players.count.description)
+                    Stepper("Players \(payoutsVM.players.count)",
+                            onIncrement: { payoutsVM.addPlayer() },
+                            onDecrement: { payoutsVM.removePlayer() })
                 }
                 HStack {
-                    Text("Total money")
-                    Text(payoutsVM.getTotalMoney(), format: .number)
+                    Text("Starting stack")
+                    HStack(spacing: .zero) {
+                        Text("$")
+                        Text(payoutsVM.startingStack, format: .number)
+                        Stepper("", value: $payoutsVM.startingStack, in: 1_000...100_000, step: 1_000)
+                    }
                 }
-                
-                HStack {
-                    Text("1st")
-                    Text(payoutsVM.firstPlacePrize, format: .number)
-                }
-                HStack {
-                    Text("2nd")
-                    Text(payoutsVM.secondPlacePrize, format: .number)
-                }
-                HStack {
-                    Text("3rd")
-                    Text(payoutsVM.thirdPlacePrize, format: .number)
-                }
-                HStack {
-                    Text("High Hand")
-                    Text(payoutsVM.highHandPrize, format: .number)
-                }
-                
-                Button("Add player") {
-                    payoutsVM.addPlayer()
-                }
-                Button("Remove player") {
-                    payoutsVM.removePlayer()
+                PayoutRowView(place: "Total money", payout: payoutsVM.getTotalMoney())
+                PayoutRowView(place: "Prize pool", payout: payoutsVM.getTotalPrizeMoney())
+                PayoutRowView(place: "High hand", payout: payoutsVM.highHandPrize)
+                PayoutRowView(place: "1st", payout: payoutsVM.firstPlacePrize)
+                PayoutRowView(place: "2nd", payout: payoutsVM.secondPlacePrize)
+                if payoutsVM.thirdPlacePrize != 0 {
+                    PayoutRowView(place: "3rd", payout: payoutsVM.thirdPlacePrize)
                 }
             }
         }
@@ -54,5 +44,25 @@ struct PayoutsView: View {
 struct PayoutsView_Previews: PreviewProvider {
     static var previews: some View {
         PayoutsView()
+    }
+}
+
+
+
+struct PayoutRowView: View {
+    
+    let place: String
+    let payout: Int
+    
+    var body: some View {
+        HStack {
+            Text(place)
+                .font(.caption)
+            Spacer()
+            HStack(spacing: 0) {
+                Text("$")
+                Text(payout, format: .number)
+            }
+        }
     }
 }
