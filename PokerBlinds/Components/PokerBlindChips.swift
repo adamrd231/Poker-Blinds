@@ -54,13 +54,12 @@ struct BigBlindHeader: View {
         HStack {
             ZStack {
                 PokerChip(chipColor: Color.theme.mainButton)
-                .offset(x: 3)
+                    .offset(x: -6)
                 PokerChip(chipColor: Color.theme.text)
-                    .offset(x: -3)
                 
                
             }
-            .rotationEffect(Angle(degrees: 30))
+            .rotationEffect(Angle(degrees: 15))
             Text("big blind")
                 .bold()
                 .foregroundColor(Color.theme.text)

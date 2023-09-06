@@ -14,17 +14,18 @@ struct TimerView: View {
     let backupTimer: TimerModel
     let clockFontSize: Double
     let durationClockFontSize: Double
-    let cgSize: CGSize = CGSizeMake(50, 50)
+
     var body: some View {
         ZStack {
             ZStack {
-                RoundedRectangle(cornerSize: cgSize)
+                Capsule()
                     .foregroundColor(Color.gray.opacity(0.1))
-                RoundedRectangle(cornerSize: cgSize)
+                Capsule()
                     .trim(from: 0, to: CGFloat(timerInfo.currentTime) / CGFloat(backupTimer.currentTime))
-                    .stroke(Color.blue.opacity(0.15), style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                    .stroke(Color.theme.mainButton.opacity(0.5), style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                    .padding(10)
             }
-            
+    
             VStack(spacing: 0) {
                 Text("Level \(timerInfo.currentLevel + 1)")
                     .fontWeight(.bold)
@@ -39,6 +40,7 @@ struct TimerView: View {
                 }
             }
         }
+        .frame(maxWidth: UIScreen.main.bounds.width * 0.8)
     }
 }
 

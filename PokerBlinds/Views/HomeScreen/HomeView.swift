@@ -17,7 +17,6 @@ struct HomeView: View {
                         Text("Home")
                     }
                 }
-            
                 .onAppear {
                     if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
                         #if DEBUG
