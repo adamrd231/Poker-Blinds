@@ -14,7 +14,6 @@ let numberFormatter: NumberFormatter = {
     return formatter
 }()
 
-
 struct PayoutsView: View {
     
     @StateObject var payoutsVM = PayoutsViewModel()
@@ -22,12 +21,9 @@ struct PayoutsView: View {
     @State var twoPlayerPayout = 0
     @State var playerOnePayout: Int = 0
     @State var playerTwoPayout: Int = 0
-    
     @State var playerArray = ["1st place", "2nd place"]
     @State var selectedPlayer = "1st place"
 
-
-    
     var body: some View {
         List {
             Section(header: Text("Options")) {
@@ -50,6 +46,7 @@ struct PayoutsView: View {
                     }
                 }
             }
+
             Section(header: Text("Payouts calc")) {
                 PayoutRowView(place: "Total money", payout: payoutsVM.getTotalMoney())
                 if payoutsVM.isUsingHighHand {
@@ -64,7 +61,6 @@ struct PayoutsView: View {
                 if payoutsVM.isUsingHighHand {
                     PayoutRowView(place: "Prize pool", payout: payoutsVM.getTotalPrizeMoney())
                 }
-               
             }
             
             Section(header: Text("End game with two players")) {
@@ -100,9 +96,7 @@ struct PayoutsView: View {
                             playerOnePayout = secondAmount
                             playerTwoPayout = firstAmount
                         }
-                        
                     }
-                    
                 }
                 if playerOnePayout != 0 {
                     PayoutRowView(place: "First place", payout: playerOnePayout)
