@@ -37,23 +37,16 @@ struct PayoutsView: View {
                             onDecrement: { payoutsVM.removePlayer() })
                 }
                 HStack {
-                    Stepper("Buyin $\(payoutsVM.buyIn)", value: $payoutsVM.buyIn, in: 0...1000, step: 1)
+                    Stepper("Buy-in $\(payoutsVM.buyIn)", value: $payoutsVM.buyIn, in: 0...1000, step: 1)
                 }
-                HStack {
-                    Text("Starting stack")
-                    HStack(spacing: .zero) {
-                        Text("$")
-                        Text(payoutsVM.startingStack, format: .number)
-                        Stepper("", value: $payoutsVM.startingStack, in: 1_000...100_000, step: 1_000)
-                    }
-                }
+                
                 VStack {
                     HStack {
                         Text("High hand")
                         Toggle("", isOn: $payoutsVM.isUsingHighHand)
                     }
                     if payoutsVM.isUsingHighHand {
-                        Stepper("$\(payoutsVM.highHandContribution)", value: $payoutsVM.highHandContribution, in: 1...100, step: 1)
+                        Stepper("Cost (less from buy in) $\(payoutsVM.highHandContribution)", value: $payoutsVM.highHandContribution, in: 1...100, step: 1)
                     }
                 }
             }
@@ -66,14 +59,24 @@ struct PayoutsView: View {
                 PayoutRowView(place: "2nd", payout: payoutsVM.secondPlacePrize)
                 if payoutsVM.thirdPlacePrize != 0 {
                     PayoutRowView(place: "3rd", payout: payoutsVM.thirdPlacePrize)
+                    
+                }
+                if payoutsVM.isUsingHighHand {
                     PayoutRowView(place: "Prize pool", payout: payoutsVM.getTotalPrizeMoney())
                 }
                
             }
             
             Section(header: Text("End game with two players")) {
-                Text("Enter total for either player")
-                
+                HStack {
+                    Text("Starting stack")
+                    HStack(spacing: .zero) {
+                        Text("$")
+                        Text(payoutsVM.startingStack, format: .number)
+                        Stepper("", value: $payoutsVM.startingStack, in: 1_000...100_000, step: 1_000)
+                    }
+                }
+                Text("Enter final total for either player")
                 TextField("Enter either player chip total", value: $twoPlayerPayout, formatter: numberFormatter)
                 Button("Calculate payout") {
   

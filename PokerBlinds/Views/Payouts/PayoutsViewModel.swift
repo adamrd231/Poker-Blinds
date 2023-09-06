@@ -74,32 +74,17 @@ class PayoutsViewModel: ObservableObject {
     func subscribers() {
         $players
             .combineLatest($isUsingHighHand, $buyIn, $highHandContribution)
-            .map(payoutInfoToStuff)
+            .map(mapPayoutInfoToStuff)
             .sink { [weak self] (gameStuff, highHandStuff) in
-                // Update....
-                // First place
                 self?.distributeMoney(returnedPlayers: gameStuff.0, usingHighHand: highHandStuff.0, gameBuyIn: gameStuff.1, highHandBuyIn: highHandStuff.1)
-                // Second Place
-                // Third Place
-                // High Hand prize
-                // Total money
-                // ranked Prize pool (less high hand)
             }
             .store(in: &cancellable)
     }
 
     
-    func payoutInfoToStuff(players: [Player], isUsingHighHand: Bool, buyIn: Int, highHandBuyIn: Int) -> (([Player], Int), (Bool, Int)) {
-        // I need to return...
-        // returned players
+    func mapPayoutInfoToStuff(players: [Player], isUsingHighHand: Bool, buyIn: Int, highHandBuyIn: Int) -> (([Player], Int), (Bool, Int)) {
         let gameStuff = (players, buyIn)
-        // the normal buy in
-        
-        // High hand on / off
-        // high hand buy in
         let highHandStuff = (isUsingHighHand, highHandBuyIn)
-        
-        
         return (gameStuff, highHandStuff)
     }
     
@@ -136,7 +121,6 @@ class PayoutsViewModel: ObservableObject {
             self.thirdPlacePrize = 0
         }
         self.highHandPrize = returnedPlayers.count * highHandBuyIn
-
     }
     
     
