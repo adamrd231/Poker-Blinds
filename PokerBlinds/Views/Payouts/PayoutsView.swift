@@ -25,7 +25,8 @@ struct PayoutsView: View {
     
     @State var playerArray = ["1st place", "2nd place"]
     @State var selectedPlayer = "1st place"
-    @State var isUsingHighHand: Bool = false
+
+
     
     var body: some View {
         List {
@@ -36,6 +37,9 @@ struct PayoutsView: View {
                             onDecrement: { payoutsVM.removePlayer() })
                 }
                 HStack {
+                    Stepper("Buyin $\(payoutsVM.buyIn)", value: $payoutsVM.buyIn, in: 0...1000, step: 1)
+                }
+                HStack {
                     Text("Starting stack")
                     HStack(spacing: .zero) {
                         Text("$")
@@ -43,24 +47,28 @@ struct PayoutsView: View {
                         Stepper("", value: $payoutsVM.startingStack, in: 1_000...100_000, step: 1_000)
                     }
                 }
-                HStack {
-                    Text("High hand")
-                    Toggle("", isOn: $isUsingHighHand)
+                VStack {
+                    HStack {
+                        Text("High hand")
+                        Toggle("", isOn: $payoutsVM.isUsingHighHand)
+                    }
+                    if payoutsVM.isUsingHighHand {
+                        Stepper("$\(payoutsVM.highHandContribution)", value: $payoutsVM.highHandContribution, in: 1...100, step: 1)
+                    }
                 }
             }
             Section(header: Text("Payouts calc")) {
-               
                 PayoutRowView(place: "Total money", payout: payoutsVM.getTotalMoney())
-                PayoutRowView(place: "Prize pool", payout: payoutsVM.getTotalPrizeMoney())
-                if isUsingHighHand {
+                if payoutsVM.isUsingHighHand {
                     PayoutRowView(place: "High hand", payout: payoutsVM.highHandPrize)
                 }
-               
                 PayoutRowView(place: "1st", payout: payoutsVM.firstPlacePrize)
                 PayoutRowView(place: "2nd", payout: payoutsVM.secondPlacePrize)
                 if payoutsVM.thirdPlacePrize != 0 {
                     PayoutRowView(place: "3rd", payout: payoutsVM.thirdPlacePrize)
+                    PayoutRowView(place: "Prize pool", payout: payoutsVM.getTotalPrizeMoney())
                 }
+               
             }
             
             Section(header: Text("End game with two players")) {
