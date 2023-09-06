@@ -11,6 +11,9 @@ import SwiftUI
 struct PayoutsView: View {
     
     @StateObject var payoutsVM = PayoutsViewModel()
+    @State var twoPlayerPayoutTotal: String = ""
+    @State var playerOnePayout: Int = 0
+    @State var playerTwoPayout: Int = 0
     
     var body: some View {
         List {
@@ -35,6 +38,14 @@ struct PayoutsView: View {
                 PayoutRowView(place: "2nd", payout: payoutsVM.secondPlacePrize)
                 if payoutsVM.thirdPlacePrize != 0 {
                     PayoutRowView(place: "3rd", payout: payoutsVM.thirdPlacePrize)
+                }
+            }
+            
+            Section(header: Text("End game with two players")) {
+                Text("Enter either player total")
+                TextField(twoPlayerPayoutTotal, text: $twoPlayerPayoutTotal)
+                Button("Calculate payout") {
+                    
                 }
             }
         }
