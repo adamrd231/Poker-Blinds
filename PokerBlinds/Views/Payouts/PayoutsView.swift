@@ -23,6 +23,10 @@ struct PayoutsView: View {
     @State var playerTwoPayout: Int = 0
     @State var playerArray = ["1st place", "2nd place"]
     @State var selectedPlayer = "1st place"
+    
+    func dismissKeyboard() {
+         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.endEditing(true) // 4
+       }
 
     var body: some View {
         List {
@@ -74,7 +78,12 @@ struct PayoutsView: View {
                 }
                 Text("Enter final total for either player")
                 Text("Players in game \(payoutsVM.players.count)")
-                TextField("Enter either player chip total", value: $splitPotPayout, formatter: numberFormatter)
+                TextField("Enter either player chip total",
+                          value: $splitPotPayout,
+                          formatter: numberFormatter
+                )
+                .keyboardType(.numberPad)
+   
         
                 Button("Calculate payout") {
 
@@ -100,6 +109,7 @@ struct PayoutsView: View {
                             playerTwoPayout = firstAmount
                         }
                     }
+                    dismissKeyboard()
                 }
                 if playerOnePayout != 0 {
                     PayoutRowView(place: "First place", payout: playerOnePayout)
