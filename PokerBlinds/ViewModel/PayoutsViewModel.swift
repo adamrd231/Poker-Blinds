@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import Combine
 
 extension BinaryInteger {
@@ -47,8 +48,51 @@ class PayoutsViewModel: ObservableObject {
     
     @Published var isUsingHighHand: Bool = false
     @Published var highHandContribution:Int = 5
+
+    
+    // Payouts stuff
+    @Published var splitPotPayout:Int = 0
+    @Published var playerOnePayout: Int = 0
+    @Published var playerTwoPayout: Int = 0
+    
+    
     // Cancellable for subscribers
     private var cancellable = Set<AnyCancellable>()
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    
+    func calculatePayout() {
+        let payoutAmount = Double(splitPotPayout)
+        let totalChips = Double(startingStack * players.count)
+        let firstAndSecondPrizePool =  Double(firstPlacePrize + secondPlacePrize)
+        let percentage = payoutAmount / totalChips
+        let finalAmount = percentage * firstAndSecondPrizePool
+        
+        // Get two values for first and second place
+        if Int(finalAmount) > firstPlacePrize || Int(finalAmount) < secondPlacePrize {
+            print("Preset")
+            playerOnePayout = firstPlacePrize
+            playerTwoPayout = secondPlacePrize
+        } else {
+            print("not preset")
+            let firstAmount = Int(finalAmount)
+            let secondAmount = (firstPlacePrize + secondPlacePrize) - firstAmount
+            
+            if firstAmount > secondAmount {
+                
+                playerOnePayout = firstAmount
+                playerTwoPayout = secondAmount
+            } else {
+                
+                playerOnePayout = secondAmount
+                playerTwoPayout = firstAmount
+            }
+        }
+        dismissKeyboard()
+    }
     
     func getTotalPrizeMoney() -> Int {
         let playerCount = players.count

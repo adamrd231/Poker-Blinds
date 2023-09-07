@@ -18,15 +18,9 @@ struct PayoutsView: View {
     
     @StateObject var payoutsVM = PayoutsViewModel()
 
-    @State var splitPotPayout:Int = 0
-    @State var playerOnePayout: Int = 0
-    @State var playerTwoPayout: Int = 0
     @State var playerArray = ["1st place", "2nd place"]
     @State var selectedPlayer = "1st place"
-    
-    func dismissKeyboard() {
-         UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.endEditing(true) // 4
-       }
+
 
     var body: some View {
         List {
@@ -79,43 +73,22 @@ struct PayoutsView: View {
                 Text("Enter final total for either player")
                 Text("Players in game \(payoutsVM.players.count)")
                 TextField("Enter either player chip total",
-                          value: $splitPotPayout,
+                          value: $payoutsVM.splitPotPayout,
                           formatter: numberFormatter
                 )
                 .keyboardType(.numberPad)
    
         
                 Button("Calculate payout") {
-
-                    let payoutAmount = Double(splitPotPayout)
-                    let totalChips = Double(payoutsVM.startingStack * payoutsVM.players.count)
-                    let firstAndSecondPrizePool =  Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
-                    let percentage = payoutAmount / totalChips
-                    let finalAmount = percentage * firstAndSecondPrizePool
-                    
-                    // Get two values for first and second place
-                    if Int(finalAmount) > payoutsVM.firstPlacePrize || Int(finalAmount) < payoutsVM.secondPlacePrize {
-                        playerOnePayout = payoutsVM.firstPlacePrize
-                        playerTwoPayout = payoutsVM.secondPlacePrize
-                    } else {
-                        let firstAmount = Int(finalAmount)
-                        let secondAmount = (payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize) - firstAmount
- 
-                        if firstAmount > secondAmount {
-                            playerOnePayout = firstAmount
-                            playerTwoPayout = secondAmount
-                        } else {
-                            playerOnePayout = secondAmount
-                            playerTwoPayout = firstAmount
-                        }
-                    }
-                    dismissKeyboard()
+                    print("Calculating payout")
+                    payoutsVM.calculatePayout()
                 }
-                if playerOnePayout != 0 {
-                    PayoutRowView(place: "First place", payout: playerOnePayout)
+                
+                if payoutsVM.playerOnePayout != 0 {
+                    PayoutRowView(place: "First place", payout: payoutsVM.playerOnePayout)
                 }
-                if playerTwoPayout != 0 {
-                    PayoutRowView(place: "Second place", payout: playerTwoPayout)
+                if payoutsVM.playerTwoPayout != 0 {
+                    PayoutRowView(place: "Second place", payout: payoutsVM.playerTwoPayout)
                 }
             }
         }

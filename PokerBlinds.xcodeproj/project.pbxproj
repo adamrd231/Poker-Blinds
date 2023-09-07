@@ -47,7 +47,19 @@
 		66EA59CE2AA8F7F5006E9C76 /* PayoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59CD2AA8F7F5006E9C76 /* PayoutsView.swift */; };
 		66EA59D02AA8F870006E9C76 /* PayoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59CF2AA8F870006E9C76 /* PayoutsViewModel.swift */; };
 		66EA59D22AAA232D006E9C76 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59D12AAA232D006E9C76 /* AdsViewModel.swift */; };
+		66EA59DA2AAA24E3006E9C76 /* PokerBlindsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */; };
+		66EA59E02AAA250C006E9C76 /* PayoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59CF2AA8F870006E9C76 /* PayoutsViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66EA59DB2AAA24E3006E9C76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 668EF5D826A347AC0040FC4D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 668EF5DF26A347AC0040FC4D;
+			remoteInfo = PokerBlinds;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6625A3142A966ED2007348D0 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
@@ -93,6 +105,8 @@
 		66EA59CD2AA8F7F5006E9C76 /* PayoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutsView.swift; sourceTree = "<group>"; };
 		66EA59CF2AA8F870006E9C76 /* PayoutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutsViewModel.swift; sourceTree = "<group>"; };
 		66EA59D12AAA232D006E9C76 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
+		66EA59D72AAA24E3006E9C76 /* PokerBlindsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerBlindsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsTests.swift; sourceTree = "<group>"; };
 		7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.release.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.release.xcconfig"; sourceTree = "<group>"; };
 		8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokerBlinds.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.debug.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +119,13 @@
 			files = (
 				66E43F7826C48BAD00AE012E /* StoreKit.framework in Frameworks */,
 				031ACDBCA6C341C3891FB5C7 /* libPods-PokerBlinds.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66EA59D42AAA24E3006E9C76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +276,7 @@
 			children = (
 				668B96722A41E42C006D76A1 /* Products.storekit */,
 				668EF5E226A347AC0040FC4D /* PokerBlinds */,
+				66EA59D82AAA24E3006E9C76 /* PokerBlindsTests */,
 				668EF5E126A347AC0040FC4D /* Products */,
 				A68120E229F8FEA117B2CB7E /* Pods */,
 				23E22468814046121343F60D /* Frameworks */,
@@ -265,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				668EF5E026A347AC0040FC4D /* PokerBlinds.app */,
+				66EA59D72AAA24E3006E9C76 /* PokerBlindsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,6 +337,14 @@
 			path = Payouts;
 			sourceTree = "<group>";
 		};
+		66EA59D82AAA24E3006E9C76 /* PokerBlindsTests */ = {
+			isa = PBXGroup;
+			children = (
+				66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */,
+			);
+			path = PokerBlindsTests;
+			sourceTree = "<group>";
+		};
 		A68120E229F8FEA117B2CB7E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,17 +375,39 @@
 			productReference = 668EF5E026A347AC0040FC4D /* PokerBlinds.app */;
 			productType = "com.apple.product-type.application";
 		};
+		66EA59D62AAA24E3006E9C76 /* PokerBlindsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66EA59DD2AAA24E3006E9C76 /* Build configuration list for PBXNativeTarget "PokerBlindsTests" */;
+			buildPhases = (
+				66EA59D32AAA24E3006E9C76 /* Sources */,
+				66EA59D42AAA24E3006E9C76 /* Frameworks */,
+				66EA59D52AAA24E3006E9C76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66EA59DC2AAA24E3006E9C76 /* PBXTargetDependency */,
+			);
+			name = PokerBlindsTests;
+			productName = PokerBlindsTests;
+			productReference = 66EA59D72AAA24E3006E9C76 /* PokerBlindsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		668EF5D826A347AC0040FC4D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					668EF5DF26A347AC0040FC4D = {
 						CreatedOnToolsVersion = 12.4;
+					};
+					66EA59D62AAA24E3006E9C76 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 668EF5DF26A347AC0040FC4D;
 					};
 				};
 			};
@@ -372,6 +425,7 @@
 			projectRoot = "";
 			targets = (
 				668EF5DF26A347AC0040FC4D /* PokerBlinds */,
+				66EA59D62AAA24E3006E9C76 /* PokerBlindsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -395,6 +449,13 @@
 				6659A1F526AC929300BD698E /* cheer.wav in Resources */,
 				668EF5E826A347AD0040FC4D /* Assets.xcassets in Resources */,
 				665BCEEB2A3A17B3007023FD /* bang.mp3 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66EA59D52AAA24E3006E9C76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,7 +518,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		66EA59D32AAA24E3006E9C76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66EA59E02AAA250C006E9C76 /* PayoutsViewModel.swift in Sources */,
+				66EA59DA2AAA24E3006E9C76 /* PokerBlindsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66EA59DC2AAA24E3006E9C76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 668EF5DF26A347AC0040FC4D /* PokerBlinds */;
+			targetProxy = 66EA59DB2AAA24E3006E9C76 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		668EF5ED26A347AD0040FC4D /* Debug */ = {
@@ -632,6 +710,46 @@
 			};
 			name = Release;
 		};
+		66EA59DE2AAA24E3006E9C76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SFM579B5E;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = design.rdConcepts.PokerBlindsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokerBlinds.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokerBlinds";
+			};
+			name = Debug;
+		};
+		66EA59DF2AAA24E3006E9C76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SFM579B5E;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = design.rdConcepts.PokerBlindsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PokerBlinds.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PokerBlinds";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -649,6 +767,15 @@
 			buildConfigurations = (
 				668EF5F026A347AD0040FC4D /* Debug */,
 				668EF5F126A347AD0040FC4D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66EA59DD2AAA24E3006E9C76 /* Build configuration list for PBXNativeTarget "PokerBlindsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66EA59DE2AAA24E3006E9C76 /* Debug */,
+				66EA59DF2AAA24E3006E9C76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
