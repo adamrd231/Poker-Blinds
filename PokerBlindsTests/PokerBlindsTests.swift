@@ -14,13 +14,12 @@ final class PokerBlindsTests: XCTestCase {
     func test_payout_with_split() {
         let sut = PayoutsViewModel()
         
-        let actual = sut.
+        let actual = sut.splitPotPayout
+        let expected = 0
+        // expected output is to split the pot evenly since 25k is half of 50k
+        XCTAssertEqual(actual, expected)
+        
     }
-    
-    
-    
-    
-    
     
     
     
