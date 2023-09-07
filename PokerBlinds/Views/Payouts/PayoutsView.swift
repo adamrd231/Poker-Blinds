@@ -9,7 +9,7 @@ import SwiftUI
 
 let numberFormatter: NumberFormatter = {
     let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
+    formatter.numberStyle = .decimal
     formatter.zeroSymbol  = ""
     return formatter
 }()
@@ -17,8 +17,8 @@ let numberFormatter: NumberFormatter = {
 struct PayoutsView: View {
     
     @StateObject var payoutsVM = PayoutsViewModel()
-    @State var twoPlayerPayoutTotal: String = ""
-    @State var twoPlayerPayout = 0
+
+    @State var splitPotPayout:Int = 0
     @State var playerOnePayout: Int = 0
     @State var playerTwoPayout: Int = 0
     @State var playerArray = ["1st place", "2nd place"]
@@ -74,15 +74,15 @@ struct PayoutsView: View {
                 }
                 Text("Enter final total for either player")
                 Text("Players in game \(payoutsVM.players.count)")
-                TextField("Enter either player chip total", value: $twoPlayerPayout, formatter: numberFormatter)
+                TextField("Enter either player chip total", value: $splitPotPayout, formatter: numberFormatter)
         
                 Button("Calculate payout") {
-  
-                    let removeCommas = twoPlayerPayoutTotal.replacingOccurrences(of: ",", with: "")
-                    let numberEntered = Double(removeCommas)
 
-                    let percentage = (numberEntered ?? 0) / Double(payoutsVM.players.count * payoutsVM.startingStack)
-                    let finalAmount = percentage * Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
+                    let payoutAmount = Double(splitPotPayout)
+                    let totalChips = Double(payoutsVM.startingStack * payoutsVM.players.count)
+                    let firstAndSecondPrizePool =  Double(payoutsVM.firstPlacePrize + payoutsVM.secondPlacePrize)
+                    let percentage = payoutAmount / totalChips
+                    let finalAmount = percentage * firstAndSecondPrizePool
                     
                     // Get two values for first and second place
                     if Int(finalAmount) > payoutsVM.firstPlacePrize || Int(finalAmount) < payoutsVM.secondPlacePrize {
