@@ -89,7 +89,7 @@ extension PokerBlindsView {
             )
             .frame(maxHeight: .infinity)
             buttons
-            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) && orientation != .landscapeLeft || orientation != .landscapeRight {
+            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.removePokerAdvertising }) {
                 Banner()
             }
         }
@@ -118,13 +118,7 @@ extension PokerBlindsView {
             
             // Buttons along bottom of screen
             buttons
-            
-            // Admob Banner
-            if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
-                Banner()
-            }
         }
-        
     }
     
     private var buttons: some View {
@@ -158,6 +152,7 @@ extension PokerBlindsView {
             Button {
                 // forward!
                 vm.fastForward()
+                print("purchases: \(storeManager.purchasedNonConsumables)")
             } label: {
                 ButtonText(image: "forward.end", title: "forward")
             }

@@ -10,16 +10,24 @@ import Foundation
 import StoreKit
 import Combine
 
+struct StoreIDsConstant {
+    static var removePokerAdvertising = "removePokerAdvertising"
+    static var quickEndGame = "quickEndGame"
+    static var roundWarningFeature = "roundWarningFeature"
+}
+
 class StoreManager: ObservableObject  {
+    
+
+    private var productIDs = [
+        StoreIDsConstant.removePokerAdvertising,
+        StoreIDsConstant.quickEndGame,
+        StoreIDsConstant.roundWarningFeature
+    ]
     
     @Published var products:[Product] = []
     @Published var purchasedNonConsumables: Set<Product> = []
 //    @Published var purchasedNonConsumables = [Product]()
-    var productIds = [
-        "removePokerAdvertising",
-        "roundWarningFeature",
-        "quickEndGame"
-    ]
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?
@@ -38,7 +46,7 @@ class StoreManager: ObservableObject  {
     @MainActor
     func requestProducts() async {
         do {
-            products = try await Product.products(for: productIds).sorted(by: { $0.price > $1.price })
+            products = try await Product.products(for: productIDs).sorted(by: { $0.price > $1.price })
         } catch let error {
             print("Error requesting products: \(error)")
         }
@@ -70,6 +78,7 @@ class StoreManager: ObservableObject  {
         for await result in Transaction.currentEntitlements {
             await self.handle(transactionVerification: result)
         }
+        print("entitlements: \(purchasedNonConsumables)")
     }
     
     @MainActor

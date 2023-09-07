@@ -18,7 +18,7 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    if !storeManager.purchasedNonConsumables.contains(where: { $0.id == "removePokerAdvertising" }) {
+                    if !storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.removePokerAdvertising }) {
                         #if DEBUG
                         #else
                         adsViewModel.showInterstitial = true
