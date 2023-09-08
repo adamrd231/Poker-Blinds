@@ -54,6 +54,7 @@ struct OptionsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var vm: ViewModel
     @ObservedObject var storeManager: StoreManager
+    @State var isUpdatingTime: Bool = false
     private let titleSize: CGFloat = 25
     
     @State var isPortrait: Bool = true
@@ -62,25 +63,27 @@ struct OptionsView: View {
         VStack {
             List {
                 Section(header: Text("Game settings")) {
-                    HStack(spacing: 5) {
+                    
+                  
+                    HStack {
                         VStack(alignment: .leading) {
-                            Text("Time in round")
+                            Text("Time")
                                 .font(.caption)
-                            HStack(spacing: .zero) {
-                                Text(vm.timerInfo.currentMinutes.description)
-                                // Seconds
-                                Text(":")
-                                Text(vm.timerInfo.currentSeconds == 0 ? "00" : vm.timerInfo.currentSeconds.description)
-                                
+                            HStack {
+                                ClockLayout(time: vm.timerInfo.currentTime, fontSize: 20, fontWeight: .regular)
                             }
                             .font(.title2)
-                            .fixedSize()
                         }
                         Spacer()
-                        Stepper("", value: $vm.timerInfo.currentTime, in: 10...10_000, step: 10)
-                            .fixedSize()
+                        Button("Update") {
+                            // toggle clock view for setting time
+                            isUpdatingTime.toggle()
+                        }
                     }
-                    
+                    .sheet(isPresented: $isUpdatingTime) {
+                        TimePickerTimerView(vm: vm, isOpen: $isUpdatingTime)
+                            .presentationDetents([.medium])
+                    }
                     OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind)
                     OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds)
                     OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit)
@@ -163,7 +166,7 @@ extension OptionsView {
             Spacer()
             Text("prediction: ")
                 .font(.system(size: 12))
-            ClockLayout(time: vm.totalGameTime , fontSize: 12)
+            ClockLayout(time: vm.totalGameTime, fontSize: 12)
  
         }) {
             ForEach(Array(zip(vm.blindLevels.indices, vm.blindLevels)), id: \.0) { index, level in
