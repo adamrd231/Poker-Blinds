@@ -37,7 +37,7 @@ struct HomeView: View {
                 }
                 .disabled(vm.isTimerRunning == TimerStates.isRunning)
             
-            PayoutsView()
+            PayoutsView(storeManager: storeManager)
                 .tabItem {
                     HStack {
                         Image(systemName: "banknote")

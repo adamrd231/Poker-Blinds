@@ -22,6 +22,21 @@
     {
       "displayPrice" : "1.99",
       "familyShareable" : false,
+      "internalID" : "6464677299",
+      "localizations" : [
+        {
+          "description" : "Calculator for finalizing payouts ",
+          "displayName" : "Payout calculator",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "payoutCalculator",
+      "referenceName" : "payout-calculator",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
       "internalID" : "6450902668",
       "localizations" : [
         {
@@ -53,7 +68,7 @@
   "settings" : {
     "_applicationInternalID" : "1580801897",
     "_developerTeamID" : "6SFM579B5E",
-    "_lastSynchronizedDate" : 710098626.49793303
+    "_lastSynchronizedDate" : 715876746.573259
   },
   "subscriptionGroups" : [
 

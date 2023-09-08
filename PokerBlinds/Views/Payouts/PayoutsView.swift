@@ -16,6 +16,7 @@ let numberFormatter: NumberFormatter = {
 
 struct PayoutsView: View {
     
+    @ObservedObject var storeManager: StoreManager
     @StateObject var payoutsVM = PayoutsViewModel()
 
     @State var playerArray = ["1st place", "2nd place"]
@@ -90,12 +91,20 @@ struct PayoutsView: View {
                 }
             }
         }
+        // Disable the whole thing if not purchased!
+        .onAppear {
+            print("Storemanager: \(storeManager)")
+            print("checking: \(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.payoutCalculator }))")
+
+        }
+        .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.payoutCalculator }))
+        .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.payoutCalculator }) ? 0.5 : 1.0)
     }
 }
 
 struct PayoutsView_Previews: PreviewProvider {
     static var previews: some View {
-        PayoutsView()
+        PayoutsView(storeManager: StoreManager())
     }
 }
 

@@ -8,7 +8,8 @@ class StoreManager: ObservableObject  {
     private var productIDs = [
         StoreIDsConstant.removePokerAdvertising,
         StoreIDsConstant.quickEndGame,
-        StoreIDsConstant.roundWarningFeature
+        StoreIDsConstant.roundWarningFeature,
+        StoreIDsConstant.payoutCalculator
     ]
     
     @Published var products:[Product] = []
