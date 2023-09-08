@@ -87,7 +87,7 @@ struct OptionsView: View {
                    
                     VStack {
                         HStack(alignment: .center) {
-                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? "lock.open" : "lock")
+                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.quickEndGame }) ? "lock.open" : "lock")
                             Text("Quick end game")
                             Spacer()
                             Toggle(vm.quickEndGame ? "on" : "off", isOn: $vm.quickEndGame)
@@ -95,8 +95,8 @@ struct OptionsView: View {
                                 .fixedSize()
                         }
                     }
-                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }) ? 0.5 : 1.0)
-                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "quickEndGame" }))
+                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.quickEndGame }) ? 0.5 : 1.0)
+                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.quickEndGame }))
                 }
 
                 Section(header: Text("Sound")) {
@@ -117,7 +117,7 @@ struct OptionsView: View {
                     
                     VStack(alignment: .trailing) {
                         HStack {
-                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? "lock.open" : "lock")
+                            Image(systemName: storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) ? "lock.open" : "lock")
                             Text("Round warning")
                             Spacer()
                             Toggle(vm.usingRoundTimer ? "on" : "off", isOn: $vm.usingRoundTimer)
@@ -125,7 +125,7 @@ struct OptionsView: View {
                                 .fixedSize()
                         }
                        
-                        if storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) && vm.usingRoundTimer {
+                        if storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) && vm.usingRoundTimer {
                             Picker("", selection: $vm.roundWarningSound) {
                                 ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
                                     Text(index.title)
@@ -137,8 +137,8 @@ struct OptionsView: View {
                             })
                         }
                     }
-                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }) ? 0.5 : 1.0)
-                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningFeature" }))
+                    .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) ? 0.5 : 1.0)
+                    .disabled(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }))
                 }
                 BlindTable
             }

@@ -1,23 +1,9 @@
-//
-//  StoreManager.swift
-//  adamsCalc
-//
-//  Created by Adam Reed on 6/29/21.
-//
-
 import Foundation
 //import SwiftUI
 import StoreKit
 import Combine
 
-struct StoreIDsConstant {
-    static var removePokerAdvertising = "removePokerAdvertising"
-    static var quickEndGame = "quickEndGame"
-    static var roundWarningFeature = "roundWarningFeature"
-}
-
 class StoreManager: ObservableObject  {
-    
 
     private var productIDs = [
         StoreIDsConstant.removePokerAdvertising,
@@ -27,7 +13,6 @@ class StoreManager: ObservableObject  {
     
     @Published var products:[Product] = []
     @Published var purchasedNonConsumables: Set<Product> = []
-//    @Published var purchasedNonConsumables = [Product]()
     
     // Listen for transactions that might be successful but not recorded
     var transactionListener: Task <Void, Error>?
@@ -73,7 +58,6 @@ class StoreManager: ObservableObject  {
         }
     }
     
-
     private func updateCurrentEntitlements() async {
         for await result in Transaction.currentEntitlements {
             await self.handle(transactionVerification: result)
