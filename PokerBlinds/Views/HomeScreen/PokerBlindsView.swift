@@ -20,6 +20,8 @@ struct PokerBlindsView: View {
     }
     private var isIpad : Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
+    
+    // MAIN VIEW
     var body: some View {
         VStack {
             if orientation == .portrait || orientation == .unknown || orientation == .faceUp {
@@ -51,6 +53,20 @@ struct PokerBlindsView_Previews: PreviewProvider {
 extension PokerBlindsView {
     private var verticalLayout: some View {
         VStack {
+            HStack {
+                Spacer()
+                Button {
+                    isShowingDoubleCheck.toggle()
+                } label: {
+                    Image(systemName: "questionmark.circle.fill")
+                        .resizable()
+            
+                }
+                .frame(width: 25, height: 25)
+                .foregroundColor(Color.theme.mainButton)
+                .padding(.trailing)
+               
+            }
             TimerView(
                 blinds: vm.blindGameOptions,
                 timerInfo: vm.timerInfo,

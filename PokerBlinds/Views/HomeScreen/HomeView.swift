@@ -5,7 +5,6 @@ struct HomeView: View {
     @ObservedObject var vm = ViewModel()
     @ObservedObject var adsViewModel = AdsViewModel()
     @StateObject var storeManager = StoreManager()
-    @State var playedVideo = false
     
     var body: some View {
         TabView {

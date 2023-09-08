@@ -1,10 +1,3 @@
-//
-//  PayoutsView.swift
-//  PokerBlinds
-//
-//  Created by Adam Reed on 9/6/23.
-//
-
 import SwiftUI
 
 let numberFormatter: NumberFormatter = {
