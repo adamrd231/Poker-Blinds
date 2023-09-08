@@ -34,7 +34,7 @@ class SoundManager {
     
     var tenSecondWarningFX: [SoundEffect] = [
         SoundEffect(title: "Clock", path: "clockTicking", type: .wav),
-        SoundEffect(title: "Electronic ticks", path: "tickingTime", type: .wav)
+        SoundEffect(title: "Electronic ticks", path: "electronicTicking", type: .flac)
     ]
     
     // Play sounds!

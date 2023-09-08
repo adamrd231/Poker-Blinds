@@ -51,6 +51,7 @@
 		66EA59E02AAA250C006E9C76 /* PayoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59CF2AA8F870006E9C76 /* PayoutsViewModel.swift */; };
 		66EA59E22AAA5431006E9C76 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59E12AAA5431006E9C76 /* View.swift */; };
 		66EA59E52AAB67B7006E9C76 /* InAppPurchaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59E42AAB67B7006E9C76 /* InAppPurchaseConstants.swift */; };
+		66EA59E72AAB7180006E9C76 /* electronicTicking.flac in Resources */ = {isa = PBXBuildFile; fileRef = 66EA59E62AAB7180006E9C76 /* electronicTicking.flac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsTests.swift; sourceTree = "<group>"; };
 		66EA59E12AAA5431006E9C76 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		66EA59E42AAB67B7006E9C76 /* InAppPurchaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseConstants.swift; sourceTree = "<group>"; };
+		66EA59E62AAB7180006E9C76 /* electronicTicking.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = electronicTicking.flac; sourceTree = "<group>"; };
 		7133C596E26C6631471A6676 /* Pods-PokerBlinds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.release.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.release.xcconfig"; sourceTree = "<group>"; };
 		8A520A936641871DB1BD2120 /* libPods-PokerBlinds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PokerBlinds.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E409A14709B4D28B5804EE21 /* Pods-PokerBlinds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokerBlinds.debug.xcconfig"; path = "Target Support Files/Pods-PokerBlinds/Pods-PokerBlinds.debug.xcconfig"; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				6659A1F126AC923000BD698E /* aww.wav */,
 				6659A1F426AC929300BD698E /* cheer.wav */,
 				665BCEE52A37BA89007023FD /* tada.mp3 */,
+				66EA59E62AAB7180006E9C76 /* electronicTicking.flac */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66EA59E72AAB7180006E9C76 /* electronicTicking.flac in Resources */,
 				665BCEEA2A3A17B3007023FD /* bonk.mp3 in Resources */,
 				662BBD622A4E5A990027C167 /* clockTicking.wav in Resources */,
 				662BBD632A4E5A990027C167 /* timesUp.wav in Resources */,
