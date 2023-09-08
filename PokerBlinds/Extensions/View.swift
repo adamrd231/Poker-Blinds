@@ -16,7 +16,6 @@ struct DeviceRotationViewModifier: ViewModifier {
         content
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
                 action(UIDevice.current.orientation)
-                print("Current orientation \(UIDevice.current.orientation)")
             }
     }
 }
