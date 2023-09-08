@@ -126,15 +126,19 @@ struct OptionsView: View {
                         }
                        
                         if storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) && vm.usingRoundTimer {
-                            Picker("", selection: $vm.roundWarningSound) {
-                                ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
-                                    Text(index.title)
+                            HStack {
+                                Text("Selected round sound:")
+                                Spacer()
+                                Picker("", selection: $vm.roundWarningSound) {
+                                    ForEach(SoundManager.instance.tenSecondWarningFX, id: \.self) { index in
+                                        Text(index.title)
+                                    }
                                 }
+                                .fixedSize()
+                                .onChange(of: vm.roundWarningSound, perform: { newValue in
+                                    SoundManager.instance.playSound(sound: vm.roundWarningSound)
+                                })
                             }
-                            .fixedSize()
-                            .onChange(of: vm.roundWarningSound, perform: { newValue in
-                                SoundManager.instance.playSound(sound: vm.roundWarningSound)
-                            })
                         }
                     }
                     .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) ? 0.5 : 1.0)

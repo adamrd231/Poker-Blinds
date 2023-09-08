@@ -34,6 +34,7 @@ class ViewModel: ObservableObject {
     @Published var keepScreenOpen: Bool = false
 
     // Sound selections
+    private var introGameSound: SoundEffect = SoundEffect(title: "Guitar", path: "guitar", type: .wav)
     @Published var currentSound: SoundEffect = SoundEffect(title: "Bell", path: "bell", type: .wav)
     @Published var roundWarningSound: SoundEffect = SoundEffect(title: "Clock", path: "clockTicking", type: .wav)
     
@@ -121,6 +122,7 @@ class ViewModel: ObservableObject {
     
     func startTimer(useWarningTimer: Bool) {
         // make a copy for backing up stuff
+        SoundManager.instance.playSound(sound: introGameSound)
         runTimer(useWarningTimer: useWarningTimer)
         backupTimer = timerInfo
     }
