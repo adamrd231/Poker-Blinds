@@ -131,7 +131,6 @@ extension PokerBlindsView {
             Button {
                 // forward!
                 vm.fastForward()
-                print("purchases: \(storeManager.purchasedNonConsumables)")
             } label: {
                 ButtonText(image: "forward.end", title: "forward")
             }

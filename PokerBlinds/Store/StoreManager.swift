@@ -62,7 +62,6 @@ class StoreManager: ObservableObject  {
         for await result in Transaction.currentEntitlements {
             await self.handle(transactionVerification: result)
         }
-        print("entitlements: \(purchasedNonConsumables)")
     }
     
     @MainActor

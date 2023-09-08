@@ -78,9 +78,7 @@ struct PayoutsView: View {
                 )
                 .keyboardType(.numberPad)
    
-        
                 Button("Calculate payout") {
-                    print("Calculating payout")
                     payoutsVM.calculatePayout()
                 }
                 

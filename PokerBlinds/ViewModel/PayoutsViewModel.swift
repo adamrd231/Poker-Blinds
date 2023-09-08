@@ -73,11 +73,9 @@ class PayoutsViewModel: ObservableObject {
         
         // Get two values for first and second place
         if Int(finalAmount) > firstPlacePrize || Int(finalAmount) < secondPlacePrize {
-            print("Preset")
             playerOnePayout = firstPlacePrize
             playerTwoPayout = secondPlacePrize
         } else {
-            print("not preset")
             let firstAmount = Int(finalAmount)
             let secondAmount = (firstPlacePrize + secondPlacePrize) - firstAmount
             
