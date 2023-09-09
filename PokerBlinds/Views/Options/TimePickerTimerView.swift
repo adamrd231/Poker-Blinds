@@ -36,6 +36,8 @@ struct TimePickerTimerView: View {
                 TimePickerView(title: "minutes", range: timerVM.minutesRange, selection: $timerVM.selectedMinutes)
                 TimePickerView(title: "seconds", range: timerVM.secondsRange, selection: $timerVM.selectedSeconds)
             }
+            .padding(.all, 32)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             HStack {
                 Button("Done") {
                     //
@@ -76,11 +78,14 @@ struct TimePickerView: View {
                     }
                 }
             }
-            .pickerStyle(.inline)
+     
+            .pickerStyle(InlinePickerStyle())
             .labelsHidden()
-            
+
             Text(title)
+                .font(.caption)
                  .fontWeight(.light)
+                 .fixedSize()
             
         }
     }

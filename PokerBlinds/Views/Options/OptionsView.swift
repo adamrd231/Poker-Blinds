@@ -61,10 +61,11 @@ struct OptionsView: View {
     
     var body: some View {
         VStack {
+            TimePickerTimerView(vm: vm, isOpen: $isUpdatingTime)
             List {
                 Section(header: Text("Game settings")) {
                     
-                  
+                   
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Time")
