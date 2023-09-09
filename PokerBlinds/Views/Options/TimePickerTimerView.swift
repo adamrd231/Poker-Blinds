@@ -26,39 +26,20 @@ class TimerViewModel: ObservableObject {
 
 struct TimePickerTimerView: View {
     @StateObject var vm: ViewModel
-    @Binding var isOpen: Bool
     @StateObject var timerVM = TimerViewModel()
     
     var body: some View {
-        VStack {
-            HStack {
-                TimePickerView(title: "hours", range: timerVM.hoursRange, selection: $timerVM.selectedHours)
-                TimePickerView(title: "minutes", range: timerVM.minutesRange, selection: $timerVM.selectedMinutes)
-                TimePickerView(title: "seconds", range: timerVM.secondsRange, selection: $timerVM.selectedSeconds)
-            }
-            .padding(.all, 32)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            HStack {
-                Button("Done") {
-                    //
-                    vm.timerInfo.currentTime = timerVM.totalTime
-                    isOpen = false
-                }
-               
-                Button("Cancel") {
-                    isOpen = false
-                }
-            }
-            .buttonStyle(BasicButtonStyle())
-            .padding(.horizontal)
+        HStack {
+            TimePickerView(title: "hours", range: timerVM.hoursRange, selection: $timerVM.selectedHours)
+            TimePickerView(title: "minutes", range: timerVM.minutesRange, selection: $timerVM.selectedMinutes)
+            TimePickerView(title: "seconds", range: timerVM.secondsRange, selection: $timerVM.selectedSeconds)
         }
-    
     }
 }
 
 struct TimePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimePickerTimerView(vm: ViewModel(), isOpen: .constant(true))
+        TimePickerTimerView(vm: ViewModel())
     }
 }
 
@@ -72,15 +53,15 @@ struct TimePickerView: View {
             Picker(title, selection: selection) {
                 ForEach(range, id: \.self) { timeIncrement in
                     HStack {
-                        Spacer()
+                        Spacer(minLength: 0)
                         Text("\(timeIncrement)")
                             .multilineTextAlignment(.trailing)
                     }
                 }
             }
-     
-            .pickerStyle(InlinePickerStyle())
-            .labelsHidden()
+            .pickerStyle(.wheel)
+            .frame(width: 66)
+            .clipped()
 
             Text(title)
                 .font(.caption)
@@ -88,5 +69,14 @@ struct TimePickerView: View {
                  .fixedSize()
             
         }
+    }
+}
+
+extension UIPickerView {
+    open override var intrinsicContentSize: CGSize {
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: super.intrinsicContentSize.height
+        )
     }
 }

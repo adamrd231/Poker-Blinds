@@ -61,15 +61,24 @@ struct OptionsView: View {
     
     var body: some View {
         VStack {
-            TimePickerTimerView(vm: vm, isOpen: $isUpdatingTime)
+            VStack {
+                HStack {
+                    Text("Round time")
+                        .font(.caption)
+                        .padding(.leading, 32)
+                    Spacer()
+                }
+                
+               
+                TimePickerTimerView(vm: vm)
+            }
+            
+           
             List {
                 Section(header: Text("Game settings")) {
-                    
-                   
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Time")
-                                .font(.caption)
+                            
                             HStack {
                                 ClockLayout(time: vm.timerInfo.currentTime, fontSize: 20, fontWeight: .regular)
                             }
@@ -81,10 +90,7 @@ struct OptionsView: View {
                             isUpdatingTime.toggle()
                         }
                     }
-                    .sheet(isPresented: $isUpdatingTime) {
-                        TimePickerTimerView(vm: vm, isOpen: $isUpdatingTime)
-                            .presentationDetents([.medium])
-                    }
+  
                     OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind)
                     OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds)
                     OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit)
