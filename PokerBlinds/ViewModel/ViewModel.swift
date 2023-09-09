@@ -13,7 +13,7 @@ import AVFoundation
 class ViewModel: ObservableObject {
     // Models for app
     var timer = Timer()
-    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 60, elapsedTime: 0)
+    @Published var timerInfo = TimerModel(currentLevel: 0, currentTime: 600, elapsedTime: 0)
     @Published var backupTimer: TimerModel?
     @Published var isTimerRunning: TimerStates = TimerStates.hasNotBeenStarted
     @Published var totalGameTime: Int = 0

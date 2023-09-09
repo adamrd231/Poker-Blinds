@@ -54,40 +54,23 @@ struct OptionsView: View {
     // Pokerblinds object with all usable inputs
     @EnvironmentObject var vm: ViewModel
     @ObservedObject var storeManager: StoreManager
-    @State var isUpdatingTime: Bool = false
     private let titleSize: CGFloat = 25
     
     @State var isPortrait: Bool = true
     
     var body: some View {
         VStack {
-            VStack {
-                HStack {
-                    Text("Round time")
-                        .font(.caption)
-                        .padding(.leading, 32)
-                    Spacer()
-                }
-                
-               
-                TimePickerTimerView(vm: vm)
-            }
-            
-           
             List {
                 Section(header: Text("Game settings")) {
+                    TimePickerTimerView(vm: vm)
                     HStack {
                         VStack(alignment: .leading) {
-                            
+                            Text("Time in round")
+                                .font(.caption)
                             HStack {
                                 ClockLayout(time: vm.timerInfo.currentTime, fontSize: 20, fontWeight: .regular)
                             }
                             .font(.title2)
-                        }
-                        Spacer()
-                        Button("Update") {
-                            // toggle clock view for setting time
-                            isUpdatingTime.toggle()
                         }
                     }
   

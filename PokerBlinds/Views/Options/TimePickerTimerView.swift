@@ -34,6 +34,9 @@ struct TimePickerTimerView: View {
             TimePickerView(title: "minutes", range: timerVM.minutesRange, selection: $timerVM.selectedMinutes)
             TimePickerView(title: "seconds", range: timerVM.secondsRange, selection: $timerVM.selectedSeconds)
         }
+        .onChange(of: timerVM.totalTime) { newValue in
+            vm.timerInfo.currentTime = timerVM.totalTime
+        }
     }
 }
 
