@@ -9,6 +9,8 @@ struct PokerBlindsView: View {
     // Orientation variable
     @State private var orientation = UIDeviceOrientation.unknown
     @State var isShowingGameResetConfirmation = false
+
+    
     var mainFontSize: Double {
         return isIpad ? 140 : 70
     }
@@ -24,7 +26,7 @@ struct PokerBlindsView: View {
     // MAIN VIEW
     var body: some View {
         VStack {
-            if orientation == .portrait || orientation == .unknown || orientation == .faceUp {
+            if orientation == .portrait || orientation == .unknown || orientation == .portraitUpsideDown || orientation == .faceUp || orientation == .faceDown {
                 verticalLayout
             } else {
                 horizontalLayout

@@ -11,6 +11,8 @@ import SwiftUI
 // call our action
 struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
+    @State private var portrait = UIDeviceOrientation.portrait
+    @State private var landscape = UIDeviceOrientation.landscapeLeft
 
     func body(content: Content) -> some View {
         content
