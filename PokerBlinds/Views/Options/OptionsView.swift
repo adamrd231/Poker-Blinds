@@ -10,6 +10,7 @@ import SwiftUI
 struct OptionRowView: View {
     let text: String
     @Binding var firstValue: Int
+    let function: () -> Void
     
     var body: some View {
         HStack {
@@ -22,6 +23,9 @@ struct OptionRowView: View {
             Spacer()
             Stepper("", value: $firstValue, in: 100...5000, step: 100)
                 .fixedSize()
+                .onChange(of: firstValue) { newValue in
+                    function()
+                }
         }
     }
 }
@@ -29,6 +33,7 @@ struct OptionRowView: View {
 struct OptionRowBlindView: View {
     let text: String
     @Binding var blind: Int
+    let function: () -> Void
     
     var body: some View {
         HStack {
@@ -45,6 +50,9 @@ struct OptionRowBlindView: View {
             Spacer()
             Stepper("", value: $blind, in: 100...5000, step: 100)
                 .fixedSize()
+                .onChange(of: blind) { newValue in
+                    function()
+                }
         }
     }
 }
@@ -55,6 +63,7 @@ struct OptionsView: View {
     @EnvironmentObject var vm: ViewModel
     @ObservedObject var storeManager: StoreManager
     private let titleSize: CGFloat = 25
+    
     
     @State var isPortrait: Bool = true
     
@@ -74,9 +83,9 @@ struct OptionsView: View {
                         }
                     }
   
-                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind)
-                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds)
-                    OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit)
+                    OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind, function: vm.simpleSuccess)
+                    OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds, function: vm.simpleSuccess)
+                    OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit, function: vm.simpleSuccess)
                    
                     VStack {
                         HStack(alignment: .center) {
@@ -86,6 +95,9 @@ struct OptionsView: View {
                             Toggle(vm.quickEndGame ? "on" : "off", isOn: $vm.quickEndGame)
                                 .font(.caption)
                                 .fixedSize()
+                                .onChange(of: vm.quickEndGame) { newValue in
+                                    vm.simpleSuccess()
+                                }
                         }
                     }
                     .opacity(!storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.quickEndGame }) ? 0.5 : 1.0)
@@ -104,6 +116,7 @@ struct OptionsView: View {
                             }
                             .onChange(of: vm.currentSound, perform: { newValue in
                                 SoundManager.instance.playSound(sound: vm.currentSound)
+                                vm.simpleSuccess()
                             })
                         }
                     }
@@ -116,6 +129,9 @@ struct OptionsView: View {
                             Toggle(vm.usingRoundTimer ? "on" : "off", isOn: $vm.usingRoundTimer)
                                 .font(.caption)
                                 .fixedSize()
+                                .onChange(of: vm.usingRoundTimer) { newValue in
+                                    vm.simpleSuccess()
+                                }
                         }
                        
                         if storeManager.purchasedNonConsumables.contains(where: { $0.id == StoreIDsConstant.roundWarningFeature }) && vm.usingRoundTimer {
@@ -130,6 +146,7 @@ struct OptionsView: View {
                                 .fixedSize()
                                 .onChange(of: vm.roundWarningSound, perform: { newValue in
                                     SoundManager.instance.playSound(sound: vm.roundWarningSound)
+                                    vm.simpleSuccess()
                                 })
                             }
                         }

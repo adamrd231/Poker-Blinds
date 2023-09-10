@@ -61,6 +61,11 @@ class ViewModel: ObservableObject {
             .store(in: &cancellable)
     }
     
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
     func updateBlindTables(blindGameOptions: BlindsModel, usingQuickEndgameRule: Bool, timer: TimerModel) -> ([BlindLevel], Int) {
         // Blinds
         var newBlinds:[BlindLevel] = []

@@ -51,6 +51,11 @@ struct TimePickerView: View {
     let range: ClosedRange<Int>
     let selection: Binding<Int>
     
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
     var body: some View {
         HStack(spacing: -4) {
             Picker(title, selection: selection) {
@@ -60,11 +65,16 @@ struct TimePickerView: View {
                         Text("\(timeIncrement)")
                             .multilineTextAlignment(.trailing)
                     }
+                    .onChange(of: timeIncrement) { newValue in
+                        simpleSuccess()
+                    }
                 }
+               
             }
             .pickerStyle(.wheel)
             .frame(width: 66)
             .clipped()
+            
 
             Text(title)
                 .font(.caption)

@@ -62,6 +62,7 @@ extension PokerBlindsView {
             HStack {
                 Spacer()
                 Button {
+                    simpleSuccess()
                     isShowingDoubleCheck.toggle()
                 } label: {
                     Image(systemName: "questionmark.circle.fill")
