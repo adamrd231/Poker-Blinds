@@ -22,6 +22,10 @@ struct PokerBlindsView: View {
     }
     private var isIpad : Bool { UIDevice.current.userInterfaceIdiom == .pad }
 
+    func simpleSuccess() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
     
     // MAIN VIEW
     var body: some View {
@@ -121,6 +125,7 @@ extension PokerBlindsView {
     private var buttons: some View {
         HStack {
             Button {
+                simpleSuccess()
                 // rewind!
                 vm.rewind()
             } label: {
@@ -128,6 +133,7 @@ extension PokerBlindsView {
             }
             .buttonStyle(OutlineButtonStyle())
             Button {
+                simpleSuccess()
                 switch vm.isTimerRunning {
                 case .hasNotBeenStarted: vm.startTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
                 case .isPaused: vm.runTimer(useWarningTimer: !storeManager.purchasedNonConsumables.contains(where: { $0.id == "roundWarningUnlocked" }))
@@ -142,11 +148,13 @@ extension PokerBlindsView {
             }
             
             Button {
+                simpleSuccess()
                 isShowingGameResetConfirmation.toggle()
             } label: {
                 ButtonText(image: "arrow.uturn.backward", title: "reset")
             }
             Button {
+                simpleSuccess()
                 // forward!
                 vm.fastForward()
             } label: {

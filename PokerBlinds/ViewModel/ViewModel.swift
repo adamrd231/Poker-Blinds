@@ -82,6 +82,7 @@ class ViewModel: ObservableObject {
     func runTimer(useWarningTimer: Bool) {
         self.isTimerRunning = .isRunning
         isIdleTimerActive = true
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true ) { _ in
             if self.timerInfo.currentTime > 0 {
                 // Round Timer -- Update poker timer value
@@ -90,12 +91,13 @@ class ViewModel: ObservableObject {
                 // Warning Timer -- un-lockable feature
                 if self.usingRoundTimer && useWarningTimer && self.timerInfo.currentTime == 10 {
                     SoundManager.instance.playSound(sound: self.roundWarningSound)
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                    
                 }
                 // New Level
                 if self.timerInfo.currentTime == 0 {
                     SoundManager.instance.playSound(sound: self.currentSound)
                     self.startNewLevel()
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                 }
             } else {
                 self.resetTimer()
