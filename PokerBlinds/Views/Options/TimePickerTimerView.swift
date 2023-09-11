@@ -28,14 +28,23 @@ struct TimePickerTimerView: View {
     @StateObject var vm: ViewModel
     @StateObject var timerVM = TimerViewModel()
     
+    init(vm: ViewModel) {
+        self._vm = StateObject(wrappedValue: vm)
+    }
+    
     var body: some View {
         HStack {
             TimePickerView(title: "hours", range: timerVM.hoursRange, selection: $timerVM.selectedHours)
             TimePickerView(title: "minutes", range: timerVM.minutesRange, selection: $timerVM.selectedMinutes)
             TimePickerView(title: "seconds", range: timerVM.secondsRange, selection: $timerVM.selectedSeconds)
         }
+        .onAppear {
+            self.timerVM.selectedHours = vm.timerInfo.currentHours
+            self.timerVM.selectedMinutes = vm.timerInfo.currentMinutes
+        }
         .onChange(of: timerVM.totalTime) { newValue in
             vm.timerInfo.currentTime = timerVM.totalTime
+            vm.saveInfo()
         }
     }
 }

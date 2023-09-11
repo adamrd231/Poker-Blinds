@@ -72,6 +72,7 @@ struct OptionsView: View {
             List {
                 Section(header: Text("Game settings")) {
                     TimePickerTimerView(vm: vm)
+                  
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Time in round")

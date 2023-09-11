@@ -47,6 +47,7 @@ class ViewModel: ObservableObject {
         // Setup subscriber on blind model to populate blind table
         // Updates whenever a user changes blind options
         addSubscribers()
+        loadInfo()
     }
     
     func addSubscribers() {
@@ -163,7 +164,7 @@ class ViewModel: ObservableObject {
         }
 
         if let timerState = try? encoder.encode(isTimerRunning) {
-            defaults.set(isTimerRunning, forKey: "timerState")
+            defaults.set(timerState, forKey: "timerState")
         }
      
     }
