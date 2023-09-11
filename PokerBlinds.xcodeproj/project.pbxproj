@@ -170,12 +170,12 @@
 		6642EA272A3367F20011589B /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
+				668B96772A4736BA006D76A1 /* PokerBlindsView.swift */,
 				668EF5E526A347AC0040FC4D /* HomeView.swift */,
 				662BBD712A570B7B0027C167 /* Timer */,
 				6642EA282A3368280011589B /* DoubleCheckPopup.swift */,
 				668EF5FE26A49F3A0040FC4D /* TimerView.swift */,
 				6642EA202A2E11080011589B /* BlindsView.swift */,
-				668B96772A4736BA006D76A1 /* PokerBlindsView.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";

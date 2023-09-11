@@ -13,7 +13,7 @@ struct BlindsModel: Codable {
     var blindLimit: Int
 }
 
-struct BlindLevel: Hashable, Identifiable {
+struct BlindLevel: Hashable, Identifiable, Codable {
     var id = UUID()
     var smallBlind: Int
     var bigBlind: Int {

@@ -152,61 +152,41 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: User --- money save state
-//    func saveInfo() {
-//        let encoder = JSONEncoder()
-//        let defaults = UserDefaults.standard
-//        if let encoded = try? encoder.encode(timerInfo) {
-//            defaults.set(encoded, forKey: "timerInfo")
-//        }
-//        if let blind = try? encoder.encode(blindInfo) {
-//            defaults.set(blind, forKey: "blindInfo")
-//        }
-//        if let screenSetting = try? encoder.encode(keepScreenOpen) {
-//            defaults.set(screenSetting, forKey: "screenSetting")
-//        }
-//        if let level = try? encoder.encode(timerInfo.currentLevel) {
-//            defaults.set(level, forKey: "level")
-//        }
-//        if let timerRunnin = try? encoder.encode(isTimerRunning) {
-//            defaults.set(timerRunnin, forKey: "timer")
-//        }
-//        if let backup = try? encoder.encode(backupTimer) {
-//            defaults.set(backup, forKey: "backup")
-//        }
-//    }
-//    
-//    func loadInfo() {
-//        let defaults = UserDefaults.standard
-//        let decoder = JSONDecoder()
-//        if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
-//            if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
-//                self.timerInfo = info
-//            }
-//        }
-//        if let blindInfo = defaults.object(forKey: "blindInfo") as? Data {
-//            if let blinds = try? decoder.decode(BlindsModel.self, from: blindInfo) {
-//                self.blindInfo = blinds
-//            }
-//        }
-//        if let screenSetting = defaults.object(forKey: "screenSetting") as? Data {
-//            if let option = try? decoder.decode(Bool.self, from: screenSetting) {
-//                self.keepScreenOpen = option
-//            }
-//        }
-//        if let level = defaults.object(forKey: "level") as? Data {
-//            if let option = try? decoder.decode(Int.self, from: level) {
-//                self.timerInfo.currentLevel = option
-//            }
-//        }
-//        if let timer = defaults.object(forKey: "timer") as? Data {
-//            if let isRunning = try? decoder.decode(TimerStates.self, from: timer) {
-//                self.isTimerRunning = isRunning
-//            }
-//        }
-//        if let backup = defaults.object(forKey: "backup") as? Data {
-//            if let info = try? decoder.decode(TimerModel.self, from: backup) {
-//                self.backupTimer = info
-//            }
-//        }
-//    }
+    func saveInfo() {
+        let encoder = JSONEncoder()
+        let defaults = UserDefaults.standard
+        if let encoded = try? encoder.encode(timerInfo) {
+            defaults.set(encoded, forKey: "timerInfo")
+        }
+        if let blind = try? encoder.encode(blindLevels) {
+            defaults.set(blind, forKey: "blindLevels")
+        }
+
+        if let timerState = try? encoder.encode(isTimerRunning) {
+            defaults.set(isTimerRunning, forKey: "timerState")
+        }
+     
+    }
+    
+    func loadInfo() {
+        let defaults = UserDefaults.standard
+        let decoder = JSONDecoder()
+        if let timerInfo = defaults.object(forKey: "timerInfo") as? Data {
+            if let info = try? decoder.decode(TimerModel.self, from: timerInfo) {
+                self.timerInfo = info
+            }
+        }
+        if let blindLevels = defaults.object(forKey: "blindLevels") as? Data {
+            if let blinds = try? decoder.decode([BlindLevel].self, from: blindLevels) {
+                self.blindLevels = blinds
+            }
+        }
+
+        if let timerState = defaults.object(forKey: "timerState") as? Data {
+            if let state = try? decoder.decode(TimerStates.self, from: timerState) {
+                self.isTimerRunning = state
+            }
+        }
+
+    }
 }
