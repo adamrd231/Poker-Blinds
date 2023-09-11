@@ -44,7 +44,7 @@ struct TimePickerTimerView: View {
         }
         .onChange(of: timerVM.totalTime) { newValue in
             vm.timerInfo.currentTime = timerVM.totalTime
-            vm.saveInfo()
+            vm.saveTimerInfo()
         }
     }
 }

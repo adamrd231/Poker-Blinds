@@ -41,6 +41,9 @@ class ViewModel: ObservableObject {
     // Idle timer
     @Published var isIdleTimerActive: Bool = false
     
+    let encoder = JSONEncoder()
+    let defaults = UserDefaults.standard
+    
     private var cancellable = Set<AnyCancellable>()
     
     init() {
@@ -153,20 +156,22 @@ class ViewModel: ObservableObject {
     }
     
     // MARK: User --- money save state
-    func saveInfo() {
-        let encoder = JSONEncoder()
-        let defaults = UserDefaults.standard
+    func saveTimerInfo() {
         if let encoded = try? encoder.encode(timerInfo) {
             defaults.set(encoded, forKey: "timerInfo")
         }
-        if let blind = try? encoder.encode(blindLevels) {
-            defaults.set(blind, forKey: "blindLevels")
+    }
+    
+    func saveBlindOptions() {
+        if let options = try? encoder.encode(blindGameOptions) {
+            defaults.set(options, forKey: "blindGameOptions")
         }
-
+    }
+    
+    func saveTimerState() {
         if let timerState = try? encoder.encode(isTimerRunning) {
             defaults.set(timerState, forKey: "timerState")
         }
-     
     }
     
     func loadInfo() {
@@ -177,9 +182,9 @@ class ViewModel: ObservableObject {
                 self.timerInfo = info
             }
         }
-        if let blindLevels = defaults.object(forKey: "blindLevels") as? Data {
-            if let blinds = try? decoder.decode([BlindLevel].self, from: blindLevels) {
-                self.blindLevels = blinds
+        if let options = defaults.object(forKey: "blindGameOptions") as? Data {
+            if let info = try? decoder.decode(BlindsModel.self, from: options) {
+                self.blindGameOptions = info
             }
         }
 

@@ -85,8 +85,17 @@ struct OptionsView: View {
                     }
   
                     OptionRowBlindView(text: "Starting Blinds", blind: $vm.blindGameOptions.startingSmallBlind, function: vm.simpleSuccess)
+                        .onChange(of: vm.blindGameOptions.startingSmallBlind) { _ in
+                            vm.saveBlindOptions()
+                        }
                     OptionRowView(text: "Raise blinds by", firstValue: $vm.blindGameOptions.amountToRaiseBlinds, function: vm.simpleSuccess)
+                        .onChange(of: vm.blindGameOptions.amountToRaiseBlinds) { _ in
+                            vm.saveBlindOptions()
+                        }
                     OptionRowBlindView(text: "Blind limit", blind: $vm.blindGameOptions.blindLimit, function: vm.simpleSuccess)
+                        .onChange(of: vm.blindGameOptions.blindLimit) { _ in
+                            vm.saveBlindOptions()
+                        }
                    
                     VStack {
                         HStack(alignment: .center) {
