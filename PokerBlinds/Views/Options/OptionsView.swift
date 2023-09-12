@@ -125,6 +125,8 @@ struct OptionsView: View {
                                 }
                             }
                             .onChange(of: vm.currentSound, perform: { newValue in
+                                // Save sound selection
+                                vm.saveMainSoundSelection()
                                 SoundManager.instance.playSound(sound: vm.currentSound)
                                 vm.simpleSuccess()
                             })

@@ -174,6 +174,12 @@ class ViewModel: ObservableObject {
         }
     }
     
+    func saveMainSoundSelection() {
+        if let soundSelection = try? encoder.encode(currentSound) {
+            defaults.set(soundSelection, forKey: "soundSelection")
+        }
+    }
+    
     func loadInfo() {
         let defaults = UserDefaults.standard
         let decoder = JSONDecoder()
@@ -191,6 +197,12 @@ class ViewModel: ObservableObject {
         if let timerState = defaults.object(forKey: "timerState") as? Data {
             if let state = try? decoder.decode(TimerStates.self, from: timerState) {
                 self.isTimerRunning = state
+            }
+        }
+        
+        if let soundSelection = defaults.object(forKey: "soundSelection") as? Data {
+            if let sound = try? decoder.decode(SoundEffect.self, from: soundSelection) {
+                self.currentSound = sound
             }
         }
 

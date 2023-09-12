@@ -8,13 +8,13 @@
 import Foundation
 import AVKit
 
-enum SoundFileType: String {
+enum SoundFileType: String, Codable {
     case mp3 = "mp3"
     case wav = "wav"
     case flac = "flac"
 }
 
-struct SoundEffect: Hashable {
+struct SoundEffect: Hashable, Codable {
     let title: String
     let path: String
     let type: SoundFileType
