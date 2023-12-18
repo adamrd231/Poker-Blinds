@@ -49,7 +49,6 @@
 		66EA59D22AAA232D006E9C76 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59D12AAA232D006E9C76 /* AdsViewModel.swift */; };
 		66EA59DA2AAA24E3006E9C76 /* PokerBlindsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */; };
 		66EA59E02AAA250C006E9C76 /* PayoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59CF2AA8F870006E9C76 /* PayoutsViewModel.swift */; };
-		66EA59E22AAA5431006E9C76 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59E12AAA5431006E9C76 /* View.swift */; };
 		66EA59E52AAB67B7006E9C76 /* InAppPurchaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66EA59E42AAB67B7006E9C76 /* InAppPurchaseConstants.swift */; };
 		66EA59E72AAB7180006E9C76 /* electronicTicking.flac in Resources */ = {isa = PBXBuildFile; fileRef = 66EA59E62AAB7180006E9C76 /* electronicTicking.flac */; };
 		66EA59E92AAB73B8006E9C76 /* guitar.wav in Resources */ = {isa = PBXBuildFile; fileRef = 66EA59E82AAB73B7006E9C76 /* guitar.wav */; };
@@ -112,7 +111,6 @@
 		66EA59D12AAA232D006E9C76 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
 		66EA59D72AAA24E3006E9C76 /* PokerBlindsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokerBlindsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66EA59D92AAA24E3006E9C76 /* PokerBlindsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokerBlindsTests.swift; sourceTree = "<group>"; };
-		66EA59E12AAA5431006E9C76 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		66EA59E42AAB67B7006E9C76 /* InAppPurchaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseConstants.swift; sourceTree = "<group>"; };
 		66EA59E62AAB7180006E9C76 /* electronicTicking.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = electronicTicking.flac; sourceTree = "<group>"; };
 		66EA59E82AAB73B7006E9C76 /* guitar.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = guitar.wav; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				6642EA2B2A3507530011589B /* Color.swift */,
-				66EA59E12AAA5431006E9C76 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -540,7 +537,6 @@
 				668B967A2A47785A006D76A1 /* BasicButtonStyle.swift in Sources */,
 				6659A20C26C47FDE00BD698E /* StoreManager.swift in Sources */,
 				6659A21226C4850900BD698E /* RemoveAdvertising.swift in Sources */,
-				66EA59E22AAA5431006E9C76 /* View.swift in Sources */,
 				662BBD702A570A690027C167 /* TimerModel.swift in Sources */,
 				6642EA292A3368280011589B /* DoubleCheckPopup.swift in Sources */,
 			);
@@ -701,7 +697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdConcepts.priceOfPoker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -729,7 +725,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = design.rdConcepts.priceOfPoker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
